@@ -1,3 +1,654 @@
+/* kleuren */
+:root {
+    --green: #166a5a;
+    --red: #e44421;
+    --black: #000;
+    --gray: #f5f5f5;
+    --font: system-ui, Arial, sans-serif;
+}
+
 body {
-    background-color: red;
+    margin: 0;
+    font-family: var(--font);
+}
+
+/* header algemeen */
+.site-header {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    /* matching spacing van de echte site */
+    padding: 0.8rem 3rem;
+
+    max-width: 1200px;
+    /* zelfde breedte container als echte site */
+    margin: 0 auto;
+    /* centreert alles perfect */
+    width: 100%;
+    gap: 2rem;
+}
+
+
+/* zoekknop */
+.search-toggle {
+    width: 52px;
+    height: 52px;
+    background: var(--green);
+    border: none;
+    color: #fff;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.search_icon {
+    font-size: 1.3rem;
+}
+
+.search_icon img,
+.search_icon_img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    display: block;
+}
+
+.search_openen_ {
+    display: none;
+}
+
+/* nav lijst */
+.main-nav__list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0;
+}
+
+/* hotspot style */
+/* hotspot basis */
+.point-wrapper {
+    position: absolute;
+    top: 100px;
+    /* hier verplaats je de hotspot omhoog/omlaag */
+    left: 300px;
+    /* hier verplaats je de hotspot naar links/rechts */
+    width: 30px;
+    height: 30px;
+    background: var(--red);
+    border-radius: 100%;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+/* binnenpunt */
+.point-wrapper i {
+    width: 30px;
+    height: 30px;
+    display: block;
+    border-radius: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1001; 
+}
+
+/* glow animatie */
+@-webkit-keyframes glowAnimation {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+
+    5% {
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+.point-wrapper:before {
+    content: "";
+    background-color: var(--red);
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    opacity: 0;
+    -webkit-animation: glowAnimation 1.8s 0.33333s ease-out infinite;
+}
+
+.point-wrapper:after {
+    content: "";
+    background-color: var(--red);
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    opacity: 0;
+    -webkit-animation: glowAnimation 1.8s 0.66666s ease-out infinite;
+}
+
+/* popup blok */
+.hotspot-popup {
+    position: absolute;
+    left: 50%;
+    top: -10px;
+    transform: translate(-50%, -110%);
+    background: #fff;
+    color: var(--black);
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 180px;
+    font-size: 0.9rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 200;
+}
+
+/* klein driehoekje onder popup */
+.hotspot-popup::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    transform: translateX(-50%);
+    border-width: 6px 6px 0 6px;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+}
+
+/* popup zichtbaar bij open state */
+.point-wrapper.point-wrapper-open .hotspot-popup {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* hotspot locatie */
+
+/* image 4 – 1 hotspot */
+.hotspot-4-1 {
+    top: 150px;
+    left: 120px;
+}
+
+/* image 10 – 4 hotspots */
+.hotspot-10-1 {
+    top: 160px;
+    left: 100px;
+}
+
+.hotspot-10-2 {
+    top: 180px;
+    left: 200px;
+}
+
+.hotspot-10-3 {
+    top: 130px;
+    left: 260px;
+}
+
+.hotspot-10-4 {
+    top: 210px;
+    left: 150px;
+}
+
+/* image 11 – 1 hotspot */
+.hotspot-11-1 {
+    top: 170px;
+    left: 140px;
+}
+
+/* image 12 – 2 hotspots */
+.hotspot-12-1 {
+    top: 160px;
+    left: 120px;
+}
+
+.hotspot-12-2 {
+    top: 190px;
+    left: 220px;
+}
+
+/* image 13 – 1 hotspot */
+.hotspot-13-1 {
+    top: 160px;
+    left: 130px;
+}
+
+/* image 14 – 1 hotspot */
+.hotspot-14-1 {
+    top: 170px;
+    left: 110px;
+}
+
+/* image 23 – 2 hotspots */
+.hotspot-23-1 {
+    top: 140px;
+    left: 120px;
+}
+
+.hotspot-23-2 {
+    top: 200px;
+    left: 180px;
+}
+
+/* image 24 – 1 hotspot */
+.hotspot-24-1 {
+    top: 150px;
+    left: 140px;
+}
+
+/* image 26 – 1 hotspot */
+.hotspot-26-1 {
+    top: 160px;
+    left: 120px;
+}
+
+/* image 31 – 1 hotspot */
+.hotspot-31-1 {
+    top: 170px;
+    left: 160px;
+}
+
+/* image 32 – 1 hotspot */
+.hotspot-32-1 {
+    top: 170px;
+    left: 150px;
+}
+
+/* elk item wordt relatief zodat dropdown eronder kan hangen */
+.main-nav__list>li {
+    position: relative;
+}
+
+/* nav knop */
+.main-nav__link {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.8rem 0.5rem;
+    font-size: 1rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--black);
+}
+
+/* open state zoals voorbeeld-site (rood blok, witte tekst) */
+.dropdown_open>.main-nav__link {
+    background: var(--red);
+    color: #fff;
+}
+
+.dropdown_open>.main-nav__link span {
+    color: inherit;
+}
+
+/* pijlen tussen items (als je die nog gebruikt) */
+.main-nav__separator {
+    color: #555;
+    user-select: none;
+}
+
+/* contact */
+.main-nav__link--plain {
+    color: var(--black);
+    text-decoration: none;
+}
+
+/* english */
+.main-nav__link--italic {
+    color: var(--black);
+    text-decoration: none;
+    font-style: italic;
+}
+
+/* klein pijltje heb je nu niet meer nodig, maar laten staan kan */
+.main-nav__caret {
+    font-size: 0.7rem;
+}
+
+/* dropdown menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 0.75rem 0;
+    list-style: none;
+    margin: 0;
+    z-index: 10;
+}
+
+/* dropdown zichtbaar als open */
+.dropdown_open .dropdown-menu {
+    display: block;
+}
+
+/* items in dropdown */
+.dropdown-menu li a {
+    display: block;
+    padding: 0.45rem 1rem;
+    color: var(--black);
+    text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+    background: #f0f0f0;
+}
+
+/* pijltje > dat draait */
+.dropdown_arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+    font-size: 1rem;
+}
+
+.dropdown_open .dropdown_arrow {
+    transform: rotate(90deg);
+}
+
+/* logo */
+.site-logo img {
+    height: 60px;
+}
+
+/* zoekbalk */
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    border-top: 1px solid #ddd;
+    background: #fff;
+}
+
+/* dezelfde horizontale marge als de header */
+.search-bar {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+
+.search-bar[hidden] {
+    display: none;
+}
+
+.search-close {
+    width: 52px;
+    height: 52px;
+    background: var(--green);
+    border: none;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.search-bar__form {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.search-bar__form input[type="search"] {
+    flex: 1;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding: 0.6rem;
+    font-size: 1rem;
+}
+
+.search-bar__form button {
+    background: var(--green);
+    border: none;
+    padding: 0.7rem 1.2rem;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+/* panorama container */
+.panorama {
+    background: var(--grey);
+    padding: 1rem 0;
+    height: 510px;
+    width: 1000px;
+}
+
+/* panorama inhoud, zorgt voor horizontaal scrollen */
+.panorama-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+
+.panorama-fotos {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    height: 500px;
+
+    width: 94%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+
+
+/* footer */
+
+.site-footer {
+    border-top: 1px solid #eee;
+    background: #fff;
+    margin-top: 3rem;
+}
+
+.footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 3rem 2rem;
+    font-size: 0.95rem;
+    color: var(--black);
+}
+
+/* kolommen */
+.footer-columns {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.2fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-column,
+.footer-column-contact {
+    min-width: 0;
+}
+
+.footer-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+}
+
+.footer-subtitle {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.5rem;
+}
+
+/* link lijsten */
+.footer-linklist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-linklist li {
+    margin-bottom: 0.35rem;
+}
+
+.footer-linklist a {
+    position: relative;
+    text-decoration: none;
+    color: var(--black);
+    padding-left: 1.25rem;
+    display: inline-block;
+}
+
+.footer-linklist a::before {
+    content: "›";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--red);
+}
+
+.footer-linklist a:hover {
+    text-decoration: underline;
+}
+
+.footer-link-italic {
+    font-style: italic;
+}
+
+/* contact kolom */
+.footer-contact-list {
+    list-style: none;
+    margin: 0 0 1.5rem;
+    padding: 0;
+}
+
+.footer-contact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin-bottom: 0.4rem;
+}
+
+.footer-contact-icon {
+    color: var(--red);
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.footer-contact-list a {
+    color: var(--red);
+    text-decoration: none;
+}
+
+.footer-contact-list a:hover {
+    text-decoration: underline;
+}
+
+/* social icons */
+.footer-social-links {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+}
+
+.footer-social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--red);
+    color: var(--red);
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+.footer-social-links a:hover {
+    background: var(--red);
+    color: #fff;
+}
+
+/* nieuwsbrief blok */
+.footer-newsletter {
+    margin-bottom: 2.5rem;
+}
+
+.footer-newsletter-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0 0 1rem;
+}
+
+.footer-newsletter-form {
+    display: flex;
+    max-width: 520px;
+}
+
+.footer-newsletter-form input[type="email"] {
+    flex: 1;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding: 0.6rem 0;
+    font-size: 1rem;
+}
+
+.footer-newsletter-form button {
+    border: none;
+    background: var(--red);
+    color: #fff;
+    padding: 0.7rem 2.5rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.footer-newsletter-form button:hover {
+    opacity: 0.9;
+}
+
+/* kvk info */
+.footer-kvk {
+    text-align: right;
+    font-size: 0.8rem;
+    color: #555;
+}
+
+.footer-kvk p {
+    margin: 0;
+}
+
+.footer-inner {
+    max-width: 1000px;
+    /* hier bepaal je de breedte */
+    margin: 0 auto;
+    /* centreert content */
+    padding: 3rem 2rem 2rem;
+    font-size: 0.95rem;
+    color: var(--black);
 }
