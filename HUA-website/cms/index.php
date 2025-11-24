@@ -21,7 +21,7 @@ if ((isset($_POST["naam_achternaam"])) && (isset($_POST["wachtwoord"]))) {
             $error = "Gebruikersnaam of wachtwoord is onjuist.";
         } else {
             $_SESSION["login"] = true;
-            header('Location: product-bewerken.php');
+            header('Location: product-beheer.php');
             exit();
         }
     }

@@ -157,8 +157,9 @@ unset($_SESSION['success'], $_SESSION['error']);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <div class="header">
-    <img  src="../img/image.png" alt="header">
+    <img src="../img/image.png" alt="header">
 </div>
+
 <body>
     <div class="wrap">
         <div class="titel">
@@ -166,7 +167,7 @@ unset($_SESSION['success'], $_SESSION['error']);
                 <h1>Artikel Beheer</h1>
                 <a href="index.php">Uitloggen</a>
             </div>
-            <a href="artikel-beheer.php?action=new" class="btn-new">Nieuw artikel</a>
+            <a href="product-toevoegen.php" class="btn-new">Nieuw artikel</a>
         </div>
         <?php if ($success): ?>
             <div class="alert success"><?php echo e($success); ?></div>
@@ -280,7 +281,7 @@ unset($_SESSION['success'], $_SESSION['error']);
                             <td><?php echo e($a['seizoenen']); ?></td>
                             <td><?php echo $a['actief'] ? 'Ja' : 'Nee'; ?></td>
                             <td class="actions">
-                                <a class="btn-edit" href="artikel-beheer.php?action=edit&id=<?php echo (int)$a['id']; ?>">Bewerk</a>
+                               <a class="btn-edit" href="artikel-bewerken.php?action=edit&id=<?php echo (int)$a['id']; ?>">Bewerk</a>
                                 <form method="post" style="display:inline" onsubmit="return confirm('Weet je zeker dat je dit artikel wilt verwijderen?');">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="id" value="<?php echo (int)$a['id']; ?>">

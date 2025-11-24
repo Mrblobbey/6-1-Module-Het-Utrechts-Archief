@@ -1,5 +1,5 @@
 <?php
-include '../connectie.php';
+include '../conn.php';
 
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']); 
@@ -8,6 +8,6 @@ if (isset($_GET['id'])) {
     $stmt->execute(['id' => $id]);
 }
 
-header("Location: producten-cms.php");
+header("Location: producten-beheer.php");
 exit;
 ?>
