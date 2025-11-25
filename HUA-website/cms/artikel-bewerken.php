@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../includes/conn.php';
+include '../includes/header.php';
 
 // Check of we een edit willen doen
 if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {

@@ -1,8 +1,9 @@
 <?php
 session_start();
 include '../includes/conn.php';
+include '../includes/header.php';
 
-$perPage = 10;
+$perPage = 5;
 
 function e($v)
 {
@@ -29,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $sql = "INSERT INTO artikel (titel, beschrijving, link_bron, bronnen_tekst, bron_auteur, auteur_id, brond_datum, seizoenen, actief, afbeelding)
-                VALUES (:titel, :beschrijving, :link_bron, :bronnen_tekst, :bron_auteur, :auteur_id, :brond_datum, :seizoenen, :actief :afbeelding)";
+                VALUES (:titel, :beschrijving, :link_bron, :bronnen_tekst, :bron_auteur, :auteur_id, :brond_datum, :seizoenen, :actief, :afbeelding)";
         $stmt = $conn->prepare($sql);
         $stmt->execute([
             ':titel' => $titel,
@@ -98,14 +99,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-if (isset($_FILES['afbeelding']) && $_FILES['afbeelding']['error'] == 0) {
-    $uploadDir = '../img/';
-    $fileName = basename($_FILES['afbeelding']['name']);
-    $uploadFile = $uploadDir . $fileName;
-    move_uploaded_file($_FILES['afbeelding']['tmp_name'], $uploadFile);
-    $afbeelding = $fileName;
-} else {
-    $afbeelding = null;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    if (isset($_FILES['afbeelding']) && $_FILES['afbeelding']['error'] == 0) {
+        $uploadDir = '../img/';
+        $fileName = basename($_FILES['afbeelding']['name']);
+        $uploadFile = $uploadDir . $fileName;
+        move_uploaded_file($_FILES['afbeelding']['tmp_name'], $uploadFile);
+        $afbeelding = $fileName;
+    } else {
+        $afbeelding = null;
+    }
+
 }
 
 
@@ -156,9 +161,6 @@ unset($_SESSION['success'], $_SESSION['error']);
     <link rel="stylesheet" href="cms.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<div class="header">
-    <img src="../img/image.png" alt="header">
-</div>
 
 <body>
     <div class="wrap">
@@ -281,12 +283,14 @@ unset($_SESSION['success'], $_SESSION['error']);
                             <td><?php echo e($a['seizoenen']); ?></td>
                             <td><?php echo $a['actief'] ? 'Ja' : 'Nee'; ?></td>
                             <td class="actions">
+                                <div class="btns">
                                <a class="btn-edit" href="artikel-bewerken.php?action=edit&id=<?php echo (int)$a['id']; ?>">Bewerk</a>
-                                <form method="post" style="display:inline" onsubmit="return confirm('Weet je zeker dat je dit artikel wilt verwijderen?');">
+                                <form class="verwijder-btn"method="post" style="display:inline" onsubmit="return confirm('Weet je zeker dat je dit artikel wilt verwijderen?');">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="id" value="<?php echo (int)$a['id']; ?>">
                                     <button type="submit" class="btn-delete">Verwijder</button>
                                 </form>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>

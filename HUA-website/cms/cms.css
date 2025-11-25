@@ -1,6 +1,6 @@
 body {
     background-color: #548C99;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font);
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -10,16 +10,200 @@ body {
     padding: 0;
 }
 
-header {
-    padding-bottom: 110px;
-    margin-top: -100px;
+/*Header begin*/
+:root {
+    --green: #166a5a;
+    --red: #e44421;
+    --black: #000;
+    --gray: #f5f5f5;
+    --font: system-ui, Arial, sans-serif;
+}
+
+.site-header {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    position: fixed;
+    top: 0; 
+    left: 0;  
+    width: 100%; 
+    z-index: 999;
+}
+
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    gap: 2rem;
+}
+
+.site-logo img {
+    height: 60px;
+}
+
+.search-toggle {
+    width: 52px;
+    height: 52px;
+    background: var(--green);
+    border: none;
+    color: #fff;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.search_icon img,
+.search_icon_img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    display: block;
+}
+
+.search_openen_ {
+    display: none;
+}
+
+.main-nav__list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0;
+}
+
+.main-nav__link--plain,
+.main-nav__link--italic {
+    color: var(--black);
+    text-decoration: none;
+}
+
+.main-nav__link--italic {
+    font-style: italic;
+}
+
+.main-nav__list > li {
+    position: relative;
+}
+
+.main-nav__link {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.8rem 0.5rem;
+    font-size: 1rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--black);
+}
+
+.dropdown_arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+    font-size: 1rem;
+}
+
+.dropdown_open > .main-nav__link {
+    background: var(--red);
+    color: #fff;
+}
+
+.dropdown_open > .main-nav__link span {
+    color: inherit;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 0.75rem 0;
+    list-style: none;
+    margin: 0;
+    z-index: 10;
+}
+
+.dropdown_open .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 0.45rem 1rem;
+    color: var(--black);
+    text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+    background: #f0f0f0;
+}
+
+.dropdown_open .dropdown_arrow {
+    transform: rotate(90deg);
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    border-top: 1px solid #ddd;
+    background: #fff;
+    max-width: 1200px;
+    margin: 0 auto;
     width: 100%;
 }
 
-img {
-    width: 100%;
-    height: 100%;
+.search-bar[hidden] {
+    display: none;
 }
+
+.search-close {
+    width: 52px;
+    height: 52px;
+    background: var(--green);
+    border: none;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.search-bar__form {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.search-bar__form input[type="search"] {
+    flex: 1;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding: 0.6rem;
+    font-size: 1rem;
+}
+
+.search-bar__form button {
+    background: var(--green);
+    border: none;
+    padding: 0.7rem 1.2rem;
+    color: white;
+    cursor: pointer;
+}
+
+/*Header Einde*/
 
 .inlog-container {
     background-color: white;
@@ -120,11 +304,12 @@ img {
 /*Begin van bewerk pagina*/
 .wrap {
     width: 1200px;
-    margin: 36px auto;
+    margin-top: 90px ;
     background: var(--panel);
     box-shadow: 0 8px 0 rgba(0, 0, 0, 0.12);
-    padding: 24px 28px;
+    padding: 10px 28px 24px 28px;
     border-radius: 6px;
+    height: 610px;
 }
 
 header {
@@ -145,7 +330,7 @@ header {
 }
 
 .top a {
-    padding: 15px 15px;
+    padding: 12px 12px;
     background: var(--accent);
     border-radius: 6px;
     text-decoration: none;
@@ -307,20 +492,56 @@ thead th {
     text-align: left;
     border-bottom: 1px solid #e8e8e8;
     font-weight: 700;
+    text-align: center;
 }
 
 tbody td {
-    padding: 20px 12px;
+    padding: 15px 12px;
     border-bottom: 1px solid #f1f1f1;
-    vertical-align: top;
+    vertical-align: middle;
     font-size: 14px;
+    text-align: center;
 }
 
 tbody tr:nth-child(odd) {
     background: #fbfbfb;
 }
 
-.actions a,
+.btns {
+    display: flex;
+    justify-content: center;
+}
+
+.actions {
+    align-items: top;
+    max-height: 10px;
+}
+
+.actions a {
+    display: inline-block;
+    padding: 7px 10px;
+    margin-right: 6px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+/* Hover effecten */
+.actions a:hover {
+    background-color: #0023e9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.actions button:hover {
+    background-color: #ff0000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
 .actions button {
     display: inline-block;
     padding: 8px 10px;
@@ -330,34 +551,26 @@ tbody tr:nth-child(odd) {
     cursor: pointer;
     text-decoration: none;
     font-weight: 600;
-}
-
-.actions a:hover {
-    background-color: #0023e9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transform: translateY(-2px);
     transition: all 0.3s ease;
 }
 
-.actions button:hover {
-    background-color: #ff0000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
+.verwijder-btn {
+    margin: 0;
+    display: inline-block;
 }
 
+
+/* Kleuren */
 .btn-edit {
     background: var(--blue);
-    color: #fff
+    color: #fff;
 }
 
 .btn-delete {
     background: var(--red);
     color: #fff;
-    border: none;
-    padding: 8px 10px;
-    border-radius: 6px
 }
+
 
 .pagination {
     display: flex;
@@ -420,7 +633,7 @@ table th.actions {
 
 /*Einde van bewerk pagina*/
 
-/*Begin van product toevoeg pagina*/
+/*Begin van product toevoeg/bewerk pagina*/
 .add-wrap {
     max-width: 1100px;
     margin: 40px auto;
@@ -482,7 +695,7 @@ table th.actions {
 .add-form-panel {
     background: #fff;
     border-radius: 12px;
-    padding: 42px 50px;
+    padding: 42px 50px 0px 50px;
     box-shadow: 0 0 14px rgba(0, 0, 0, 0.08);
     width: 110%;
     min-height: 500px;
@@ -493,7 +706,6 @@ table th.actions {
     gap: 60px;
     align-items: flex-start;
     justify-content: center;
-    margin-bottom: 30px;
 }
 
 .left-col,
@@ -513,7 +725,7 @@ table th.actions {
 .add-form-panel input[type="file"],
 .add-form-panel textarea {
     width: 100%;
-    padding: 11px 12px;
+    padding: 5px 12px;
     border-radius: 6px;
     border: 1px solid #cfcfcf;
     background: #fafafa;
@@ -521,6 +733,7 @@ table th.actions {
     margin-bottom: 8px;
     font-family: inherit;
     transition: border 0.2s;
+    max-height: 100px;
 }
 
 .add-form-panel textarea {
@@ -560,12 +773,11 @@ table th.actions {
     display: column;
     justify-content: center;
     gap: 25px;
-    margin-top: 40px;
 }
 
 .add-btn-save,
 .add-btn-cancel {
-    padding: 13px 32px;
+    padding: 10px 32px;
     font-size: 18px;
     font-weight: 500;
     border-radius: 6px;
@@ -616,10 +828,5 @@ table th.actions {
 }
 
 
-/*Einde van product toevoeg pagina*/
+/*Einde van product toevoeg/bewerk pagina*/
 
-/*Begin van bewerkpagina*/
-
-/* artikel-bewerken.css */
-
-/*Einde van bewerkpagina*/
