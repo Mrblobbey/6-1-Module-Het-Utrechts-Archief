@@ -1,3 +1,462 @@
+<?php
+$panoramaImages = [
+    [
+        'src'   => 'img/1.jpg',
+        'alt'   => 'Panorama Image 1',
+        'style' => [
+            'height'      => 500,
+            'z_index'     => 1,
+            'margin_left' => 0,
+            'margin_top'  => 0,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/2.jpg',
+        'alt'   => 'Panorama Image 2',
+        'style' => [
+            'height'      => 500,
+            'z_index'     => 2,
+            'margin_left' => 0,
+            'margin_top'  => 0,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/3.jpg',
+        'alt'   => 'Panorama Image 3',
+        'style' => [
+            'height'      => 497.5,
+            'z_index'     => 3,
+            'margin_left' => -40,
+            'margin_top'  => -1,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/4.jpg',
+        'alt'   => 'Panorama Image 4',
+        'style' => [
+            'height'      => 500,
+            'z_index'     => 4,
+            'margin_left' => -43,
+            'margin_top'  => -5,
+        ],
+        'hotspots' => [
+            [
+                'class' => 'hotspot-4-1',
+                'title' => 'Hotspot 4-1',
+                'text'  => 'Tekst voor deze hotspot.',
+            ],
+        ],
+    ],
+    [
+        'src'   => 'img/5.jpg',
+        'alt'   => 'Panorama Image 5',
+        'style' => [
+            'height'      => 506,
+            'z_index'     => 5,
+            'margin_left' => -56,
+            'margin_top'  => -8,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/6.jpg',
+        'alt'   => 'Panorama Image 6',
+        'style' => [
+            'height'      => 511,
+            'z_index'     => 6,
+            'margin_left' => -60,
+            'margin_top'  => -12,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/7.jpg',
+        'alt'   => 'Panorama Image 7',
+        'style' => [
+            'height'      => 523,
+            'z_index'     => 8,
+            'margin_left' => -71,
+            'margin_top'  => -13,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/8.jpg',
+        'alt'   => 'Panorama Image 8',
+        'style' => [
+            'height'      => 502,
+            'z_index'     => 7,
+            'margin_left' => -44,
+            'margin_top'  => -6,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/9.jpg',
+        'alt'   => 'Panorama Image 9',
+        'style' => [
+            'height'      => 514,
+            'z_index'     => 9,
+            'margin_left' => -37,
+            'margin_top'  => -12,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/10.jpg',
+        'alt'   => 'Panorama Image 10',
+        'style' => [
+            'height'      => 511,
+            'z_index'     => 10,
+            'margin_left' => -44,
+            'margin_top'  => -11,
+        ],
+        'hotspots' => [
+            [
+                'class' => 'hotspot-10-1',
+                'title' => 'Hotspot 10-1',
+                'text'  => 'Tekst voor deze hotspot.',
+            ],
+            [
+                'class' => 'hotspot-10-2',
+                'title' => 'Hotspot 10-2',
+                'text'  => 'Tekst voor deze hotspot.',
+            ],
+            [
+                'class' => 'hotspot-10-3',
+                'title' => 'Hotspot 10-3',
+                'text'  => 'Tekst voor deze hotspot.',
+            ],
+            [
+                'class' => 'hotspot-10-4',
+                'title' => 'Hotspot 10-4',
+                'text'  => 'Tekst voor deze hotspot.',
+            ],
+        ],
+    ],
+    [
+        'src'   => 'img/11.jpg',
+        'alt'   => 'Panorama Image 11',
+        'style' => [
+            'height'      => 515,
+            'z_index'     => 11,
+            'margin_left' => -62,
+            'margin_top'  => -13,
+        ],
+        'hotspots' => [
+            [
+                'class' => 'hotspot-11-1',
+                'title' => 'Hotspot 11-1',
+                'text'  => 'Tekst voor deze hotspot.',
+            ],
+        ],
+    ],
+    [
+        'src'   => 'img/12.jpg',
+        'alt'   => 'Panorama Image 12',
+        'style' => [
+            'height'      => 518,
+            'z_index'     => 12,
+            'margin_left' => -60,
+            'margin_top'  => -11,
+        ],
+        'hotspots' => [
+            [
+                'class' => 'hotspot-12-1',
+                'title' => 'Hotspot 12-1',
+                'text'  => 'Tekst voor deze hotspot.',
+            ],
+            [
+                'class' => 'hotspot-12-2',
+                'title' => 'Hotspot 12-2',
+                'text'  => 'Tekst voor deze hotspot.',
+            ],
+        ],
+    ],
+    [
+        'src'   => 'img/13.jpg',
+        'alt'   => 'Panorama Image 13',
+        'style' => [
+            'height'      => 515.5,
+            'z_index'     => 13,
+            'margin_left' => -37,
+            'margin_top'  => -11,
+        ],
+        'hotspots' => [
+            [
+                'class' => 'hotspot-13-1',
+                'title' => 'Hotspot 13-1',
+                'text'  => 'Tekst voor deze hotspot.',
+            ],
+        ],
+    ],
+    [
+        'src'   => 'img/14.jpg',
+        'alt'   => 'Panorama Image 14',
+        'style' => [
+            'height'      => 509,
+            'z_index'     => 14,
+            'margin_left' => -45,
+            'margin_top'  => -6,
+        ],
+        'hotspots' => [
+            [
+                'class' => 'hotspot-14-1',
+                'title' => 'Hotspot 14-1',
+                'text'  => 'Tekst voor deze hotspot.',
+            ],
+        ],
+    ],
+    [
+        'src'   => 'img/15.jpg',
+        'alt'   => 'Panorama Image 15',
+        'style' => [
+            'height'      => 506,
+            'z_index'     => 15,
+            'margin_left' => -59,
+            'margin_top'  => -4,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/16.jpg',
+        'alt'   => 'Panorama Image 16',
+        'style' => [
+            'height'      => 505,
+            'z_index'     => 16,
+            'margin_left' => -54,
+            'margin_top'  => 1,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/17.jpg',
+        'alt'   => 'Panorama Image 17',
+        'style' => [
+            'height'      => 508,
+            'z_index'     => 17,
+            'margin_left' => -36,
+            'margin_top'  => 1,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/18.jpg',
+        'alt'   => 'Panorama Image 18',
+        'style' => [
+            'height'      => 515,
+            'z_index'     => 18,
+            'margin_left' => -40,
+            'margin_top'  => 1.5,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/19.jpg',
+        'alt'   => 'Panorama Image 19',
+        'style' => [
+            'height'      => 526,
+            'z_index'     => 19,
+            'margin_left' => -41,
+            'margin_top'  => -3,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/20.jpg',
+        'alt'   => 'Panorama Image 20',
+        'style' => [
+            'height'      => 534,
+            'z_index'     => 21,
+            'margin_left' => -38,
+            'margin_top'  => -6,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/21.jpg',
+        'alt'   => 'Panorama Image 21',
+        'style' => [
+            'height'      => 526,
+            'z_index'     => 20,
+            'margin_left' => -30,
+            'margin_top'  => 7,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/22.jpg',
+        'alt'   => 'Panorama Image 22',
+        'style' => [
+            'height'      => 542,
+            'z_index'     => 22,
+            'margin_left' => -43,
+            'margin_top'  => -5,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/23.jpg',
+        'alt'   => 'Panorama Image 23',
+        'style' => [
+            'height'      => 528,
+            'z_index'     => 23,
+            'margin_left' => -40,
+            'margin_top'  => 2,
+        ],
+        'hotspots' => [
+            [
+                'class' => 'hotspot-23-1',
+                'title' => 'Hotspot 23-1',
+                'text'  => 'Tekst voor deze hotspot.',
+            ],
+            [
+                'class' => 'hotspot-23-2',
+                'title' => 'Hotspot 23-2',
+                'text'  => 'Tekst voor deze hotspot.',
+            ],
+        ],
+    ],
+    [
+        'src'   => 'img/24.jpg',
+        'alt'   => 'Panorama Image 24',
+        'style' => [
+            'height'      => 506,
+            'z_index'     => 24,
+            'margin_left' => -34,
+            'margin_top'  => 16,
+        ],
+        'hotspots' => [
+            [
+                'class' => 'hotspot-24-1',
+                'title' => 'Hotspot 24-1',
+                'text'  => 'Tekst voor deze hotspot.',
+            ],
+        ],
+    ],
+    [
+        'src'   => 'img/25.jpg',
+        'alt'   => 'Panorama Image 25',
+        'style' => [
+            'height'      => 524,
+            'z_index'     => 25,
+            'margin_left' => -30,
+            'margin_top'  => 1,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/26.jpg',
+        'alt'   => 'Panorama Image 26',
+        'style' => [
+            'height'      => 510.5,
+            'z_index'     => 26,
+            'margin_left' => -35,
+            'margin_top'  => 12,
+        ],
+        'hotspots' => [
+            [
+                'class' => 'hotspot-26-1',
+                'title' => 'Hotspot 26-1',
+                'text'  => 'Tekst voor deze hotspot.',
+            ],
+        ],
+    ],
+    [
+        'src'   => 'img/27.jpg',
+        'alt'   => 'Panorama Image 27',
+        'style' => [
+            'height'      => 527,
+            'z_index'     => 27,
+            'margin_left' => -42,
+            'margin_top'  => 5,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/28.jpg',
+        'alt'   => 'Panorama Image 28',
+        'style' => [
+            'height'      => 540,
+            'z_index'     => 28,
+            'margin_left' => -48,
+            'margin_top'  => -4,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/29.jpg',
+        'alt'   => 'Panorama Image 29',
+        'style' => [
+            'height'      => 534,
+            'z_index'     => 29,
+            'margin_left' => -44,
+            'margin_top'  => -1,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/30.jpg',
+        'alt'   => 'Panorama Image 30',
+        'style' => [
+            'height'      => 531,
+            'z_index'     => 30,
+            'margin_left' => -53,
+            'margin_top'  => 5,
+        ],
+        'hotspots' => [],
+    ],
+    [
+        'src'   => 'img/31.jpg',
+        'alt'   => 'Panorama Image 31',
+        'style' => [
+            'height'      => 540,
+            'z_index'     => 32,
+            'margin_left' => -47,
+            'margin_top'  => 1,
+        ],
+        'hotspots' => [
+            [
+                'class' => 'hotspot-31-1',
+                'title' => 'Hotspot 31-1',
+                'text'  => 'Tekst voor deze hotspot.',
+            ],
+        ],
+    ],
+    [
+        'src'   => 'img/32.jpg',
+        'alt'   => 'Panorama Image 32',
+        'style' => [
+            'height'      => 535,
+            'z_index'     => 31,
+            'margin_left' => -48,
+            'margin_top'  => -4,
+        ],
+        'hotspots' => [
+            [
+                'class' => 'hotspot-32-1',
+                'title' => 'Hotspot 32-1',
+                'text'  => 'Tekst voor deze hotspot.',
+            ],
+        ],
+    ],
+    [
+        'src'   => 'img/33.jpg',
+        'alt'   => 'Panorama Image 33',
+        'style' => [
+            'height'      => 539,
+            'z_index'     => 33,
+            'margin_left' => -45,
+            'margin_top'  => -2,
+        ],
+        'hotspots' => [],
+    ],
+];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -131,343 +590,52 @@
             <div class="panorama-content">
 
                 <div class="panorama-fotos">
+                    <?php foreach ($panoramaImages as $image): ?>
+                        <?php
+                        $s = $image['style'];
+                        $s['height'] = $s['height'] * 1.5;
+                        $s['margin_left'] = $s['margin_left'] * 1.5;
+                        $s['margin_top'] = $s['margin_top'] * 1.5;
 
-                    <!-- img 1 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/1.jpg" alt="Panorama Image 1"
-                            style="height: 500px; z-index: 1; margin-left: 0px; margin-top: 0px;">
-                    </div>
 
-                    <!-- img 2 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/2.jpg" alt="Panorama Image 2"
-                            style="height: 500px; z-index: 2; margin-left: 0px; margin-top: 0px;">
-                    </div>
+                        $styleAttr = sprintf(
+                            'height: %spx; z-index: %s; margin-left: %spx; margin-top: %spx;',
+                            $s['height'],
+                            $s['z_index'],
+                            $s['margin_left'],
+                            $s['margin_top']
+                        );
+                        ?>
+                        <div class="panorama-img-wrapper">
+                            <img
+                                src="<?= htmlspecialchars($image['src'], ENT_QUOTES) ?>"
+                                alt="<?= htmlspecialchars($image['alt'], ENT_QUOTES) ?>"
+                                style="<?= $styleAttr ?>">
 
-                    <!-- img 3 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/3.jpg" alt="Panorama Image 3"
-                            style="height: 497.5px; z-index: 3; margin-left: -40px; margin-top: -1px;">
-                    </div>
-
-                    <!-- img 4 + 1 hotspot -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/4.jpg" alt="Panorama Image 4"
-                            style="height: 500px; z-index: 4; margin-left: -43px; margin-top: -5px;">
-
-                        <div class="point-wrapper hotspot-4-1">
-                            <i></i>
-                            <div class="hotspot-popup">
-                                <h4 class="hotspot-title">Hotspot 4-1</h4>
-                                <p class="hotspot-text">Tekst voor deze hotspot.</p>
-                            </div>
+                            <?php foreach ($image['hotspots'] as $hotspot): ?>
+                                <div class="point-wrapper <?= htmlspecialchars($hotspot['class'], ENT_QUOTES) ?>">
+                                    <i></i>
+                                    <div class="hotspot-popup">
+                                        <h4 class="hotspot-title">
+                                            <?= htmlspecialchars($hotspot['title'], ENT_QUOTES) ?>
+                                        </h4>
+                                        <p class="hotspot-text">
+                                            <?= htmlspecialchars($hotspot['text'], ENT_QUOTES) ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
-                    </div>
-
-                    <!-- img 5 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/5.jpg" alt="Panorama Image 5"
-                            style="height: 506px; z-index: 5; margin-left: -56px; margin-top: -8px;">
-                    </div>
-
-                    <!-- img 6 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/6.jpg" alt="Panorama Image 6"
-                            style="height: 511px; z-index: 6; margin-left: -60px; margin-top: -12px;">
-                    </div>
-
-                    <!-- img 7 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/7.jpg" alt="Panorama Image 7"
-                            style="height: 523px; z-index: 8; margin-left: -71px; margin-top: -13px;">
-                    </div>
-
-                    <!-- img 8 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/8.jpg" alt="Panorama Image 8"
-                            style="height: 502px; z-index: 7; margin-left: -44px; margin-top: -6px;">
-                    </div>
-
-                    <!-- img 9 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/9.jpg" alt="Panorama Image 9"
-                            style="height: 514px; z-index: 9; margin-left: -37px; margin-top: -12px;">
-                    </div>
-
-                    <!-- img 10 + 4 hotspots -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/10.jpg" alt="Panorama Image 10"
-                            style="height: 511px; z-index: 10; margin-left: -44px; margin-top: -11px;">
-
-                        <div class="point-wrapper hotspot-10-1">
-                            <i></i>
-                            <div class="hotspot-popup">
-                                <h4 class="hotspot-title">Hotspot 10-1</h4>
-                                <p class="hotspot-text">Tekst voor deze hotspot.</p>
-                            </div>
-                        </div>
-
-                        <div class="point-wrapper hotspot-10-2">
-                            <i></i>
-                            <div class="hotspot-popup">
-                                <h4 class="hotspot-title">Hotspot 10-2</h4>
-                                <p class="hotspot-text">Tekst voor deze hotspot.</p>
-                            </div>
-                        </div>
-
-                        <div class="point-wrapper hotspot-10-3">
-                            <i></i>
-                            <div class="hotspot-popup">
-                                <h4 class="hotspot-title">Hotspot 10-3</h4>
-                                <p class="hotspot-text">Tekst voor deze hotspot.</p>
-                            </div>
-                        </div>
-
-                        <div class="point-wrapper hotspot-10-4">
-                            <i></i>
-                            <div class="hotspot-popup">
-                                <h4 class="hotspot-title">Hotspot 10-4</h4>
-                                <p class="hotspot-text">Tekst voor deze hotspot.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- img 11 + 1 hotspot -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/11.jpg" alt="Panorama Image 11"
-                            style="height: 515px; z-index: 11; margin-left: -62px; margin-top: -13px;">
-
-                        <div class="point-wrapper hotspot-11-1">
-                            <i></i>
-                            <div class="hotspot-popup">
-                                <h4 class="hotspot-title">Hotspot 11-1</h4>
-                                <p class="hotspot-text">Tekst voor deze hotspot.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- img 12 + 2 hotspots -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/12.jpg" alt="Panorama Image 12"
-                            style="height: 518px; z-index: 12; margin-left: -60px; margin-top: -11px;">
-
-                        <div class="point-wrapper hotspot-12-1">
-                            <i></i>
-                            <div class="hotspot-popup">
-                                <h4 class="hotspot-title">Hotspot 12-1</h4>
-                                <p class="hotspot-text">Tekst voor deze hotspot.</p>
-                            </div>
-                        </div>
-
-                        <div class="point-wrapper hotspot-12-2">
-                            <i></i>
-                            <div class="hotspot-popup">
-                                <h4 class="hotspot-title">Hotspot 12-2</h4>
-                                <p class="hotspot-text">Tekst voor deze hotspot.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- img 13 + 1 hotspot -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/13.jpg" alt="Panorama Image 13"
-                            style="height: 515.5px; z-index: 13; margin-left: -37px; margin-top: -11px;">
-
-                        <div class="point-wrapper hotspot-13-1">
-                            <i></i>
-                            <div class="hotspot-popup">
-                                <h4 class="hotspot-title">Hotspot 13-1</h4>
-                                <p class="hotspot-text">Tekst voor deze hotspot.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- img 14 + 1 hotspot -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/14.jpg" alt="Panorama Image 14"
-                            style="height: 509px; z-index: 14; margin-left: -45px; margin-top: -6px;">
-
-                        <div class="point-wrapper hotspot-14-1">
-                            <i></i>
-                            <div class="hotspot-popup">
-                                <h4 class="hotspot-title">Hotspot 14-1</h4>
-                                <p class="hotspot-text">Tekst voor deze hotspot.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- img 15 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/15.jpg" alt="Panorama Image 15"
-                            style="height: 506px; z-index: 15; margin-left: -59px; margin-top: -4px;">
-                    </div>
-
-                    <!-- img 16 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/16.jpg" alt="Panorama Image 16"
-                            style="height: 505px; z-index: 16; margin-left: -54px; margin-top: 1px;">
-                    </div>
-
-                    <!-- img 17 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/17.jpg" alt="Panorama Image 17"
-                            style="height: 508px; z-index: 17; margin-left: -36px; margin-top: 1px;">
-                    </div>
-
-                    <!-- img 18 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/18.jpg" alt="Panorama Image 18"
-                            style="height: 515px; z-index: 18; margin-left: -40px; margin-top: 1.5px;">
-                    </div>
-
-                    <!-- img 19 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/19.jpg" alt="Panorama Image 19"
-                            style="height: 526px; z-index: 19; margin-left: -41px; margin-top: -3px;">
-                    </div>
-
-                    <!-- img 20 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/20.jpg" alt="Panorama Image 20"
-                            style="height: 534px; z-index: 21; margin-left: -38px; margin-top: -6px;">
-                    </div>
-
-                    <!-- img 21 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/21.jpg" alt="Panorama Image 21"
-                            style="height: 526px; z-index: 20; margin-left: -30px; margin-top: 7px;">
-                    </div>
-
-                    <!-- img 22 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/22.jpg" alt="Panorama Image 22"
-                            style="height: 542px; z-index: 22; margin-left: -43px; margin-top: -5px;">
-                    </div>
-
-                    <!-- img 23 + 2 hotspots -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/23.jpg" alt="Panorama Image 23"
-                            style="height: 528px; z-index: 23; margin-left: -40px; margin-top: 2px;">
-
-                        <div class="point-wrapper hotspot-23-1">
-                            <i></i>
-                            <div class="hotspot-popup">
-                                <h4 class="hotspot-title">Hotspot 23-1</h4>
-                                <p class="hotspot-text">Tekst voor deze hotspot.</p>
-                            </div>
-                        </div>
-
-                        <div class="point-wrapper hotspot-23-2">
-                            <i></i>
-                            <div class="hotspot-popup">
-                                <h4 class="hotspot-title">Hotspot 23-2</h4>
-                                <p class="hotspot-text">Tekst voor deze hotspot.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- img 24 + 1 hotspot -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/24.jpg" alt="Panorama Image 24"
-                            style="height: 506px; z-index: 24; margin-left: -34px; margin-top: 16px;">
-
-                        <div class="point-wrapper hotspot-24-1">
-                            <i></i>
-                            <div class="hotspot-popup">
-                                <h4 class="hotspot-title">Hotspot 24-1</h4>
-                                <p class="hotspot-text">Tekst voor deze hotspot.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- img 25 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/25.jpg" alt="Panorama Image 25"
-                            style="height: 524px; z-index: 25; margin-left: -30px; margin-top: 1px;">
-                    </div>
-
-                    <!-- img 26 + 1 hotspot -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/26.jpg" alt="Panorama Image 26"
-                            style="height: 510.5px; z-index: 26; margin-left: -35px; margin-top: 12px;">
-
-                        <div class="point-wrapper hotspot-26-1">
-                            <i></i>
-                            <div class="hotspot-popup">
-                                <h4 class="hotspot-title">Hotspot 26-1</h4>
-                                <p class="hotspot-text">Tekst voor deze hotspot.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- img 27 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/27.jpg" alt="Panorama Image 27"
-                            style="height: 527px; z-index: 27; margin-left: -42px; margin-top: 5px;">
-                    </div>
-
-                    <!-- img 28 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/28.jpg" alt="Panorama Image 28"
-                            style="height: 540px; z-index: 28; margin-left: -48px; margin-top: -4px;">
-                    </div>
-
-                    <!-- img 29 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/29.jpg" alt="Panorama Image 29"
-                            style="height: 534px; z-index: 29; margin-left: -44px; margin-top: -1px;">
-                    </div>
-
-                    <!-- img 30 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/30.jpg" alt="Panorama Image 30"
-                            style="height: 531px; z-index: 30; margin-left: -53px; margin-top: 5px;">
-                    </div>
-
-                    <!-- img 31 + 1 hotspot -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/31.jpg" alt="Panorama Image 31"
-                            style="height: 540px; z-index: 32; margin-left: -47px; margin-top: 1px;">
-
-                        <div class="point-wrapper hotspot-31-1">
-                            <i></i>
-                            <div class="hotspot-popup">
-                                <h4 class="hotspot-title">Hotspot 31-1</h4>
-                                <p class="hotspot-text">Tekst voor deze hotspot.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- img 32 + 1 hotspot -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/32.jpg" alt="Panorama Image 32"
-                            style="height: 535px; z-index: 31; margin-left: -48px; margin-top: -4px;">
-
-                        <div class="point-wrapper hotspot-32-1">
-                            <i></i>
-                            <div class="hotspot-popup">
-                                <h4 class="hotspot-title">Hotspot 32-1</h4>
-                                <p class="hotspot-text">Tekst voor deze hotspot.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- img 33 -->
-                    <div class="panorama-img-wrapper">
-                        <img src="img/33.jpg" alt="Panorama Image 33"
-                            style="height: 539px; z-index: 33; margin-left: -45px; margin-top: -2px;">
-                    </div>
-
+                    <?php endforeach; ?>
                 </div>
-                <!-- hotspot -->
-                <div class="point-wrapper">
-                    <i></i>
-                    <div class="hotspot-popup">
-                        <h4 class="hotspot-title">Titel hotspot</h4>
-                        <p class="hotspot-text">Korte uitleg over dit punt.</p>
-                    </div>
-                </div>
-                <div class="panorama-scroll"></div>
+                <!-- pijltjes -->
+                <button class="panorama-arrow panorama-arrow-left" type="button" aria-label="Scroll naar links">
+                    ‹
+                </button>
+                <button class="panorama-arrow panorama-arrow-right" type="button" aria-label="Scroll naar rechts">
+                    ›
+                </button>
+
             </div>
 
     </main>

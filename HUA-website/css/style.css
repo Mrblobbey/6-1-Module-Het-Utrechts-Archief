@@ -437,33 +437,72 @@ body {
 
 /* panorama container */
 .panorama {
-    background: var(--grey);
+    background: var(--gray);
     padding: 1rem 0;
-    height: 510px;
-    width: 1000px;
+    height: 800px;
+    width: 100%; /* FIX */
+    max-width: 100%; 
+    position: relative;
+    overflow: hidden;
 }
 
 /* panorama inhoud, zorgt voor horizontaal scrollen */
+/* panorama inhoud, zorgt voor horizontaal scrollen */
 .panorama-content {
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: nowrap;
+    width: 70%;        /* FIX 1 */
+    left: 255px;
+    max-width: none;
+    overflow: hidden;
+    position: relative;
 }
 
-
+/* horizontale scroller */
 .panorama-fotos {
     display: flex;
     flex-direction: row;
-    position: absolute;
-    height: 500px;
-
-    width: 94%;
-    overflow-x: scroll;
+    position: relative;
+    height: 780px;
+    overflow-x: auto;
     overflow-y: hidden;
+    scroll-behavior: smooth;
 }
 
+/* elke foto */
+.panorama-img-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
 
+/* pijltjes */
+.panorama-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    z-index: 1500;
+}
+
+.panorama-arrow-left {
+    left: 8px;
+}
+
+.panorama-arrow-right {
+    right: 8px;
+}
+
+.panorama-arrow:hover {
+    background: rgba(0,0,0,0.6);
+}
 
 /* footer */
 

@@ -87,3 +87,28 @@ document.addEventListener("DOMContentLoaded", function () {
     hotspots.forEach((h) => h.classList.remove("point-wrapper-open"));
   });
 });
+// pijltjes werkend krijgen 
+
+const panoramaFotos = document.querySelector(".panorama-fotos");
+const arrowLeft = document.querySelector(".panorama-arrow-left");
+const arrowRight = document.querySelector(".panorama-arrow-right");
+
+if (panoramaFotos && arrowLeft && arrowRight) {
+  const scrollAmount = 300; // hoeveel px per klik
+
+  arrowLeft.addEventListener("click", function (e) {
+    e.stopPropagation();
+    panoramaFotos.scrollBy({
+      left: -scrollAmount,
+      behavior: "smooth"
+    });
+  });
+
+  arrowRight.addEventListener("click", function (e) {
+    e.stopPropagation();
+    panoramaFotos.scrollBy({
+      left: scrollAmount,
+      behavior: "smooth"
+    });
+  });
+}
