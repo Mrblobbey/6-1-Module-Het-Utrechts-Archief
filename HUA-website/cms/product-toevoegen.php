@@ -59,17 +59,13 @@ unset($_SESSION['success'], $_SESSION['error']);
 
 <body>
 
-    <div class="header">
-        <img src="../img/image.png" alt="header">
-    </div>
-
     <div class="add-wrap">
         <?php if ($success): ?><div class="add-alert-success"><?= e($success) ?></div><?php endif; ?>
         <?php if ($error): ?><div class="add-alert-error"><?= e($error) ?></div><?php endif; ?>
 
         <div class="add-form-panel">
             <h1>Nieuw product toevoegen</h1>
-            <form method="post" enctype="multipart/form-data" class="add-form">
+            <form method="post" enctype="multipart/form-data" class="add-form-toevoegen">
                 <div class="left-col">
                     <label>Afbeelding</label>
                     <input type="file" name="afbeelding">

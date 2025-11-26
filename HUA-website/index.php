@@ -1,5 +1,4 @@
 <?php
-    include 'includes/header.php';
 $panoramaImages = [
     [
         'src'   => 'img/1.jpg',
@@ -469,7 +468,7 @@ $panoramaImages = [
 </head>
 
 <body>
-
+    <?php include 'includes/header.php'; ?>
     <main>
 
         <div class="panorama">
@@ -618,6 +617,7 @@ $panoramaImages = [
 
         </div>
     </footer>
+    <script src="script/header.js"></script>
     <script src="script/script.js"></script>
 </body>
 

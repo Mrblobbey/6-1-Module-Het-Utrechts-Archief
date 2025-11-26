@@ -1,7 +1,6 @@
 <?php
 session_start();
 include '../includes/conn.php';
-include '../includes/header.php';
 
 $perPage = 5;
 
@@ -110,7 +109,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $afbeelding = null;
     }
-
 }
 
 
@@ -129,8 +127,8 @@ if ($action === 'edit' && $editId) {
 $where = '1=1';
 $params = [];
 if ($search !== '') {
-    $where = "(titel LIKE :q OR beschrijving LIKE :q OR bronnen_tekst LIKE :q OR bron_auteur LIKE :q)";
-    $params[':q'] = '%' . $search . '%';
+    $where = "(titel = :q OR beschrijving = :q OR bronnen_tekst = :q OR bron_auteur = :q)";
+    $params[':q'] = $search;
 }
 $countStmt = $conn->prepare("SELECT COUNT(*) FROM artikel WHERE $where");
 $countStmt->execute($params);
@@ -163,6 +161,7 @@ unset($_SESSION['success'], $_SESSION['error']);
 </head>
 
 <body>
+    <?php include '../includes/header.php'; ?>
     <div class="wrap">
         <div class="titel">
             <div class="top">
@@ -180,7 +179,7 @@ unset($_SESSION['success'], $_SESSION['error']);
 
         <div class="controls">
             <form method="get" class="search-form" style="margin:0">
-                <input type="text" name="q" placeholder="Zoeken..." value="<?php echo e($search); ?>">
+                <input type="search" name="q" placeholder="Zoeken..." value="<?php echo e($search); ?>">
                 <button type="submit" class="btn-search"><i class="fa fa-search"></i></button>
             </form>
             <div class="right-controls">
@@ -214,7 +213,7 @@ unset($_SESSION['success'], $_SESSION['error']);
                     <input type="text" name="titel" required value="<?php echo e($vals['titel']); ?>">
 
                     <label>Beschrijving</label>
-                    <textarea name="beschrijving"><?php echo e($vals['beschrijving']); ?></textarea>
+                    <textarea name="beschrijving"></textarea>
 
                     <label>Link bron</label>
                     <input type="text" name="link_bron" value="<?php echo e($vals['link_bron']); ?>">
@@ -275,7 +274,7 @@ unset($_SESSION['success'], $_SESSION['error']);
 
                             <td><?php echo e($a['titel']); ?></td>
                             <td class="text-center">
-                                <a href="beschrijving.php?id=<?php echo (int)$a['id']; ?>" class="btn-link">Bekijk</a>
+                                <a href="artikel-bewerken.php?action=edit&id=<?php echo (int)$a['id']; ?>" class="btn-link">Bekijk</a>
                             </td>
                             <td><?php if ($a['link_bron']): ?><a href="<?php echo e($a['link_bron']); ?>" target="_blank">link</a><?php endif; ?></td>
                             <td><?php echo e($a['bron_auteur']); ?></td>
@@ -284,12 +283,12 @@ unset($_SESSION['success'], $_SESSION['error']);
                             <td><?php echo $a['actief'] ? 'Ja' : 'Nee'; ?></td>
                             <td class="actions">
                                 <div class="btns">
-                               <a class="btn-edit" href="artikel-bewerken.php?action=edit&id=<?php echo (int)$a['id']; ?>">Bewerk</a>
-                                <form class="verwijder-btn"method="post" style="display:inline" onsubmit="return confirm('Weet je zeker dat je dit artikel wilt verwijderen?');">
-                                    <input type="hidden" name="action" value="delete">
-                                    <input type="hidden" name="id" value="<?php echo (int)$a['id']; ?>">
-                                    <button type="submit" class="btn-delete">Verwijder</button>
-                                </form>
+                                    <a class="btn-edit" href="artikel-bewerken.php?action=edit&id=<?php echo (int)$a['id']; ?>">Bewerk</a>
+                                    <form class="verwijder-btn" method="post" style="display:inline" onsubmit="return confirm('Weet je zeker dat je dit artikel wilt verwijderen?');">
+                                        <input type="hidden" name="action" value="delete">
+                                        <input type="hidden" name="id" value="<?php echo (int)$a['id']; ?>">
+                                        <button type="submit" class="btn-delete">Verwijder</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -309,6 +308,7 @@ unset($_SESSION['success'], $_SESSION['error']);
         <?php endif; ?>
 
     </div>
+    <script src="../script/header.js"></script>
 
 </body>
 

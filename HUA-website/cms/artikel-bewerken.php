@@ -150,7 +150,7 @@ if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {
                     <button type="button" class="hotspot-btn">Hotspot</button>
                 </div>
             </form>
-            <div class="add-btn-container">
+            <div class="add-cancel-btn-container">
                 <button type="submit" class="add-btn-save">Opslaan</button>
                 <a href="product-beheer.php" class="add-btn-cancel">Annuleren</a>
             </div>
