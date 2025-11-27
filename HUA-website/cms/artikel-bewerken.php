@@ -156,6 +156,7 @@ if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {
             </div>
         </div>
     </div>
+        <script src="../script/header.js"></script>
 </body>
 
 </html>

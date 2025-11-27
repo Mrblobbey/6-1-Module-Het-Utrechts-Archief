@@ -112,7 +112,9 @@
         </nav>
 
         <a href="#" class="site-logo">
-            <img src="/HUA/6-1-Module-Het-Utrechts-Archief/HUA-website/img/Logo_ingeklapt.png" alt="Het Utrechts Archief Logo">
+            <a href="https://hetutrechtsarchief.nl/">
+            <img src="/HUA/6-1-Module-Het-Utrechts-Archief/HUA-website/img/Logo_ingeklapt.png" alt="Het Utrechts Archief Logo" style="width: 62px">
+            </a>    
         </a>
     </div>
 

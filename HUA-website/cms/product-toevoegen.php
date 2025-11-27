@@ -102,6 +102,7 @@ unset($_SESSION['success'], $_SESSION['error']);
             </div>
         </div>
     </div>
+        <script src="../script/header.js"></script>
 </body>
 
 </html>
