@@ -1,9 +1,13 @@
 <header class="site-header">
     <div class="header-inner">
 
-        <button class="search-toggle" aria-expanded="false" aria-controls="site-search">
+        <button id="search-toggle" class="search-toggle" aria-expanded="false" aria-controls="site-search">
             <span class="search_icon" aria-hidden="true">
-                <img src="/HUA/6-1-Module-Het-Utrechts-Archief/HUA-website/img/search_icon.png" alt="Zoek icoon" class="search_icon_img">
+                <img src="/HUA/6-1-Module-Het-Utrechts-Archief/HUA-website/img/search_icon.png" alt="Zoek icoon" id="search_icon_img">
+            </span>
+
+            <span id="search-close" style="display: none;">
+                ✕
             </span>
             <span class="search_openen_">Zoeken openen</span>
         </button>
@@ -12,13 +16,10 @@
             <ul class="main-nav__list">
 
                 <li class="onderzoek_nav">
-                    <button class="main-nav__link" aria-expanded="false">
+                    <button id="menuBtn" class="main-nav__link" aria-expanded="false">
                         <span class="dropdown_arrow">></span>
                         <span>Onderzoek</span>
                     </button>
-                            <button class="search-close">
-                                ✕
-                            </button>
 
                     <ul class="dropdown-menu">
                         <li><a href="https://hetutrechtsarchief.nl/onderzoek/collecties?view=collections">Collecties</a></li>
@@ -97,7 +98,7 @@
                         <li><a href="https://hetutrechtsarchief.nl/over-ons/word-vriend">Word vriend</a></li>
                         <li><a href="https://hetutrechtsarchief.nl/over-ons/toegankelijkheid">Toegankelijkheid</a></li>
                         <li><a href="https://hetutrechtsarchief.nl/over-ons/heeft-u-een-klacht">Heeft u een klacht?</a></li>
-                    </ul>   
+                    </ul>
                 </li>
 
                 <li class="contact_nav">

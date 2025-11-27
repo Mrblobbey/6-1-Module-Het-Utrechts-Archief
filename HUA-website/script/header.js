@@ -1,4 +1,3 @@
-// dropdown elementen
 const dropdowns = document.querySelectorAll(
     ".onderzoek_nav, .ontdekken_dropdown, .onderwijs_dropdown, .vakgenoten_dropdown, .overons_dropdown"
 );
@@ -41,7 +40,6 @@ if (dropdowns.length > 0) {
     });
 }
 
-// zoek elementen
 const searchToggle = document.querySelector(".search-toggle");
 const searchBar = document.querySelector("#site-search");
 const searchClose = document.querySelector(".search-close");
@@ -66,3 +64,21 @@ if (searchClose && searchBar && searchToggle) {
         searchToggle.setAttribute("aria-expanded", "false");
     });
 }
+
+const btn = document.getElementById("search-toggle");
+const img = document.getElementById("search_icon_img");
+const x = document.getElementById("search-close");
+
+btn.addEventListener("click", function () {
+    const isHidden = window.getComputedStyle(img).display === "none";
+
+    if (!isHidden) {
+        img.style.display = "none";   // vergrootglas verbergen
+        x.style.display = "inline";   // kruis tonen
+    } else {
+        img.style.display = "inline"; // vergrootglas tonen
+        x.style.display = "none";     // kruis verbergen
+    }
+});
+
+
