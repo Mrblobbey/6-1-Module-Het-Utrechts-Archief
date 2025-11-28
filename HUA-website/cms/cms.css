@@ -687,7 +687,7 @@ table th.actions {
 
 .add-title {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 10px;
 }
@@ -743,12 +743,12 @@ table th.actions {
     padding: 5px 50px 0px 50px;
     box-shadow: 0 0 14px rgba(0, 0, 0, 0.08);
     width: 110%;
-    max-height: 640px;
 }
 
 .add-form-panel h1{
     font-size: 36px;
     font-weight: 600;
+    color: #213b3b;
 }
 
 .add-form {
