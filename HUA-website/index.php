@@ -1,3 +1,5 @@
+<!-- dit is de tijdelijk array voor de foto's, tergelijke tijd te kunnen veranderen -->
+
 <?php
 $panoramaImages = [
     [
@@ -512,7 +514,14 @@ $panoramaImages = [
                         </button>
 
                         <ul class="dropdown-menu">
-
+                            <li><a href="#">Tentoonstellingen</a></li>
+                            <li><a href="#">Activiteiten</a></li>
+                            <li><a href="#">Families en kinderen</a></li>
+                            <li><a href="#">Plan je bezoek</a></li>
+                            <li><a href="#">Rondleidingen</a></li>
+                            <li><a href="#">Verhalen</a></li>
+                            <li><a href="#">Podcast</a></li>
+                            <li><a href="#">Utrecht Time Machine</a></li>
                         </ul>
                     </li>
 
@@ -524,7 +533,12 @@ $panoramaImages = [
                         </button>
 
                         <ul class="dropdown-menu">
-
+                            <li><a href="#">Primair onderwijs</a></li>
+                            <li><a href="#">Voortgezet onderwijs</a></li>
+                            <li><a href="#">Taalklasssen aanbod</a></li>
+                            <li><a href="#">Studenten</a></li>
+                            <li><a href="#">Cursussen</a></li>
+                            <li><a href="#">Voorwaarden Groepsbezoek</a></li>
                         </ul>
                     </li>
 
@@ -536,7 +550,10 @@ $panoramaImages = [
                         </button>
 
                         <ul class="dropdown-menu">
-
+                            <li><a href="#">e-depot</a></li>
+                            <li><a href="#">Archiefbeheer</a></li>
+                            <li><a href="#">Toezicht</a></li>
+                            <li><a href="#">Toezicht in de praktijk</a></li>
                         </ul>
                     </li>
 
@@ -548,16 +565,25 @@ $panoramaImages = [
                         </button>
 
                         <ul class="dropdown-menu">
+                            <li><a href="#">Archief overdragen</a></li>
+                            <li><a href="#">Beleid</a></li>
+                            <li><a href="#">Projecten</a></li>
+                            <li><a href="#">Nieuws</a></li>
+                            <li><a href="#">Medewerkers</a></li>
+                            <li><a href="#">Vacatures</a></li>
+                            <li><a href="#">Word vriend</a></li>
+                            <li><a href="#">Toegankelijkheid</a></li>
+                            <li><a href="#">Heeft u een klacht</a></li>
 
                         </ul>
                     </li>
 
-                    <!-- CONTACT (geen dropdown) -->
+                    <!-- CONTACT knop -->
                     <li class="contact_nav">
                         <a href="#" class="main-nav__link main-nav__link--plain">Contact</a>
                     </li>
 
-                    <!-- ENGLISH (schuin) -->
+                    <!-- ENGLISH vertaler -->
                     <li class="english_nav">
                         <a href="#" class="main-nav__link main-nav__link--italic">English</a>
                     </li>
@@ -645,7 +671,7 @@ $panoramaImages = [
 
             <div class="footer-columns">
 
-                <!-- kolom: Plan een bezoek + Onderzoek -->
+                <!-- bezoek plus onderzoek-->
                 <div class="footer-column">
                     <h3 class="footer-title">Plan een bezoek</h3>
                     <ul class="footer-linklist">
@@ -662,7 +688,7 @@ $panoramaImages = [
                     </ul>
                 </div>
 
-                <!-- kolom: Over ons -->
+                <!-- over ons-->
                 <div class="footer-column">
                     <h3 class="footer-title">Over ons</h3>
                     <ul class="footer-linklist">
@@ -678,7 +704,7 @@ $panoramaImages = [
                     </ul>
                 </div>
 
-                <!-- kolom: Contact + socials -->
+                <!-- contact en sociaal -->
                 <div class="footer-column-contact">
                     <h3 class="footer-title">Contact</h3>
                     <ul class="footer-contact-list">
