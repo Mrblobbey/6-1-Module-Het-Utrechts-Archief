@@ -440,20 +440,20 @@ body {
     background: var(--gray);
     padding: 1rem 0;
     height: 800px;
-    width: 100%; /* FIX */
-    max-width: 100%; 
+    width: 100%;
+    max-width: 100%;
     position: relative;
-    overflow: hidden;
+    overflow: visible; /* NIET wegknippen wat erin zit */
 }
 
-/* panorama inhoud, zorgt voor horizontaal scrollen */
-/* panorama inhoud, zorgt voor horizontaal scrollen */
+/* panorama inhoud */
 .panorama-content {
-    width: 70%;        /* FIX 1 */
+    width: 70%;
     left: 255px;
     max-width: none;
-    overflow: hidden;
-    position: relative;
+    position: relative; 
+    overflow-x: hidden; /* alleen horizontaal eventueel knippen */
+    overflow-y: visible;
 }
 
 /* horizontale scroller */
@@ -473,7 +473,7 @@ body {
     flex-shrink: 0;
 }
 
-/* pijltjes */
+/* pijltjes blijven zoals je had */
 .panorama-arrow {
     position: absolute;
     top: 50%;
@@ -503,6 +503,33 @@ body {
 .panorama-arrow:hover {
     background: rgba(0,0,0,0.6);
 }
+
+/* MINI MAP */
+.panorama-minimap {
+    position: absolute;
+    right: 10px;
+    bottom: 75px;                 /* in de panorama, niet eronder */
+    width: 220px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 2px solid red;        /* tijdelijk rood om duidelijk te zien */
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    z-index: 2000;
+}
+
+/* wat je “zichtbare gebied” aangeeft */
+.panorama-minimap-viewport {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 3px;
+    pointer-events: none;
+}
+
 
 /* footer */
 

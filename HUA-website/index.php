@@ -615,7 +615,7 @@ $panoramaImages = [
         <div class="panorama">
             <div class="panorama-content">
 
-                <div class="panorama-fotos">
+                <div class="panorama-fotos" id="panoramaFotos">
                     <?php foreach ($panoramaImages as $image): ?>
                         <?php
                         $s = $image['style'];
@@ -653,6 +653,10 @@ $panoramaImages = [
                             <?php endforeach; ?>
                         </div>
                     <?php endforeach; ?>
+                </div>
+
+                <div class="panorama-minimap" id="panoramaMinimap">
+                    <div class="panorama-minimap-viewport" id="panoramaMinimapViewport"></div>
                 </div>
                 <!-- pijltjes -->
                 <button class="panorama-arrow panorama-arrow-left" type="button" aria-label="Scroll naar links">
