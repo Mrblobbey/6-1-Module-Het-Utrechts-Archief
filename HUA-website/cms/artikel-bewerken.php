@@ -2,7 +2,6 @@
 session_start();
 include '../includes/conn.php';
 
-// Check of we een edit willen doen
 if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {
     $id = (int)$_GET['id'];
 
@@ -17,67 +16,53 @@ if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $titel = trim($_POST['titel'] ?? '');
+        $catalogusnummer = trim($_POST['catalogusnummer'] ?? '');
         $beschrijving = trim($_POST['beschrijving'] ?? '');
-        $link_bron = trim($_POST['link_bron'] ?? '');
-        $bronnen_tekst = trim($_POST['bronnen_tekst'] ?? '');
-        $bron_auteur = trim($_POST['bron_auteur'] ?? '');
-        $auteur_id = intval($_POST['auteur_id'] ?? 0);
-        $brond_datum = trim($_POST['brond_datum'] ?? '');
-        $seizoenen = trim($_POST['seizoenen'] ?? '');
+        $link_bron = trim($_POST['link_bron'] ?? $artikel['link_bron']);
         $actief = isset($_POST['actief']) ? 1 : 0;
 
-        // Afbeelding uploaden
-        if (isset($_FILES['afbeelding']) && $_FILES['afbeelding']['error'] === 0) {
+        $afbeelding = $artikel['afbeelding'];
+        if (!empty($_FILES['afbeelding']['name']) && $_FILES['afbeelding']['error'] === 0) {
             $uploadDir = '../img/';
-            $fileName = basename($_FILES['afbeelding']['name']);
-            $uploadFile = $uploadDir . $fileName;
-            move_uploaded_file($_FILES['afbeelding']['tmp_name'], $uploadFile);
+            $fileName = time() . '_' . basename($_FILES['afbeelding']['name']);
+            move_uploaded_file($_FILES['afbeelding']['tmp_name'], $uploadDir . $fileName);
             $afbeelding = $fileName;
-        } else {
-            $afbeelding = $artikel['afbeelding'];
         }
 
-        if ($titel === '') {
+        if ($catalogusnummer === '') {
             $_SESSION['error'] = "Titel is verplicht.";
-            header("Location: artikel-bewerken.php?action=edit&id=$id");
+            header("Location: product-beheer.php");
             exit;
         }
 
         $stmt = $conn->prepare("UPDATE artikel SET 
-            titel = :titel,
-            beschrijving = :beschrijving,
-            link_bron = :link_bron,
-            bronnen_tekst = :bronnen_tekst,
-            bron_auteur = :bron_auteur,
-            auteur_id = :auteur_id,
-            brond_datum = :brond_datum,
-            seizoenen = :seizoenen,
-            actief = :actief,
-            afbeelding = :afbeelding
-            WHERE id = :id
-        ");
+        catalogusnummer = :catalogusnummer,
+        beschrijving = :beschrijving,
+        link_bron = :link_bron,
+        actief = :actief,
+        afbeelding = :afbeelding,
+        x = :x,
+        y = :y
+        WHERE id = :id
+    ");
         $stmt->execute([
-            ':titel' => $titel,
+            ':catalogusnummer' => $catalogusnummer,
             ':beschrijving' => $beschrijving,
             ':link_bron' => $link_bron,
-            ':bronnen_tekst' => $bronnen_tekst,
-            ':bron_auteur' => $bron_auteur,
-            ':auteur_id' => $auteur_id,
-            ':brond_datum' => $brond_datum,
-            ':seizoenen' => $seizoenen,
             ':actief' => $actief,
             ':afbeelding' => $afbeelding,
+            ':x' => $_POST['x'] ?? 0,
+            ':y' => $_POST['y'] ?? 0,
             ':id' => $id
         ]);
 
         $_SESSION['success'] = "Artikel succesvol bijgewerkt.";
-        header("Location: artikel-bewerken.php?action=edit&id=$id");
+        header("Location: product-beheer.php");
         exit;
     }
 } else {
     $_SESSION['error'] = "Ongeldige actie.";
-    header("Location: artikel-beheer.php");
+    header("Location: beheer-beheer.php");
     exit;
 }
 
@@ -98,63 +83,105 @@ if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {
             <div class="add-title">
                 <div class="add-top">
                     <h1>Artikel bewerken</h1>
-            <?php if (!empty($_SESSION['error'])): ?>
-                <div class="add-alert-error"><?= htmlspecialchars($_SESSION['error']) ?></div>
-                <?php unset($_SESSION['error']); ?>
-            <?php endif; ?>
-
-            <?php if (!empty($_SESSION['success'])): ?>
-                <div class="add-alert-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
-                <?php unset($_SESSION['success']); ?>
-            <?php endif; ?>
-
-            <form class="add-form" method="post" enctype="multipart/form-data">
-                <div class="left-col">
-                    <label>Afbeelding</label>
-                    <?php if (!empty($artikel['afbeelding'])): ?>
-                        <img src="../img/<?= htmlspecialchars($artikel['afbeelding']) ?>" alt="Afbeelding" style="max-width:100%; margin-bottom:10px;">
+                    <?php if (!empty($_SESSION['error'])): ?>
+                        <div class="add-alert-error"><?= htmlspecialchars($_SESSION['error']) ?></div>
+                        <?php unset($_SESSION['error']); ?>
                     <?php endif; ?>
-                    <input type="file" name="afbeelding">
 
-                    <label>Titel *</label>
-                    <input type="text" name="titel" value="<?= htmlspecialchars($artikel['titel']) ?>" required>
+                    <?php if (!empty($_SESSION['success'])): ?>
+                        <div class="add-alert-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
+                        <?php unset($_SESSION['success']); ?>
+                    <?php endif; ?>
 
-                    <label>Beschrijving</label>
-                    <textarea name="beschrijving"><?= htmlspecialchars($artikel['beschrijving']) ?></textarea>
+                    <form class="add-form" method="post" enctype="multipart/form-data">
+                        <div class="left-col">
+                            <div class="hotspot-container" style="position:relative; display:inline-block; max-width:100%;">
+                                <img id="img-hotspot" src="../img/<?= htmlspecialchars($artikel['afbeelding']) ?>" style="width:100%; display:block;">
+                                <div id="hotspot"
+                                    style="
+            width:20px;
+            height:20px;
+            background:red;
+            border-radius:50%;
+            position:absolute;
+            cursor:pointer;
+            left: <?= (int)$artikel['x'] ?>px;
+            top: <?= (int)$artikel['y'] ?>px;
+        ">
+                                </div>
+                            </div>
 
-                    <label>Link bron</label>
-                    <input type="text" name="link_bron" value="<?= htmlspecialchars($artikel['link_bron']) ?>">
+                            <input type="hidden" name="x" id="input-x" value="<?= htmlspecialchars($artikel['x'] ?? 0) ?>">
+                            <input type="hidden" name="y" id="input-y" value="<?= htmlspecialchars($artikel['y'] ?? 0) ?>">
+
+                            <label>Titel *</label>
+                            <input type="text" name="titel" value="<?= htmlspecialchars($artikel['catalogusnummer']) ?>" required>
+
+                            <label>Link bron</label>
+                            <input type="text" name="link_bron" value="<?= htmlspecialchars($artikel['link_bron']) ?>">
+
+                            <label>Titel *</label>
+                            <input type="text" name="catalogusnummer" value="<?= htmlspecialchars($artikel['catalogusnummer']) ?>" required>
+
+                            <label>Beschrijving</label>
+                            <textarea name="beschrijving"><?= htmlspecialchars($artikel['beschrijving']) ?></textarea>
+
+                            <label><input type="checkbox" name="actief" <?= $artikel['actief'] ? 'checked' : '' ?>> Actief</label>
+
+                            <div class="add-cancel-btn-container">
+                                <button type="submit" class="add-btn-save">Opslaan</button>
+                                <a href="product-beheer.php" class="add-btn-cancel">Annuleren</a>
+                            </div>
+                        </div>
+                    </form>
+                    <script>
+                        const hotspot = document.getElementById("hotspot");
+                        const img = document.getElementById("img-hotspot");
+                        const inputX = document.getElementById("input-x");
+                        const inputY = document.getElementById("input-y");
+
+                        let dragging = false;
+                        let offsetX = 0;
+                        let offsetY = 0;
+
+                        hotspot.addEventListener("mousedown", (e) => {
+                            dragging = true;
+                            offsetX = e.offsetX;
+                            offsetY = e.offsetY;
+                        });
+
+                        document.addEventListener("mouseup", () => {
+                            dragging = false;
+                        });
+
+                        document.addEventListener("mousemove", (e) => {
+                            if (!dragging) return;
+
+                            const rect = img.getBoundingClientRect();
+                            let x = e.clientX - rect.left - offsetX;
+                            let y = e.clientY - rect.top - offsetY;
+
+                            x = Math.max(0, Math.min(x, rect.width - hotspot.offsetWidth));
+                            y = Math.max(0, Math.min(y, rect.height - hotspot.offsetHeight));
+
+                            hotspot.style.left = x + "px";
+                            hotspot.style.top = y + "px";
+
+                            inputX.value = Math.round(x);
+                            inputY.value = Math.round(y);
+                        });
+                    </script>
+
                 </div>
-
-                <div class="right-col">
-                    <label>Bronnen tekst</label>
-                    <input type="text" name="bronnen_tekst" value="<?= htmlspecialchars($artikel['bronnen_tekst']) ?>">
-
-                    <label>Bron / auteur</label>
-                    <input type="text" name="bron_auteur" value="<?= htmlspecialchars($artikel['bron_auteur']) ?>">
-
-                    <label>Auteur ID</label>
-                    <input type="number" name="auteur_id" value="<?= htmlspecialchars($artikel['auteur_id']) ?>">
-
-                    <label>Brond datum</label>
-                    <input type="text" name="brond_datum" value="<?= htmlspecialchars($artikel['brond_datum']) ?>">
-
-                    <label>Seizoenen</label>
-                    <input type="text" name="seizoenen" value="<?= htmlspecialchars($artikel['seizoenen']) ?>">
-
-                    <label><input type="checkbox" name="actief" <?= $artikel['actief'] ? 'checked' : '' ?>> Actief</label>
-                </div>
-                                <div class="add-btn-container">
-                    <div class="hotspot-drop"></div>
-                    <button type="button" class="hotspot-btn">Hotspot</button>
-                </div>
-            </form>
-            <div class="add-btn-container">
-                <button type="submit" class="add-btn-save">Opslaan</button>
-                <a href="product-beheer.php" class="add-btn-cancel">Annuleren</a>
             </div>
-        </div>
-    </div>
+
+            <script src="../script/header.js"></script>
+            <script src="../script/script.js"></script>
 </body>
 
 </html>
+
+<?php
+include '../includes/header.php';
+include '../includes/login-true.php';
+?>
