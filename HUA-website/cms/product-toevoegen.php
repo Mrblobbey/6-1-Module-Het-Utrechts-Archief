@@ -1,6 +1,8 @@
 <?php
 session_start();
 include '../includes/conn.php';
+include '../includes/header.php';
+include '../includes/login-true.php';
 
 function e($v)
 {
@@ -11,6 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $naam = trim($_POST['naam'] ?? '');
     $beschrijving = trim($_POST['beschrijving'] ?? '');
+    $link_bron = trim($_POST['link_bron'] ?? '');
+    $actief = isset($_POST['actief']) ? 1 : 0;
 
     if ($naam === '') {
         $_SESSION['error'] = 'Productnaam is verplicht.';
@@ -28,12 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $afbeelding = null;
     }
 
-    $sql = "INSERT INTO product (naam, beschrijving, afbeelding)
-            VALUES (:naam, :beschrijving, :afbeelding)";
+    $sql = "INSERT INTO product (naam, beschrijving, link_bron, actief, afbeelding)
+            VALUES (:naam, :beschrijving, :link_bron, :actief, :afbeelding)";
     $stmt = $conn->prepare($sql);
     $stmt->execute([
         ':naam' => $naam,
         ':beschrijving' => $beschrijving,
+        ':link_bron' => $link_bron,
+        ':actief' => $actief,
         ':afbeelding' => $afbeelding
     ]);
 
@@ -57,41 +63,42 @@ unset($_SESSION['success'], $_SESSION['error']);
 </head>
 
 <body>
-
-    <div class="header">
-        <img src="../img/image.png" alt="header">
-    </div>
-
     <div class="add-wrap">
-        <?php if ($success): ?><div class="add-alert-success"><?= e($success) ?></div><?php endif; ?>
-        <?php if ($error): ?><div class="add-alert-error"><?= e($error) ?></div><?php endif; ?>
-
         <div class="add-form-panel">
-            <h1>Nieuw product toevoegen</h1>
-            <form method="post" enctype="multipart/form-data" class="add-form">
+            <div class="add-title">
+                <div class="add-top">
+                    <h1>Nieuw product toevoegen</h1>
+                </div>
+
+                <?php if ($success): ?>
+                    <div class="add-alert-success"><?= e($success) ?></div>
+                <?php endif; ?>
+
+                <?php if ($error): ?>
+                    <div class="add-alert-error"><?= e($error) ?></div>
+                <?php endif; ?>
+            </div>
+
+            <form class="add-form" method="post" enctype="multipart/form-data">
                 <div class="left-col">
                     <label>Afbeelding</label>
-                    <input type="file" name="afbeelding">
+                    <img id="preview" src="" alt="Preview"style="max-width:100%; margin-bottom:10px; max-height:200px;">
+
+                    <input type="file" name="afbeelding" id="fileInput" accept="image/*">
+
 
                     <label>Titel *</label>
                     <input type="text" name="naam" placeholder="bla bla bla" required>
 
                     <label>Beschrijving</label>
-                    <textarea name="beschrijving" placeholder="bla bla bla" required></textarea>
+                    <textarea name="beschrijving" placeholder="bla bla bla"></textarea>
                 </div>
 
-                <div class="right-col">
-                    <label>Link_bron</label>
-                    <input type="text" name="link_bron" placeholder="https://..." required>
+                <div class="left-col">
+                    <label>Link bron</label>
+                    <input type="text" name="link_bron" placeholder="https://...">
 
-                    <label>Bronnen_text</label>
-                    <input type="text" name="bronnen_text" placeholder="bla bla bla" required>
-
-                    <label>Bron_auteur</label>
-                    <input type="text" name="bron_auteur" placeholder="bla bla bla" required>
-
-                    <label>Bron_datum</label>
-                    <input type="text" name="bron_datum" placeholder="18-04-2008" required>
+                    <label><input type="checkbox" name="actief"> Actief</label>
                 </div>
 
                 <div class="add-btn-container">
@@ -99,12 +106,16 @@ unset($_SESSION['success'], $_SESSION['error']);
                     <button type="button" class="hotspot-btn">Hotspot</button>
                 </div>
             </form>
-            <div class="add-delete-buttons">
-                <button type="submit" class="add-btn-save" form="productForm">Toevoegen</button>
+
+            <div class="add-cancel-btn-container">
+                <button type="submit" form="productForm" class="add-btn-save">Toevoegen</button>
                 <a href="product-beheer.php" class="add-btn-cancel">Annuleren</a>
             </div>
         </div>
     </div>
+
+    <script src="../script/header.js"></script>
+    <script src="../script/script.js"></script>
 </body>
 
 </html>
