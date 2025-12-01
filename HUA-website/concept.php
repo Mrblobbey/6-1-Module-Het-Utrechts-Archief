@@ -1,49 +1,134 @@
+//code van produt-toevoegen.php =
+<div class="right-col">
+    <label>Link_bron</label>
+    <input type="text" name="link_bron" placeholder="https://..." required>
+
+    <label>Bronnen_text</label>
+    <input type="text" name="bronnen_text" placeholder="bla bla bla" required>
+
+    <label>Bron_auteur</label>
+    <input type="text" name="bron_auteur" placeholder="bla bla bla" required>
+
+    <label>Bron_datum</label>
+    <input type="text" name="bron_datum" placeholder="18-04-2008" required>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+//code van artikel-bewerken.php =
+
 <?php
-session_start();
-include '../includes/conn.php';
-include '../includes/login-true.php';
+$link_bron = trim($_POST['link_bron'] ?? '');
+$bronnen_tekst = trim($_POST['bronnen_tekst'] ?? '');
+$bron_auteur = trim($_POST['bron_auteur'] ?? '');
+$auteur_id = intval($_POST['auteur_id'] ?? 0);
+$brond_datum = trim($_POST['brond_datum'] ?? '');
+$seizoenen = trim($_POST['seizoenen'] ?? '');
 
-$perPage = 5;
 
-function e($v)
-{
-    return htmlspecialchars($v ?? '', ENT_QUOTES);
-}
+$stmt = $conn->prepare("UPDATE artikel SET 
+            link_bron = :link_bron,
+            bronnen_tekst = :bronnen_tekst,
+            bron_auteur = :bron_auteur,
+            auteur_id = :auteur_id,
+            brond_datum = :brond_datum,
+            seizoenen = :seizoenen,
+            WHERE id = :id
+        ");
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+$stmt->execute([
+    ':titel' => $titel,
+    ':beschrijving' => $beschrijving,
+    ':actief' => $actief,
+    ':afbeelding' => $afbeelding,
+    ':id' => $id
+]);
+?>
 
-    if (isset($_POST['action']) && $_POST['action'] === 'create') {
-        $titel = trim($_POST['titel'] ?? '');
-        $beschrijving = trim($_POST['beschrijving'] ?? '');
-        $link_bron = trim($_POST['link_bron'] ?? '');
-        $actief = isset($_POST['actief']) ? 1 : 0;
+<label>Link bron</label>
+<input type="text" name="link_bron" value="<?= htmlspecialchars($artikel['link_bron']) ?>">
+</div>
 
-        if ($titel === '') {
-            $_SESSION['error'] = 'Titel is verplicht.';
-            header('Location: artikel-beheer.php?action=new');
-            exit;
-        }
+<div class="right-col">
+    <label>Bronnen tekst</label>
+    <input type="text" name="bronnen_tekst" value="<?= htmlspecialchars($artikel['bronnen_tekst']) ?>">
 
-        $sql = "INSERT INTO artikel (titel, beschrijving, link_bron, actief, afbeelding)
-                VALUES (:titel, :beschrijving, :link_bron, :actief, :afbeelding)";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([
-            ':titel' => $titel,
-            ':beschrijving' => $beschrijving,
-            ':link_bron' => $link_bron,
-            ':actief' => $actief,
-            ':afbeelding' => $afbeelding
-        ]);
-        $_SESSION['success'] = 'Artikel toegevoegd.';
-        header('Location: artikel-beheer.php');
-        exit;
-    }
+    <label>Bron / auteur</label>
+    <input type="text" name="bron_auteur" value="<?= htmlspecialchars($artikel['bron_auteur']) ?>">
 
-    if (isset($_POST['action']) && $_POST['action'] === 'update' && isset($_POST['id'])) {
+    <label>Auteur ID</label>
+    <input type="number" name="auteur_id" value="<?= htmlspecialchars($artikel['auteur_id']) ?>">
+
+    <label>Brond datum</label>
+    <input type="text" name="brond_datum" value="<?= htmlspecialchars($artikel['brond_datum']) ?>">
+
+    <label>Seizoenen</label>
+    <input type="text" name="seizoenen" value="<?= htmlspecialchars($artikel['seizoenen']) ?>">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //code van product-beheer.php
+    <?php
+    $link_bron = trim($_POST['link_bron'] ?? '');
+    $bronnen_tekst = trim($_POST['bronnen_tekst'] ?? '');
+    $bron_auteur = trim($_POST['bron_auteur'] ?? '');
+    $auteur_id = intval($_POST['auteur_id'] ?? 0);
+    $brond_datum = trim($_POST['brond_datum'] ?? '');
+    $seizoenen = trim($_POST['seizoenen'] ?? '');
+
+    $sql = "INSERT INTO artikel (titel, beschrijving, link_bron, bronnen_tekst, bron_auteur, auteur_id, brond_datum, seizoenen, actief, afbeelding)
+                VALUES (:titel, :beschrijving, :link_bron, :bronnen_tekst, :bron_auteur, :auteur_id, :brond_datum, :seizoenen, :actief, :afbeelding)";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([
+        ':titel' => $titel,
+        ':beschrijving' => $beschrijving,
+        ':link_bron' => $link_bron,
+        ':bronnen_tekst' => $bronnen_tekst,
+        ':bron_auteur' => $bron_auteur,
+        ':auteur_id' => $auteur_id,
+        ':brond_datum' => $brond_datum,
+        ':seizoenen' => $seizoenen,
+        ':actief' => $actief,
+        ':afbeelding' => $afbeelding
+    ]);
+    $_SESSION['success'] = 'Artikel toegevoegd.';
+    header('Location: artikel-beheer.php');
+    exit;
+     if (isset($_POST['action']) && $_POST['action'] === 'update' && isset($_POST['id'])) {
         $id = intval($_POST['id']);
         $titel = trim($_POST['titel'] ?? '');
         $beschrijving = trim($_POST['beschrijving'] ?? '');
-        $link_bron = trim($_POST['link_bron'] ?? '');
+        // $link_bron = trim($_POST['link_bron'] ?? '');
+        // $bronnen_tekst = trim($_POST['bronnen_tekst'] ?? '');
+        // $bron_auteur = trim($_POST['bron_auteur'] ?? '');
+        // $auteur_id = intval($_POST['auteur_id'] ?? 0);
+        // $brond_datum = trim($_POST['brond_datum'] ?? '');
+        // $seizoenen = trim($_POST['seizoenen'] ?? '');
         $actief = isset($_POST['actief']) ? 1 : 0;
 
         if ($titel === '') {
@@ -52,14 +137,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
-        $sql = "UPDATE artikel SET titel=:titel, beschrijving=:beschrijving, link_bron=:linkbron, actief=:actief
+        $sql = "UPDATE artikel SET titel=:titel, beschrijving=:beschrijving, link_bron=:link_bron,
+                bronnen_tekst=:bronnen_tekst, bron_auteur=:bron_auteur, auteur_id=:auteur_id,
+                brond_datum=:brond_datum, seizoenen=:seizoenen, actief=:actief
                 WHERE id = :id LIMIT 1";
         $stmt = $conn->prepare($sql);
         $stmt->execute([
             ':titel' => $titel,
             ':beschrijving' => $beschrijving,
-            ':actief' => $actief,
             ':link_bron' => $link_bron,
+            ':bronnen_tekst' => $bronnen_tekst,
+            ':bron_auteur' => $bron_auteur,
+            ':auteur_id' => $auteur_id,
+            ':brond_datum' => $brond_datum,
+            ':seizoenen' => $seizoenen,
+            ':actief' => $actief,
             ':id' => $id
         ]);
         $_SESSION['success'] = 'Artikel bijgewerkt.';
@@ -75,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: artikel-beheer.php');
         exit;
     }
-}
+// }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -106,7 +198,7 @@ if ($action === 'edit' && $editId) {
 $where = '1=1';
 $params = [];
 if ($search !== '') {
-    $where = "(titel = :q OR beschrijving = :q)";
+    $where = "(titel = :q OR beschrijving = :q OR bronnen_tekst = :q OR bron_auteur = :q)";
     $params[':q'] = $search;
 }
 $countStmt = $conn->prepare("SELECT COUNT(*) FROM artikel WHERE $where");
@@ -174,6 +266,11 @@ unset($_SESSION['success'], $_SESSION['error']);
                 'titel' => '',
                 'beschrijving' => '',
                 'link_bron' => '',
+                'bronnen_tekst' => '',
+                'bron_auteur' => '',
+                'auteur_id' => '',
+                'brond_datum' => '',
+                'seizoenen' => '',
                 'actief' => 1
             ];
             ?>
@@ -189,8 +286,23 @@ unset($_SESSION['success'], $_SESSION['error']);
                     <label>Beschrijving</label>
                     <textarea name="beschrijving"></textarea>
 
-                    <label>Link Bron</label>
+                    <label>Link bron</label>
                     <input type="text" name="link_bron" value="<?php echo e($vals['link_bron']); ?>">
+
+                    <label>Bronnen tekst</label>
+                    <input type="text" name="bronnen_tekst" value="<?php echo e($vals['bronnen_tekst']); ?>">
+
+                    <label>Bron / auteur</label>
+                    <input type="text" name="bron_auteur" value="<?php echo e($vals['bron_auteur']); ?>">
+
+                    <label>Auteur ID</label>
+                    <input type="number" name="auteur_id" value="<?php echo e($vals['auteur_id']); ?>">
+
+                    <label>Brond datum (YYYY-MM-DD)</label>
+                    <input type="text" name="brond_datum" value="<?php echo e($vals['brond_datum']); ?>">
+
+                    <label>Seizoenen</label>
+                    <input type="text" name="seizoenen" placeholder="bijv: lente,zomer" value="<?php echo e($vals['seizoenen']); ?>">
 
                     <label><input type="checkbox" name="actief" <?php echo (isset($vals['actief']) && $vals['actief']) ? 'checked' : ''; ?>> Actief</label>
 
@@ -207,7 +319,10 @@ unset($_SESSION['success'], $_SESSION['error']);
                         <th>Afbeelding</th>
                         <th>Titel</th>
                         <th>Beschrijving</th>
-                        <th>Link Bron</th>
+                        <th>Bron</th>
+                        <th>Bron auteur</th>
+                        <th>Datum</th>
+                        <th>Seizoenen</th>
                         <th>Actief</th>
                         <th class="actions">Acties</th>
                     </tr>
@@ -229,18 +344,18 @@ unset($_SESSION['success'], $_SESSION['error']);
                             </td>
 
                             <td><?php echo e($a['titel']); ?></td>
-
-                            <td><?php echo e($a['beschrijving']); ?></td>
-
-                            <td><?php echo e($a['link_bron']); ?></td>
-
+                            <td class="text-center">
+                                <a href="artikel-bewerken.php?action=edit&id=<?php echo (int)$a['id']; ?>" class="btn-link">Bekijk</a>
+                            </td>
+                            <td><?php if ($a['link_bron']): ?><a href="<?php echo e($a['link_bron']); ?>" target="_blank">link</a><?php endif; ?></td>
+                            <td><?php echo e($a['bron_auteur']); ?></td>
+                            <td><?php echo e($a['brond_datum']); ?></td>
+                            <td><?php echo e($a['seizoenen']); ?></td>
                             <td><?php echo $a['actief'] ? 'Ja' : 'Nee'; ?></td>
-
                             <td class="actions">
                                 <div class="btns">
                                     <a class="btn-edit" href="artikel-bewerken.php?action=edit&id=<?php echo (int)$a['id']; ?>">Bewerk</a>
-                                    <form class="verwijder-btn" method="post" style="display:inline"
-                                        onsubmit="return confirm('Weet je zeker dat je dit artikel wilt verwijderen?');">
+                                    <form class="verwijder-btn" method="post" style="display:inline" onsubmit="return confirm('Weet je zeker dat je dit artikel wilt verwijderen?');">
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="id" value="<?php echo (int)$a['id']; ?>">
                                         <button type="submit" class="btn-delete">Verwijder</button>
@@ -248,7 +363,6 @@ unset($_SESSION['success'], $_SESSION['error']);
                                 </div>
                             </td>
                         </tr>
-
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -266,7 +380,10 @@ unset($_SESSION['success'], $_SESSION['error']);
 
     </div>
     <script src="../script/header.js"></script>
-    <script src="../script/script.js"></script>
+
 </body>
 
 </html>
+    ?>
+
+    

@@ -1,7 +1,6 @@
 <?php
 session_start();
 include '../includes/conn.php';
-
 $error = '';
 
 if ((isset($_POST["naam_achternaam"])) && (isset($_POST["wachtwoord"]))) {
@@ -20,9 +19,9 @@ if ((isset($_POST["naam_achternaam"])) && (isset($_POST["wachtwoord"]))) {
         if (!password_verify($password, $user['wachtwoord'])) {
             $error = "Gebruikersnaam of wachtwoord is onjuist.";
         } else {
-            $_SESSION["login"] = true;
-            header('Location: product-beheer.php');
-            exit();
+        $_SESSION["login"] = true;
+        header('Location: product-beheer.php');
+        exit();
         }
     }
 }
@@ -38,9 +37,6 @@ if ((isset($_POST["naam_achternaam"])) && (isset($_POST["wachtwoord"]))) {
     <link rel="stylesheet" href="cms.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<header>
-    <img src="../img/image.png" alt="header">
-</header>
 
 <body>
     <div class="inlog-container">
