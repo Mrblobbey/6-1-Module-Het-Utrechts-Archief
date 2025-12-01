@@ -609,8 +609,7 @@ $panoramaImages = [
             </form>
         </div>
     </header>
-
-    <?php include 'includes/header.php'; ?>
+    
     <main>
 
         <div class="panorama">
