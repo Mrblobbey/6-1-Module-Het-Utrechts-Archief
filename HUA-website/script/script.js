@@ -66,3 +66,35 @@ fileInput.addEventListener("change", function () {
 });
 
 
+//hostspot placement
+const hotspot = document.getElementById("hotspot");
+const img = document.getElementById("img-hotspot");
+const inputX = document.getElementById("input-x");
+const inputY = document.getElementById("input-y");
+
+let offsetX, offsetY, dragging = false;
+
+hotspot.addEventListener("mousedown", (e) => {
+    dragging = true;
+    offsetX = e.offsetX;
+    offsetY = e.offsetY;
+});
+
+document.addEventListener("mouseup", () => dragging = false);
+
+document.addEventListener("mousemove", (e) => {
+    if (!dragging) return;
+
+    const rect = img.getBoundingClientRect();
+    let x = e.clientX - rect.left - offsetX;
+    let y = e.clientY - rect.top - offsetY;
+
+    x = Math.max(0, Math.min(x, rect.width - 20));
+    y = Math.max(0, Math.min(y, rect.height - 20));
+
+    hotspot.style.left = x + "px";
+    hotspot.style.top = y + "px";
+
+    inputX.value = Math.round(x);
+    inputY.value = Math.round(y);
+});

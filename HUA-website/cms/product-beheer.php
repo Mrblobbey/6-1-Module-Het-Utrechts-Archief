@@ -13,22 +13,22 @@ function e($v)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['action']) && $_POST['action'] === 'create') {
-        $titel = trim($_POST['titel'] ?? '');
+        $catalogusnummer = trim($_POST['catalogusnummer'] ?? '');
         $beschrijving = trim($_POST['beschrijving'] ?? '');
         $link_bron = trim($_POST['link_bron'] ?? '');
         $actief = isset($_POST['actief']) ? 1 : 0;
 
-        if ($titel === '') {
+        if ($catalogusnummer === '') {
             $_SESSION['error'] = 'Titel is verplicht.';
             header('Location: artikel-beheer.php?action=new');
             exit;
         }
 
-        $sql = "INSERT INTO artikel (titel, beschrijving, link_bron, actief, afbeelding)
-                VALUES (:titel, :beschrijving, :link_bron, :actief, :afbeelding)";
+        $sql = "INSERT INTO artikel (catalogusnummer, beschrijving, link_bron, actief, afbeelding)
+                VALUES (:catalogusnummer, :beschrijving, :link_bron, :actief, :afbeelding)";
         $stmt = $conn->prepare($sql);
         $stmt->execute([
-            ':titel' => $titel,
+            ':catalogusnummer' => $catalogusnummer,
             ':beschrijving' => $beschrijving,
             ':link_bron' => $link_bron,
             ':actief' => $actief,
@@ -41,22 +41,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['action']) && $_POST['action'] === 'update' && isset($_POST['id'])) {
         $id = intval($_POST['id']);
-        $titel = trim($_POST['titel'] ?? '');
+        $catalogusnummer = trim($_POST['catalogusnummer'] ?? '');
         $beschrijving = trim($_POST['beschrijving'] ?? '');
         $link_bron = trim($_POST['link_bron'] ?? '');
         $actief = isset($_POST['actief']) ? 1 : 0;
 
-        if ($titel === '') {
+        if ($catalogusnummer === '') {
             $_SESSION['error'] = 'Titel is verplicht.';
             header('Location: artikel-beheer.php?action=edit&id=' . $id);
             exit;
         }
 
-        $sql = "UPDATE artikel SET titel=:titel, beschrijving=:beschrijving, link_bron=:linkbron, actief=:actief
+        $sql = "UPDATE artikel SET catalogusnummer=:catalogusnummer, beschrijving=:beschrijving, link_bron=:linkbron, actief=:actief
                 WHERE id = :id LIMIT 1";
         $stmt = $conn->prepare($sql);
         $stmt->execute([
-            ':titel' => $titel,
+            ':catalogusnummer' => $catalogusnummer,
             ':beschrijving' => $beschrijving,
             ':actief' => $actief,
             ':link_bron' => $link_bron,
@@ -106,7 +106,7 @@ if ($action === 'edit' && $editId) {
 $where = '1=1';
 $params = [];
 if ($search !== '') {
-    $where = "(titel = :q OR beschrijving = :q)";
+    $where = "(catalogusnummer = :q OR beschrijving = :q)";
     $params[':q'] = $search;
 }
 $countStmt = $conn->prepare("SELECT COUNT(*) FROM artikel WHERE $where");
@@ -150,8 +150,15 @@ unset($_SESSION['success'], $_SESSION['error']);
             <a href="product-toevoegen.php" class="btn-new">Nieuw artikel</a>
         </div>
         <?php if ($success): ?>
-            <div class="alert success"><?php echo e($success); ?></div>
+            <div class="alert success" id="flash-message"><?php echo e($success); ?></div>
+            <script>
+                setTimeout(() => {
+                    const msg = document.getElementById('flash-message');
+                    if (msg) msg.style.display = 'none';
+                }, 1200);
+            </script>
         <?php endif; ?>
+
         <?php if ($error): ?>
             <div class="alert error"><?php echo e($error); ?></div>
         <?php endif; ?>
@@ -171,102 +178,119 @@ unset($_SESSION['success'], $_SESSION['error']);
             $isEdit = $action === 'edit' && $editArtikel;
             $formAction = $isEdit ? 'update' : 'create';
             $vals = $isEdit ? $editArtikel : [
-                'titel' => '',
+                'catalogusnummer' => '',
                 'beschrijving' => '',
                 'link_bron' => '',
                 'actief' => 1
             ];
             ?>
-            <div class="form-panel">
-                <h2><?php echo $isEdit ? 'Artikel bewerken' : 'Nieuw artikel'; ?></h2>
-                <form method="post">
-                    <label>Afbeelding</label>
-                    <input type="file" name="afbeelding">
-
-                    <label>Titel *</label>
-                    <input type="text" name="titel" required value="<?php echo e($vals['titel']); ?>">
-
-                    <label>Beschrijving</label>
-                    <textarea name="beschrijving"></textarea>
-
-                    <label>Link Bron</label>
-                    <input type="text" name="link_bron" value="<?php echo e($vals['link_bron']); ?>">
-
-                    <label><input type="checkbox" name="actief" <?php echo (isset($vals['actief']) && $vals['actief']) ? 'checked' : ''; ?>> Actief</label>
-
-                    <div style="margin-top:12px;">
-                        <button type="submit" class="btn-save"><?php echo $isEdit ? 'Opslaan' : 'Toevoegen'; ?></button>
-                        <a href="artikel-beheer.php" class="btn-cancel">Annuleren</a>
-                    </div>
-                </form>
-            </div>
-        <?php else: ?>
-            <table id="articles-table">
-                <thead>
-                    <tr>
-                        <th>Afbeelding</th>
-                        <th>Titel</th>
-                        <th>Beschrijving</th>
-                        <th>Link Bron</th>
-                        <th>Actief</th>
-                        <th class="actions">Acties</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (count($artikelen) === 0): ?>
-                        <tr>
-                            <td colspan="9" style="text-align:center">Geen artikelen gevonden.</td>
-                        </tr>
-                    <?php endif; ?>
-                    <?php foreach ($artikelen as $a): ?>
-                        <tr>
-                            <td>
-                                <?php if (!empty($a['afbeelding'])): ?>
-                                    <img src="../img/<?php echo e($a['afbeelding']); ?>" alt="Afbeelding" style="max-width:80px; max-height:60px;">
-                                <?php else: ?>
-                                    Geen afbeelding
-                                <?php endif; ?>
-                            </td>
-
-                            <td><?php echo e($a['titel']); ?></td>
-
-                            <td><?php echo e($a['beschrijving']); ?></td>
-
-                            <td><?php echo e($a['link_bron']); ?></td>
-
-                            <td><?php echo $a['actief'] ? 'Ja' : 'Nee'; ?></td>
-
-                            <td class="actions">
-                                <div class="btns">
-                                    <a class="btn-edit" href="artikel-bewerken.php?action=edit&id=<?php echo (int)$a['id']; ?>">Bewerk</a>
-                                    <form class="verwijder-btn" method="post" style="display:inline"
-                                        onsubmit="return confirm('Weet je zeker dat je dit artikel wilt verwijderen?');">
-                                        <input type="hidden" name="action" value="delete">
-                                        <input type="hidden" name="id" value="<?php echo (int)$a['id']; ?>">
-                                        <button type="submit" class="btn-delete">Verwijder</button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-
-            <div class="pagination">
-                <?php if ($page > 1): ?>
-                    <a href="?q=<?php echo urlencode($search); ?>&page=<?php echo $page - 1; ?>" class="page-link">&laquo; Vorige</a>
+            <form method="post" enctype="multipart/form-data">
+                <input type="hidden" name="action" value="<?php echo $isEdit ? 'update' : 'create'; ?>">
+                <?php if ($isEdit): ?>
+                    <input type="hidden" name="id" value="<?php echo (int)$editArtikel['id']; ?>">
                 <?php endif; ?>
-                <span>Pagina <?php echo $page; ?> / <?php echo $pages; ?></span>
-                <?php if ($page < $pages): ?>
-                    <a href="?q=<?php echo urlencode($search); ?>&page=<?php echo $page + 1; ?>" class="page-link">Volgende &raquo;</a>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>
+
+                <label>Afbeelding</label>
+                <input type="file" name="afbeelding">
+
+                <label>Titel *</label>
+                <input type="text" name="catalogusnummer" required value="<?php echo e($vals['catalogusnummer']); ?>">
+
+                <label>Beschrijving</label>
+                <textarea name="beschrijving"><?php echo e($vals['beschrijving']); ?></textarea>
+
+                <label>Link Bron</label>
+                <input type="text" name="link_bron" value="<?php echo e($vals['link_bron']); ?>">
+
+                <label><input type="checkbox" name="actief" <?php echo (isset($vals['actief']) && $vals['actief']) ? 'checked' : ''; ?>> Actief</label>
+
+                <input type="hidden" name="x" id="input-x" value="<?php echo e($vals['x'] ?? 0); ?>">
+                <input type="hidden" name="y" id="input-y" value="<?php echo e($vals['y'] ?? 0); ?>">
+
+                <div style="margin-top:12px;">
+                    <button type="submit" class="btn-save"><?php echo $isEdit ? 'Opslaan' : 'Toevoegen'; ?></button>
+                    <a href="artikel-beheer.php" class="btn-cancel">Annuleren</a>
+                </div>
+            </form>
 
     </div>
-    <script src="../script/header.js"></script>
-    <script src="../script/script.js"></script>
+<?php else: ?>
+    <table id="articles-table">
+        <thead>
+            <tr>
+                <th>Afbeelding</th>
+                <th>catalogusnummer</th>
+                <th>Beschrijving</th>
+                <th>Link Bron</th>
+                <th>Actief</th>
+                <th class="actions">Acties</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (count($artikelen) === 0): ?>
+                <tr>
+                    <td colspan="9" style="text-align:center">Geen artikelen gevonden.</td>
+                </tr>
+            <?php endif; ?>
+            <?php foreach ($artikelen as $a): ?>
+                <tr>
+                    <td>
+                        <?php if (!empty($a['afbeelding'])): ?>
+                            <img src="../img/<?php echo e($a['afbeelding']); ?>" alt="Afbeelding" style="max-width:80px; max-height:60px;">
+                        <?php else: ?>
+                            Geen afbeelding
+                        <?php endif; ?>
+                    </td>
+
+                    <td><?php echo e($a['catalogusnummer']); ?></td>
+
+                    <td>
+                        <a href="artikel-bewerken.php?action=edit&id=<?php echo (int)$a['id']; ?>">
+                            Bekijk
+                        </a>
+                    </td>
+
+                    <td>
+                        <?php if (!empty($a['link_bron'])): ?>
+                            <a href="<?php echo e($a['link_bron']); ?>" target="_blank" rel="noopener noreferrer">
+                                Link
+                            </a>
+                        <?php else: ?>
+                            Geen link
+                        <?php endif; ?>
+                    </td>
+
+                    <td class="actions">
+                        <div class="btns">
+                            <a class="btn-edit" href="artikel-bewerken.php?action=edit&id=<?php echo (int)$a['id']; ?>">Bewerk</a>
+                            <form class="verwijder-btn" method="post" style="display:inline"
+                                onsubmit="return confirm('Weet je zeker dat je dit artikel wilt verwijderen?');">
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="id" value="<?php echo (int)$a['id']; ?>">
+                                <button type="submit" class="btn-delete">Verwijder</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <?php if ($page > 1): ?>
+            <a href="?q=<?php echo urlencode($search); ?>&page=<?php echo $page - 1; ?>" class="page-link">&laquo; Vorige</a>
+        <?php endif; ?>
+        <span>Pagina <?php echo $page; ?> / <?php echo $pages; ?></span>
+        <?php if ($page < $pages): ?>
+            <a href="?q=<?php echo urlencode($search); ?>&page=<?php echo $page + 1; ?>" class="page-link">Volgende &raquo;</a>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
+
+</div>
+<script src="../script/header.js"></script>
+<script src="../script/script.js"></script>
 </body>
 
 </html>
