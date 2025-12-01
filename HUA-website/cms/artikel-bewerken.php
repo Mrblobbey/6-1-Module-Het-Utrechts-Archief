@@ -1,6 +1,8 @@
 <?php
 session_start();
 include '../includes/conn.php';
+include '../includes/header.php';
+include '../includes/login-true.php';
 
 if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {
     $id = (int)$_GET['id'];
@@ -26,6 +28,8 @@ if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {
             $uploadDir = '../img/';
             $fileName = time() . '_' . basename($_FILES['afbeelding']['name']);
             move_uploaded_file($_FILES['afbeelding']['tmp_name'], $uploadDir . $fileName);
+            $fileName = time() . '_' . basename($_FILES['afbeelding']['name']);
+            move_uploaded_file($_FILES['afbeelding']['tmp_name'], $uploadDir . $fileName);
             $afbeelding = $fileName;
         }
 
@@ -34,6 +38,7 @@ if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {
             header("Location: product-beheer.php");
             exit;
         }
+
 
         $stmt = $conn->prepare("UPDATE artikel SET 
         catalogusnummer = :catalogusnummer,

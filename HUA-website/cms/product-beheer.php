@@ -2,7 +2,9 @@
 session_start();
 include '../includes/conn.php';
 include '../includes/login-true.php';
+include '../includes/login-true.php';
 
+$perPage = 5;
 $perPage = 5;
 
 function e($v)
@@ -59,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':catalogusnummer' => $catalogusnummer,
             ':beschrijving' => $beschrijving,
             ':actief' => $actief,
+            ':actief' => $actief,
             ':link_bron' => $link_bron,
             ':id' => $id
         ]);
@@ -79,6 +82,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    if (isset($_FILES['afbeelding']) && $_FILES['afbeelding']['error'] == 0) {
+        $uploadDir = '../img/';
+        $fileName = basename($_FILES['afbeelding']['name']);
+        $uploadFile = $uploadDir . $fileName;
+        move_uploaded_file($_FILES['afbeelding']['tmp_name'], $uploadFile);
+        $afbeelding = $fileName;
+    } else {
+        $afbeelding = null;
+    }
     if (isset($_FILES['afbeelding']) && $_FILES['afbeelding']['error'] == 0) {
         $uploadDir = '../img/';
         $fileName = basename($_FILES['afbeelding']['name']);
@@ -141,6 +155,7 @@ unset($_SESSION['success'], $_SESSION['error']);
 
 <body>
     <?php include '../includes/header.php'; ?>
+    <?php include '../includes/header.php'; ?>
     <div class="wrap">
         <div class="titel">
             <div class="top">
@@ -165,6 +180,7 @@ unset($_SESSION['success'], $_SESSION['error']);
 
         <div class="controls">
             <form method="get" class="search-form" style="margin:0">
+                <input type="search" name="q" placeholder="Zoeken..." value="<?php echo e($search); ?>">
                 <input type="search" name="q" placeholder="Zoeken..." value="<?php echo e($search); ?>">
                 <button type="submit" class="btn-search"><i class="fa fa-search"></i></button>
             </form>

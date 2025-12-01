@@ -610,6 +610,7 @@ $panoramaImages = [
         </div>
     </header>
 
+    <?php include 'includes/header.php'; ?>
     <main>
 
         <div class="panorama">
@@ -762,6 +763,7 @@ $panoramaImages = [
 
         </div>
     </footer>
+    <script src="script/header.js"></script>
     <script src="script/script.js"></script>
 </body>
 
