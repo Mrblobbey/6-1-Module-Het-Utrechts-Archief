@@ -463,9 +463,9 @@ include 'includes/conn.php';
 $stmt = $conn->query("SELECT * FROM artikel");
 $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-echo '<pre>';
-print_r($artikelen);
-echo '<pre>';
+// echo '<pre>';
+// print_r($artikelen);
+// echo '<pre>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -510,7 +510,13 @@ echo '<pre>';
                                     style="<?= $styleAttr ?>">
 
                                 <?php if(isset($artikel['x']) && isset($artikel['y'])){ ?>
-                                    <div class="point-wrapper" style="top: <?= $artikel['y'] ?>px; left: <?= $artikel['x'] ?>px; position: absolute">
+                                   <?php 
+$scaledX = $artikel['x'] * 4.5;
+$scaledY = $artikel['y'] * 4.5;
+?>
+<div class="point-wrapper" 
+     style="top: <?= $scaledY ?>px; left: <?= $scaledX ?>px; position:absolute;">
+
                                         <i></i>
                                         <div class="hotspot-popup">
                                             <h4 class="hotspot-title">
