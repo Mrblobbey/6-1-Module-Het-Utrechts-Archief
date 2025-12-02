@@ -1,463 +1,471 @@
 <!-- dit is de tijdelijk array voor de foto's, tergelijke tijd te kunnen veranderen -->
 
 <?php
-$panoramaImages = [
-    [
-        'src'   => 'img/1.jpg',
-        'alt'   => 'Panorama Image 1',
-        'style' => [
-            'height'      => 500,
-            'z_index'     => 1,
-            'margin_left' => 0,
-            'margin_top'  => 0,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/2.jpg',
-        'alt'   => 'Panorama Image 2',
-        'style' => [
-            'height'      => 500,
-            'z_index'     => 2,
-            'margin_left' => 0,
-            'margin_top'  => 0,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/3.jpg',
-        'alt'   => 'Panorama Image 3',
-        'style' => [
-            'height'      => 497.5,
-            'z_index'     => 3,
-            'margin_left' => -40,
-            'margin_top'  => -1,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/4.jpg',
-        'alt'   => 'Panorama Image 4',
-        'style' => [
-            'height'      => 500,
-            'z_index'     => 4,
-            'margin_left' => -43,
-            'margin_top'  => -5,
-        ],
-        'hotspots' => [
-            [
-                'class' => 'hotspot-4-1',
-                'title' => 'Hotspot 4-1',
-                'text'  => 'Tekst voor deze hotspot.',
-            ],
-        ],
-    ],
-    [
-        'src'   => 'img/5.jpg',
-        'alt'   => 'Panorama Image 5',
-        'style' => [
-            'height'      => 506,
-            'z_index'     => 5,
-            'margin_left' => -56,
-            'margin_top'  => -8,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/6.jpg',
-        'alt'   => 'Panorama Image 6',
-        'style' => [
-            'height'      => 511,
-            'z_index'     => 6,
-            'margin_left' => -60,
-            'margin_top'  => -12,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/7.jpg',
-        'alt'   => 'Panorama Image 7',
-        'style' => [
-            'height'      => 523,
-            'z_index'     => 8,
-            'margin_left' => -71,
-            'margin_top'  => -13,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/8.jpg',
-        'alt'   => 'Panorama Image 8',
-        'style' => [
-            'height'      => 502,
-            'z_index'     => 7,
-            'margin_left' => -44,
-            'margin_top'  => -6,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/9.jpg',
-        'alt'   => 'Panorama Image 9',
-        'style' => [
-            'height'      => 514,
-            'z_index'     => 9,
-            'margin_left' => -37,
-            'margin_top'  => -12,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/10.jpg',
-        'alt'   => 'Panorama Image 10',
-        'style' => [
-            'height'      => 511,
-            'z_index'     => 10,
-            'margin_left' => -44,
-            'margin_top'  => -11,
-        ],
-        'hotspots' => [
-            [
-                'class' => 'hotspot-10-1',
-                'title' => 'Hotspot 10-1',
-                'text'  => 'Tekst voor deze hotspot.',
-            ],
-            [
-                'class' => 'hotspot-10-2',
-                'title' => 'Hotspot 10-2',
-                'text'  => 'Tekst voor deze hotspot.',
-            ],
-            [
-                'class' => 'hotspot-10-3',
-                'title' => 'Hotspot 10-3',
-                'text'  => 'Tekst voor deze hotspot.',
-            ],
-            [
-                'class' => 'hotspot-10-4',
-                'title' => 'Hotspot 10-4',
-                'text'  => 'Tekst voor deze hotspot.',
-            ],
-        ],
-    ],
-    [
-        'src'   => 'img/11.jpg',
-        'alt'   => 'Panorama Image 11',
-        'style' => [
-            'height'      => 515,
-            'z_index'     => 11,
-            'margin_left' => -62,
-            'margin_top'  => -13,
-        ],
-        'hotspots' => [
-            [
-                'class' => 'hotspot-11-1',
-                'title' => 'Hotspot 11-1',
-                'text'  => 'Tekst voor deze hotspot.',
-            ],
-        ],
-    ],
-    [
-        'src'   => 'img/12.jpg',
-        'alt'   => 'Panorama Image 12',
-        'style' => [
-            'height'      => 518,
-            'z_index'     => 12,
-            'margin_left' => -60,
-            'margin_top'  => -11,
-        ],
-        'hotspots' => [
-            [
-                'class' => 'hotspot-12-1',
-                'title' => 'Hotspot 12-1',
-                'text'  => 'Tekst voor deze hotspot.',
-            ],
-            [
-                'class' => 'hotspot-12-2',
-                'title' => 'Hotspot 12-2',
-                'text'  => 'Tekst voor deze hotspot.',
-            ],
-        ],
-    ],
-    [
-        'src'   => 'img/13.jpg',
-        'alt'   => 'Panorama Image 13',
-        'style' => [
-            'height'      => 515.5,
-            'z_index'     => 13,
-            'margin_left' => -37,
-            'margin_top'  => -11,
-        ],
-        'hotspots' => [
-            [
-                'class' => 'hotspot-13-1',
-                'title' => 'Hotspot 13-1',
-                'text'  => 'Tekst voor deze hotspot.',
-            ],
-        ],
-    ],
-    [
-        'src'   => 'img/14.jpg',
-        'alt'   => 'Panorama Image 14',
-        'style' => [
-            'height'      => 509,
-            'z_index'     => 14,
-            'margin_left' => -45,
-            'margin_top'  => -6,
-        ],
-        'hotspots' => [
-            [
-                'class' => 'hotspot-14-1',
-                'title' => 'Hotspot 14-1',
-                'text'  => 'Tekst voor deze hotspot.',
-            ],
-        ],
-    ],
-    [
-        'src'   => 'img/15.jpg',
-        'alt'   => 'Panorama Image 15',
-        'style' => [
-            'height'      => 506,
-            'z_index'     => 15,
-            'margin_left' => -59,
-            'margin_top'  => -4,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/16.jpg',
-        'alt'   => 'Panorama Image 16',
-        'style' => [
-            'height'      => 505,
-            'z_index'     => 16,
-            'margin_left' => -54,
-            'margin_top'  => 1,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/17.jpg',
-        'alt'   => 'Panorama Image 17',
-        'style' => [
-            'height'      => 508,
-            'z_index'     => 17,
-            'margin_left' => -36,
-            'margin_top'  => 1,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/18.jpg',
-        'alt'   => 'Panorama Image 18',
-        'style' => [
-            'height'      => 515,
-            'z_index'     => 18,
-            'margin_left' => -40,
-            'margin_top'  => 1.5,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/19.jpg',
-        'alt'   => 'Panorama Image 19',
-        'style' => [
-            'height'      => 526,
-            'z_index'     => 19,
-            'margin_left' => -41,
-            'margin_top'  => -3,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/20.jpg',
-        'alt'   => 'Panorama Image 20',
-        'style' => [
-            'height'      => 534,
-            'z_index'     => 21,
-            'margin_left' => -38,
-            'margin_top'  => -6,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/21.jpg',
-        'alt'   => 'Panorama Image 21',
-        'style' => [
-            'height'      => 526,
-            'z_index'     => 20,
-            'margin_left' => -30,
-            'margin_top'  => 7,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/22.jpg',
-        'alt'   => 'Panorama Image 22',
-        'style' => [
-            'height'      => 542,
-            'z_index'     => 22,
-            'margin_left' => -43,
-            'margin_top'  => -5,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/23.jpg',
-        'alt'   => 'Panorama Image 23',
-        'style' => [
-            'height'      => 528,
-            'z_index'     => 23,
-            'margin_left' => -40,
-            'margin_top'  => 2,
-        ],
-        'hotspots' => [
-            [
-                'class' => 'hotspot-23-1',
-                'title' => 'Hotspot 23-1',
-                'text'  => 'Tekst voor deze hotspot.',
-            ],
-            [
-                'class' => 'hotspot-23-2',
-                'title' => 'Hotspot 23-2',
-                'text'  => 'Tekst voor deze hotspot.',
-            ],
-        ],
-    ],
-    [
-        'src'   => 'img/24.jpg',
-        'alt'   => 'Panorama Image 24',
-        'style' => [
-            'height'      => 506,
-            'z_index'     => 24,
-            'margin_left' => -34,
-            'margin_top'  => 16,
-        ],
-        'hotspots' => [
-            [
-                'class' => 'hotspot-24-1',
-                'title' => 'Hotspot 24-1',
-                'text'  => 'Tekst voor deze hotspot.',
-            ],
-        ],
-    ],
-    [
-        'src'   => 'img/25.jpg',
-        'alt'   => 'Panorama Image 25',
-        'style' => [
-            'height'      => 524,
-            'z_index'     => 25,
-            'margin_left' => -30,
-            'margin_top'  => 1,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/26.jpg',
-        'alt'   => 'Panorama Image 26',
-        'style' => [
-            'height'      => 510.5,
-            'z_index'     => 26,
-            'margin_left' => -35,
-            'margin_top'  => 12,
-        ],
-        'hotspots' => [
-            [
-                'class' => 'hotspot-26-1',
-                'title' => 'Hotspot 26-1',
-                'text'  => 'Tekst voor deze hotspot.',
-            ],
-        ],
-    ],
-    [
-        'src'   => 'img/27.jpg',
-        'alt'   => 'Panorama Image 27',
-        'style' => [
-            'height'      => 527,
-            'z_index'     => 27,
-            'margin_left' => -42,
-            'margin_top'  => 5,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/28.jpg',
-        'alt'   => 'Panorama Image 28',
-        'style' => [
-            'height'      => 540,
-            'z_index'     => 28,
-            'margin_left' => -48,
-            'margin_top'  => -4,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/29.jpg',
-        'alt'   => 'Panorama Image 29',
-        'style' => [
-            'height'      => 534,
-            'z_index'     => 29,
-            'margin_left' => -44,
-            'margin_top'  => -1,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/30.jpg',
-        'alt'   => 'Panorama Image 30',
-        'style' => [
-            'height'      => 531,
-            'z_index'     => 30,
-            'margin_left' => -53,
-            'margin_top'  => 5,
-        ],
-        'hotspots' => [],
-    ],
-    [
-        'src'   => 'img/31.jpg',
-        'alt'   => 'Panorama Image 31',
-        'style' => [
-            'height'      => 540,
-            'z_index'     => 32,
-            'margin_left' => -47,
-            'margin_top'  => 1,
-        ],
-        'hotspots' => [
-            [
-                'class' => 'hotspot-31-1',
-                'title' => 'Hotspot 31-1',
-                'text'  => 'Tekst voor deze hotspot.',
-            ],
-        ],
-    ],
-    [
-        'src'   => 'img/32.jpg',
-        'alt'   => 'Panorama Image 32',
-        'style' => [
-            'height'      => 535,
-            'z_index'     => 31,
-            'margin_left' => -48,
-            'margin_top'  => -4,
-        ],
-        'hotspots' => [
-            [
-                'class' => 'hotspot-32-1',
-                'title' => 'Hotspot 32-1',
-                'text'  => 'Tekst voor deze hotspot.',
-            ],
-        ],
-    ],
-    [
-        'src'   => 'img/33.jpg',
-        'alt'   => 'Panorama Image 33',
-        'style' => [
-            'height'      => 539,
-            'z_index'     => 33,
-            'margin_left' => -45,
-            'margin_top'  => -2,
-        ],
-        'hotspots' => [],
-    ],
-];
+// $panoramaImages = [
+//     [
+//         'src'   => 'img/1.jpg',
+//         'alt'   => 'Panorama Image 1',
+//         'style' => [
+//             'height'      => 500,
+//             'z_index'     => 1,
+//             'margin_left' => 0,
+//             'margin_top'  => 0,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/2.jpg',
+//         'alt'   => 'Panorama Image 2',
+//         'style' => [
+//             'height'      => 500,
+//             'z_index'     => 2,
+//             'margin_left' => 0,
+//             'margin_top'  => 0,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/3.jpg',
+//         'alt'   => 'Panorama Image 3',
+//         'style' => [
+//             'height'      => 497.5,
+//             'z_index'     => 3,
+//             'margin_left' => -40,
+//             'margin_top'  => -1,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/4.jpg',
+//         'alt'   => 'Panorama Image 4',
+//         'style' => [
+//             'height'      => 500,
+//             'z_index'     => 4,
+//             'margin_left' => -43,
+//             'margin_top'  => -5,
+//         ],
+//         'hotspots' => [
+//             [
+//                 'class' => 'hotspot-4-1',
+//                 'title' => 'Hotspot 4-1',
+//                 'text'  => 'Tekst voor deze hotspot.',
+//             ],
+//         ],
+//     ],
+//     [
+//         'src'   => 'img/5.jpg',
+//         'alt'   => 'Panorama Image 5',
+//         'style' => [
+//             'height'      => 506,
+//             'z_index'     => 5,
+//             'margin_left' => -56,
+//             'margin_top'  => -8,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/6.jpg',
+//         'alt'   => 'Panorama Image 6',
+//         'style' => [
+//             'height'      => 511,
+//             'z_index'     => 6,
+//             'margin_left' => -60,
+//             'margin_top'  => -12,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/7.jpg',
+//         'alt'   => 'Panorama Image 7',
+//         'style' => [
+//             'height'      => 523,
+//             'z_index'     => 8,
+//             'margin_left' => -71,
+//             'margin_top'  => -13,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/8.jpg',
+//         'alt'   => 'Panorama Image 8',
+//         'style' => [
+//             'height'      => 502,
+//             'z_index'     => 7,
+//             'margin_left' => -44,
+//             'margin_top'  => -6,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/9.jpg',
+//         'alt'   => 'Panorama Image 9',
+//         'style' => [
+//             'height'      => 514,
+//             'z_index'     => 9,
+//             'margin_left' => -37,
+//             'margin_top'  => -12,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/10.jpg',
+//         'alt'   => 'Panorama Image 10',
+//         'style' => [
+//             'height'      => 511,
+//             'z_index'     => 10,
+//             'margin_left' => -44,
+//             'margin_top'  => -11,
+//         ],
+//         'hotspots' => [
+//             [
+//                 'class' => 'hotspot-10-1',
+//                 'title' => 'Hotspot 10-1',
+//                 'text'  => 'Tekst voor deze hotspot.',
+//             ],
+//             [
+//                 'class' => 'hotspot-10-2',
+//                 'title' => 'Hotspot 10-2',
+//                 'text'  => 'Tekst voor deze hotspot.',
+//             ],
+//             [
+//                 'class' => 'hotspot-10-3',
+//                 'title' => 'Hotspot 10-3',
+//                 'text'  => 'Tekst voor deze hotspot.',
+//             ],
+//             [
+//                 'class' => 'hotspot-10-4',
+//                 'title' => 'Hotspot 10-4',
+//                 'text'  => 'Tekst voor deze hotspot.',
+//             ],
+//         ],
+//     ],
+//     [
+//         'src'   => 'img/11.jpg',
+//         'alt'   => 'Panorama Image 11',
+//         'style' => [
+//             'height'      => 515,
+//             'z_index'     => 11,
+//             'margin_left' => -62,
+//             'margin_top'  => -13,
+//         ],
+//         'hotspots' => [
+//             [
+//                 'class' => 'hotspot-11-1',
+//                 'title' => 'Hotspot 11-1',
+//                 'text'  => 'Tekst voor deze hotspot.',
+//             ],
+//         ],
+//     ],
+//     [
+//         'src'   => 'img/12.jpg',
+//         'alt'   => 'Panorama Image 12',
+//         'style' => [
+//             'height'      => 518,
+//             'z_index'     => 12,
+//             'margin_left' => -60,
+//             'margin_top'  => -11,
+//         ],
+//         'hotspots' => [
+//             [
+//                 'class' => 'hotspot-12-1',
+//                 'title' => 'Hotspot 12-1',
+//                 'text'  => 'Tekst voor deze hotspot.',
+//             ],
+//             [
+//                 'class' => 'hotspot-12-2',
+//                 'title' => 'Hotspot 12-2',
+//                 'text'  => 'Tekst voor deze hotspot.',
+//             ],
+//         ],
+//     ],
+//     [
+//         'src'   => 'img/13.jpg',
+//         'alt'   => 'Panorama Image 13',
+//         'style' => [
+//             'height'      => 515.5,
+//             'z_index'     => 13,
+//             'margin_left' => -37,
+//             'margin_top'  => -11,
+//         ],
+//         'hotspots' => [
+//             [
+//                 'class' => 'hotspot-13-1',
+//                 'title' => 'Hotspot 13-1',
+//                 'text'  => 'Tekst voor deze hotspot.',
+//             ],
+//         ],
+//     ],
+//     [
+//         'src'   => 'img/14.jpg',
+//         'alt'   => 'Panorama Image 14',
+//         'style' => [
+//             'height'      => 509,
+//             'z_index'     => 14,
+//             'margin_left' => -45,
+//             'margin_top'  => -6,
+//         ],
+//         'hotspots' => [
+//             [
+//                 'class' => 'hotspot-14-1',
+//                 'title' => 'Hotspot 14-1',
+//                 'text'  => 'Tekst voor deze hotspot.',
+//             ],
+//         ],
+//     ],
+//     [
+//         'src'   => 'img/15.jpg',
+//         'alt'   => 'Panorama Image 15',
+//         'style' => [
+//             'height'      => 506,
+//             'z_index'     => 15,
+//             'margin_left' => -59,
+//             'margin_top'  => -4,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/16.jpg',
+//         'alt'   => 'Panorama Image 16',
+//         'style' => [
+//             'height'      => 505,
+//             'z_index'     => 16,
+//             'margin_left' => -54,
+//             'margin_top'  => 1,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/17.jpg',
+//         'alt'   => 'Panorama Image 17',
+//         'style' => [
+//             'height'      => 508,
+//             'z_index'     => 17,
+//             'margin_left' => -36,
+//             'margin_top'  => 1,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/18.jpg',
+//         'alt'   => 'Panorama Image 18',
+//         'style' => [
+//             'height'      => 515,
+//             'z_index'     => 18,
+//             'margin_left' => -40,
+//             'margin_top'  => 1.5,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/19.jpg',
+//         'alt'   => 'Panorama Image 19',
+//         'style' => [
+//             'height'      => 526,
+//             'z_index'     => 19,
+//             'margin_left' => -41,
+//             'margin_top'  => -3,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/20.jpg',
+//         'alt'   => 'Panorama Image 20',
+//         'style' => [
+//             'height'      => 534,
+//             'z_index'     => 21,
+//             'margin_left' => -38,
+//             'margin_top'  => -6,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/21.jpg',
+//         'alt'   => 'Panorama Image 21',
+//         'style' => [
+//             'height'      => 526,
+//             'z_index'     => 20,
+//             'margin_left' => -30,
+//             'margin_top'  => 7,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/22.jpg',
+//         'alt'   => 'Panorama Image 22',
+//         'style' => [
+//             'height'      => 542,
+//             'z_index'     => 22,
+//             'margin_left' => -43,
+//             'margin_top'  => -5,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/23.jpg',
+//         'alt'   => 'Panorama Image 23',
+//         'style' => [
+//             'height'      => 528,
+//             'z_index'     => 23,
+//             'margin_left' => -40,
+//             'margin_top'  => 2,
+//         ],
+//         'hotspots' => [
+//             [
+//                 'class' => 'hotspot-23-1',
+//                 'title' => 'Hotspot 23-1',
+//                 'text'  => 'Tekst voor deze hotspot.',
+//             ],
+//             [
+//                 'class' => 'hotspot-23-2',
+//                 'title' => 'Hotspot 23-2',
+//                 'text'  => 'Tekst voor deze hotspot.',
+//             ],
+//         ],
+//     ],
+//     [
+//         'src'   => 'img/24.jpg',
+//         'alt'   => 'Panorama Image 24',
+//         'style' => [
+//             'height'      => 506,
+//             'z_index'     => 24,
+//             'margin_left' => -34,
+//             'margin_top'  => 16,
+//         ],
+//         'hotspots' => [
+//             [
+//                 'class' => 'hotspot-24-1',
+//                 'title' => 'Hotspot 24-1',
+//                 'text'  => 'Tekst voor deze hotspot.',
+//             ],
+//         ],
+//     ],
+//     [
+//         'src'   => 'img/25.jpg',
+//         'alt'   => 'Panorama Image 25',
+//         'style' => [
+//             'height'      => 524,
+//             'z_index'     => 25,
+//             'margin_left' => -30,
+//             'margin_top'  => 1,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/26.jpg',
+//         'alt'   => 'Panorama Image 26',
+//         'style' => [
+//             'height'      => 510.5,
+//             'z_index'     => 26,
+//             'margin_left' => -35,
+//             'margin_top'  => 12,
+//         ],
+//         'hotspots' => [
+//             [
+//                 'class' => 'hotspot-26-1',
+//                 'title' => 'Hotspot 26-1',
+//                 'text'  => 'Tekst voor deze hotspot.',
+//             ],
+//         ],
+//     ],
+//     [
+//         'src'   => 'img/27.jpg',
+//         'alt'   => 'Panorama Image 27',
+//         'style' => [
+//             'height'      => 527,
+//             'z_index'     => 27,
+//             'margin_left' => -42,
+//             'margin_top'  => 5,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/28.jpg',
+//         'alt'   => 'Panorama Image 28',
+//         'style' => [
+//             'height'      => 540,
+//             'z_index'     => 28,
+//             'margin_left' => -48,
+//             'margin_top'  => -4,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/29.jpg',
+//         'alt'   => 'Panorama Image 29',
+//         'style' => [
+//             'height'      => 534,
+//             'z_index'     => 29,
+//             'margin_left' => -44,
+//             'margin_top'  => -1,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/30.jpg',
+//         'alt'   => 'Panorama Image 30',
+//         'style' => [
+//             'height'      => 531,
+//             'z_index'     => 30,
+//             'margin_left' => -53,
+//             'margin_top'  => 5,
+//         ],
+//         'hotspots' => [],
+//     ],
+//     [
+//         'src'   => 'img/31.jpg',
+//         'alt'   => 'Panorama Image 31',
+//         'style' => [
+//             'height'      => 540,
+//             'z_index'     => 32,
+//             'margin_left' => -47,
+//             'margin_top'  => 1,
+//         ],
+//         'hotspots' => [
+//             [
+//                 'class' => 'hotspot-31-1',
+//                 'title' => 'Hotspot 31-1',
+//                 'text'  => 'Tekst voor deze hotspot.',
+//             ],
+//         ],
+//     ],
+//     [
+//         'src'   => 'img/32.jpg',
+//         'alt'   => 'Panorama Image 32',
+//         'style' => [
+//             'height'      => 535,
+//             'z_index'     => 31,
+//             'margin_left' => -48,
+//             'margin_top'  => -4,
+//         ],
+//         'hotspots' => [
+//             [
+//                 'class' => 'hotspot-32-1',
+//                 'title' => 'Hotspot 32-1',
+//                 'text'  => 'Tekst voor deze hotspot.',
+//             ],
+//         ],
+//     ],
+//     [
+//         'src'   => 'img/33.jpg',
+//         'alt'   => 'Panorama Image 33',
+//         'style' => [
+//             'height'      => 539,
+//             'z_index'     => 33,
+//             'margin_left' => -45,
+//             'margin_top'  => -2,
+//         ],
+//         'hotspots' => [],
+//     ],
+// ];
 
+include 'includes/conn.php';
+
+$stmt = $conn->query("SELECT * FROM artikel");
+$artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// echo '<pre>';
+// print_r($artikelen);
+// echo '<pre>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -470,189 +478,60 @@ $panoramaImages = [
 </head>
 
 <body>
-    <header class="site-header">
-        <div class="header-inner">
-
-            <!-- Zoek-icoon links -->
-            <button class="search-toggle" aria-expanded="false" aria-controls="site-search">
-                <span class="search_icon" aria-hidden="true">
-                    <img src="img/search_icon.png" alt="Zoek icoon" class="search_icon_img">
-                </span>
-                <span class="search_openen_">Zoeken openen</span>
-            </button>
-
-            <!-- Hoofd navigatie -->
-            <nav class="main-nav" aria-label="Hoofdmenu">
-                <ul class="main-nav__list">
-
-                    <!-- Nav dropdown -->
-                    <li class="onderzoek_nav">
-                        <button class="main-nav__link" aria-expanded="false">
-                            <span class="dropdown_arrow">></span>
-                            <span>Onderzoek</span>
-                        </button>
-
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Collecties</a></li>
-                            <li><a href="#">Zoek op onderwerp</a></li>
-                            <li><a href="#">Studiezaal</a></li>
-                            <li><a href="#">Bouwdossiers</a></li>
-                            <li><a href="#">Archiefstuk inzien</a></li>
-                            <li><a href="#">Verzoek tot digitaliseren</a></li>
-                            <li><a href="#">Helpt u mee?</a></li>
-                            <li><a href="#">Open data</a></li>
-                            <li><a href="#">Openbaarheid</a></li>
-                        </ul>
-                    </li>
-
-
-                    <!-- ONTDEKKEN -->
-                    <li class="ontdekken_dropdown">
-                        <button class="main-nav__link" aria-expanded="false">
-                            <span class="dropdown_arrow">></span>
-                            <span>Ontdekken</span>
-                        </button>
-
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Tentoonstellingen</a></li>
-                            <li><a href="#">Activiteiten</a></li>
-                            <li><a href="#">Families en kinderen</a></li>
-                            <li><a href="#">Plan je bezoek</a></li>
-                            <li><a href="#">Rondleidingen</a></li>
-                            <li><a href="#">Verhalen</a></li>
-                            <li><a href="#">Podcast</a></li>
-                            <li><a href="#">Utrecht Time Machine</a></li>
-                        </ul>
-                    </li>
-
-                    <!-- ONDERWIJS -->
-                    <li class="onderwijs_dropdown">
-                        <button class="main-nav__link" aria-expanded="false">
-                            <span class="dropdown_arrow">></span>
-                            <span>Onderwijs</span>
-                        </button>
-
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Primair onderwijs</a></li>
-                            <li><a href="#">Voortgezet onderwijs</a></li>
-                            <li><a href="#">Taalklasssen aanbod</a></li>
-                            <li><a href="#">Studenten</a></li>
-                            <li><a href="#">Cursussen</a></li>
-                            <li><a href="#">Voorwaarden Groepsbezoek</a></li>
-                        </ul>
-                    </li>
-
-                    <!-- VAKGENOTEN -->
-                    <li class="vakgenoten_dropdown">
-                        <button class="main-nav__link" aria-expanded="false">
-                            <span class="dropdown_arrow">></span>
-                            <span>Vakgenoten</span>
-                        </button>
-
-                        <ul class="dropdown-menu">
-                            <li><a href="#">e-depot</a></li>
-                            <li><a href="#">Archiefbeheer</a></li>
-                            <li><a href="#">Toezicht</a></li>
-                            <li><a href="#">Toezicht in de praktijk</a></li>
-                        </ul>
-                    </li>
-
-                    <!-- OVER ONS -->
-                    <li class="overons_dropdown">
-                        <button class="main-nav__link" aria-expanded="false">
-                            <span class="dropdown_arrow">></span>
-                            <span>Over ons</span>
-                        </button>
-
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Archief overdragen</a></li>
-                            <li><a href="#">Beleid</a></li>
-                            <li><a href="#">Projecten</a></li>
-                            <li><a href="#">Nieuws</a></li>
-                            <li><a href="#">Medewerkers</a></li>
-                            <li><a href="#">Vacatures</a></li>
-                            <li><a href="#">Word vriend</a></li>
-                            <li><a href="#">Toegankelijkheid</a></li>
-                            <li><a href="#">Heeft u een klacht</a></li>
-
-                        </ul>
-                    </li>
-
-                    <!-- CONTACT knop -->
-                    <li class="contact_nav">
-                        <a href="#" class="main-nav__link main-nav__link--plain">Contact</a>
-                    </li>
-
-                    <!-- ENGLISH vertaler -->
-                    <li class="english_nav">
-                        <a href="#" class="main-nav__link main-nav__link--italic">English</a>
-                    </li>
-                </ul>
-            </nav>
-
-            <!-- Logo rechts -->
-            <a href="#" class="site-logo">
-                <!-- vervang src door jouw logo -->
-                <img src="img/Logo_ingeklapt.png" alt="Het Utrechts Archief Logo">
-            </a>
-        </div>
-
-        <!-- Uitklapbare zoekbalk -->
-        <div class="search-bar" id="site-search" hidden>
-            <button class="search-close" aria-label="Zoeken sluiten">
-                ✕
-            </button>
-
-            <form action="#" method="get" class="search-bar__form">
-                <input type="search" name="q" placeholder="Ik ben op zoek naar…" />
-                <button type="submit">Zoeken ›</button>
-            </form>
-        </div>
-    </header>
+    <?php
+    include 'includes/header.php'
+    ?>
 
     <main>
 
         <div class="panorama">
             <div class="panorama-content">
-                <div class="panorama-zoom-container">
-                    <div class="panorama-fotos" id="panoramaFotos">
-                        <?php foreach ($panoramaImages as $image): ?>
-                            <?php
-                            $s = $image['style'];
-                            $s['height'] = $s['height'] * 1.5;
-                            $s['margin_left'] = $s['margin_left'] * 1.5;
-                            $s['margin_top'] = $s['margin_top'] * 1.5;
 
-
-                            $styleAttr = sprintf(
-                                'height: %spx; margin-left: %spx; margin-top: %spx;',
-                                $s['height'],
-                                $s['margin_left'],
-                                $s['margin_top']
-                            );
-                            ?>
-                            <div class="panorama-img-wrapper" style="z-index: <?= $s['z_index'] ?>;">
+                <div class="panorama-fotos" id="panoramaFotos">
+                    <?php foreach ($artikelen as $artikel): ?>
+                        <?php
+                        $artikel['height'] = $artikel['height'] * 1.5;
+                        $artikel['margin_left'] = $artikel['margin_left'] * 1.5;
+                        $artikel['margin_top'] = $artikel['margin_top'] * 1.5;
+                        $styleAttr = sprintf(
+                            'height: %spx; z-index: %s; margin-left: %spx; margin-top: %spx;',
+                            $artikel['height'],
+                            $artikel['z_index'],
+                            $artikel['margin_left'],
+                            $artikel['margin_top']
+                        );
+                        ?>
+                        <div class="panorama-img-wrapper">
+                            <div>
+                                <!-- <div id="Hotspot_<?php echo ($artikel["id"]) ?>"></div> -->
                                 <img
-                                    src="<?= htmlspecialchars($image['src'], ENT_QUOTES) ?>"
-                                    alt="<?= htmlspecialchars($image['alt'], ENT_QUOTES) ?>"
+                                    src="img/<?= htmlspecialchars($artikel['afbeelding'], ENT_QUOTES) ?>"
+                                    alt="<?= htmlspecialchars($artikel['alt'], ENT_QUOTES) ?>"
                                     style="<?= $styleAttr ?>">
 
-                                <?php foreach ($image['hotspots'] as $hotspot): ?>
-                                    <div class="point-wrapper <?= htmlspecialchars($hotspot['class'], ENT_QUOTES) ?>">
+                                <?php if(isset($artikel['x']) && isset($artikel['y'])){ ?>
+                                   <?php 
+$scaledX = $artikel['x'] * 4.5;
+$scaledY = $artikel['y'] * 4.5;
+?>
+<div class="point-wrapper" 
+     style="top: <?= $scaledY ?>px; left: <?= $scaledX ?>px; position:absolute;">
+
                                         <i></i>
                                         <div class="hotspot-popup">
                                             <h4 class="hotspot-title">
-                                                <?= htmlspecialchars($hotspot['title'], ENT_QUOTES) ?>
+                                                <?= 'test' ?>
                                             </h4>
                                             <p class="hotspot-text">
-                                                <?= htmlspecialchars($hotspot['text'], ENT_QUOTES) ?>
+                                                <?= htmlspecialchars($hotspot['beschrijving'], ENT_QUOTES) ?>
                                             </p>
                                         </div>
                                     </div>
-                                <?php endforeach; ?>
+                                <?php } ?>
                             </div>
-                        <?php endforeach; ?>
-                    </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
 
                     <div class="panorama-minimap" id="panoramaMinimap">
                         <div class="panorama-minimap-viewport" id="panoramaMinimapViewport"></div>
