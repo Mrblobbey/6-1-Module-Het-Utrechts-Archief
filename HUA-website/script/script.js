@@ -96,25 +96,61 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-//img toevoegen
-
+// img toevoegen
 const fileInput = document.getElementById("fileInput");
-const preview = document.getElementById("preview");
+const preview   = document.getElementById("preview");
 
-fileInput.addEventListener("change", function () {
-    const file = this.files[0];
-    if (file) {
-        const reader = new FileReader();
+if (fileInput && preview) {
+    fileInput.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
 
-        reader.addEventListener("load", function () {
-            preview.setAttribute("src", this.result);
-            preview.style.display = "block";
-        });
+            reader.addEventListener("load", function () {
+                preview.setAttribute("src", this.result);
+                preview.style.display = "block";
+            });
 
-        reader.readAsDataURL(file);
-    } else {
-        preview.style.display = "none";
+            reader.readAsDataURL(file);
+        } else {
+            preview.style.display = "none";
+        }
+    });
+}
+
+// panorama zoom met dubbelklikken
+document.addEventListener('DOMContentLoaded', function () {
+
+    const pano = document.getElementById('panoramaFotos');
+    if (!pano) {
+        console.warn('panoramaFotos niet gevonden voor zoom');
+        return;
     }
-});
 
+    let zoomed = false;
+    const zoomFactor = 2;
+
+    pano.addEventListener('dblclick', function (e) {
+        e.preventDefault();
+
+        const rect = pano.getBoundingClientRect();
+
+        // klikpositie (percentage)
+        const clickX = (e.clientX - rect.left) / rect.width;
+        const clickY = (e.clientY - rect.top) / rect.height;
+
+        pano.style.setProperty("--zoom-x", (clickX * 100) + "%");
+        pano.style.setProperty("--zoom-y", (clickY * 100) + "%");
+
+        if (!zoomed) {
+            pano.classList.add("zoomed");
+            pano.style.transform = `scale(${zoomFactor})`;
+        } else {
+            pano.classList.remove("zoomed");
+            pano.style.transform = "scale(1)";
+        }
+
+        zoomed = !zoomed;
+    });
+});
 

@@ -609,65 +609,64 @@ $panoramaImages = [
             </form>
         </div>
     </header>
-    
+
     <main>
 
         <div class="panorama">
             <div class="panorama-content">
+                <div class="panorama-zoom-container">
+                    <div class="panorama-fotos" id="panoramaFotos">
+                        <?php foreach ($panoramaImages as $image): ?>
+                            <?php
+                            $s = $image['style'];
+                            $s['height'] = $s['height'] * 1.5;
+                            $s['margin_left'] = $s['margin_left'] * 1.5;
+                            $s['margin_top'] = $s['margin_top'] * 1.5;
 
-                <div class="panorama-fotos" id="panoramaFotos">
-                    <?php foreach ($panoramaImages as $image): ?>
-                        <?php
-                        $s = $image['style'];
-                        $s['height'] = $s['height'] * 1.5;
-                        $s['margin_left'] = $s['margin_left'] * 1.5;
-                        $s['margin_top'] = $s['margin_top'] * 1.5;
 
+                            $styleAttr = sprintf(
+                                'height: %spx; margin-left: %spx; margin-top: %spx;',
+                                $s['height'],
+                                $s['margin_left'],
+                                $s['margin_top']
+                            );
+                            ?>
+                            <div class="panorama-img-wrapper" style="z-index: <?= $s['z_index'] ?>;">
+                                <img
+                                    src="<?= htmlspecialchars($image['src'], ENT_QUOTES) ?>"
+                                    alt="<?= htmlspecialchars($image['alt'], ENT_QUOTES) ?>"
+                                    style="<?= $styleAttr ?>">
 
-                        $styleAttr = sprintf(
-                            'height: %spx; z-index: %s; margin-left: %spx; margin-top: %spx;',
-                            $s['height'],
-                            $s['z_index'],
-                            $s['margin_left'],
-                            $s['margin_top']
-                        );
-                        ?>
-                        <div class="panorama-img-wrapper">
-                            <img
-                                src="<?= htmlspecialchars($image['src'], ENT_QUOTES) ?>"
-                                alt="<?= htmlspecialchars($image['alt'], ENT_QUOTES) ?>"
-                                style="<?= $styleAttr ?>">
-
-                            <?php foreach ($image['hotspots'] as $hotspot): ?>
-                                <div class="point-wrapper <?= htmlspecialchars($hotspot['class'], ENT_QUOTES) ?>">
-                                    <i></i>
-                                    <div class="hotspot-popup">
-                                        <h4 class="hotspot-title">
-                                            <?= htmlspecialchars($hotspot['title'], ENT_QUOTES) ?>
-                                        </h4>
-                                        <p class="hotspot-text">
-                                            <?= htmlspecialchars($hotspot['text'], ENT_QUOTES) ?>
-                                        </p>
+                                <?php foreach ($image['hotspots'] as $hotspot): ?>
+                                    <div class="point-wrapper <?= htmlspecialchars($hotspot['class'], ENT_QUOTES) ?>">
+                                        <i></i>
+                                        <div class="hotspot-popup">
+                                            <h4 class="hotspot-title">
+                                                <?= htmlspecialchars($hotspot['title'], ENT_QUOTES) ?>
+                                            </h4>
+                                            <p class="hotspot-text">
+                                                <?= htmlspecialchars($hotspot['text'], ENT_QUOTES) ?>
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
 
-                <div class="panorama-minimap" id="panoramaMinimap">
-                    <div class="panorama-minimap-viewport" id="panoramaMinimapViewport"></div>
-                </div>
-                <!-- pijltjes -->
-                <button class="panorama-arrow panorama-arrow-left" type="button" aria-label="Scroll naar links">
-                    ‹
-                </button>
-                <button class="panorama-arrow panorama-arrow-right" type="button" aria-label="Scroll naar rechts">
-                    ›
-                </button>
+                    <div class="panorama-minimap" id="panoramaMinimap">
+                        <div class="panorama-minimap-viewport" id="panoramaMinimapViewport"></div>
+                    </div>
+                    <!-- pijltjes -->
+                    <button class="panorama-arrow panorama-arrow-left" type="button" aria-label="Scroll naar links">
+                        ‹
+                    </button>
+                    <button class="panorama-arrow panorama-arrow-right" type="button" aria-label="Scroll naar rechts">
+                        ›
+                    </button>
 
+                </div>
             </div>
-
     </main>
 
     <footer class="site-footer">
