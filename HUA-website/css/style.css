@@ -159,7 +159,7 @@ body {
     padding: 0.75rem 1rem;
     border-radius: 4px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    min-width: 180px;
+    min-width: 400px;
     font-size: 0.9rem;
     opacity: 0;
     pointer-events: none;
@@ -542,6 +542,72 @@ body {
     transform-origin: var(--zoom-x) var(--zoom-y);
     transition: transform 0.25s ease;
 }
+
+/* INFO-PANEEL BIJ PANORAMA */
+.panorama {
+    position: relative;
+}
+
+/* basis van het panel */
+.panorama-info-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    max-height: 780px; /* ongeveer hoogte panorama-fotos */
+    width: 360px;
+    background: #fff;
+    box-shadow: 4px 0 12px rgba(0,0,0,0.25);
+    transform: translateX(-100%);   /* verstopt links */
+    transition: transform 0.3s ease;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+}
+
+/* open state */
+.panorama-info-panel.info-open {
+    transform: translateX(0);
+}
+
+/* inhoud */
+.info-content {
+    padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+    overflow-y: auto;
+    font-size: 0.95rem;
+}
+
+.info-title {
+    margin: 0 0 1rem;
+    font-size: 1.3rem;
+}
+
+.info-section {
+    margin-bottom: 1rem;
+}
+
+.info-section h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0 0 0.2rem;
+}
+
+.info-section p {
+    margin: 0;
+}
+
+/* sluitknop */
+.info-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: transparent;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
 
 /* footer */
 

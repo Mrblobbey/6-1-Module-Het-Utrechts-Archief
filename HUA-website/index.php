@@ -509,43 +509,54 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     alt="<?= htmlspecialchars($artikel['alt'], ENT_QUOTES) ?>"
                                     style="<?= $styleAttr ?>">
 
-                                <?php if(isset($artikel['x']) && isset($artikel['y'])){ ?>
-                                   <?php 
-$scaledX = $artikel['x'] * 4.5;
-$scaledY = $artikel['y'] * 4.5;
-?>
-<div class="point-wrapper" 
-     style="top: <?= $scaledY ?>px; left: <?= $scaledX ?>px; position:absolute;">
-
+                                <?php if (isset($artikel['x']) && isset($artikel['y'])): ?>
+                                    <?php
+                                    $scaledX = $artikel['x'] * 4.5;
+                                    $scaledY = $artikel['y'] * 4.5;
+                                    ?>
+                                    <div class="point-wrapper"
+                                        style="top: <?= $scaledY ?>px; left: <?= $scaledX ?>px; position:absolute;"
+                                        data-id="<?= htmlspecialchars($artikel['id'], ENT_QUOTES) ?>"
+                                        data-beschrijving="<?= htmlspecialchars($artikel['beschrijving'], ENT_QUOTES) ?>"
+                                        data-link="<?= htmlspecialchars($artikel['link_bron'], ENT_QUOTES) ?>">
                                         <i></i>
+
                                         <div class="hotspot-popup">
-                                            <h4 class="hotspot-title">
-                                                <?= 'test' ?>
+                                            <h4 class="hotspot-beschrijving">
+                                                <?= htmlspecialchars($artikel['beschrijving'], ENT_QUOTES) ?>
                                             </h4>
-                                            <p class="hotspot-text">
-                                                <?= htmlspecialchars($hotspot['beschrijving'], ENT_QUOTES) ?>
-                                            </p>
+
+                                            <?php if (!empty($artikel['link_bron'])): ?>
+                                                <p class="hotspot-link">
+                                                    <a href="<?= htmlspecialchars($artikel['link_bron'], ENT_QUOTES) ?>"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer">
+                                                        Bekijken →
+                                                    </a>
+                                                </p>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
-                                <?php } ?>
+                                <?php endif; ?>
+ß
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
 
-                    <div class="panorama-minimap" id="panoramaMinimap">
-                        <div class="panorama-minimap-viewport" id="panoramaMinimapViewport"></div>
-                    </div>
-                    <!-- pijltjes -->
-                    <button class="panorama-arrow panorama-arrow-left" type="button" aria-label="Scroll naar links">
-                        ‹
-                    </button>
-                    <button class="panorama-arrow panorama-arrow-right" type="button" aria-label="Scroll naar rechts">
-                        ›
-                    </button>
-
+                <div class="panorama-minimap" id="panoramaMinimap">
+                    <div class="panorama-minimap-viewport" id="panoramaMinimapViewport"></div>
                 </div>
+                <!-- pijltjes -->
+                <button class="panorama-arrow panorama-arrow-left" type="button" aria-label="Scroll naar links">
+                    ‹
+                </button>
+                <button class="panorama-arrow panorama-arrow-right" type="button" aria-label="Scroll naar rechts">
+                    ›
+                </button>
+
             </div>
+        </div>
     </main>
 
     <footer class="site-footer">
