@@ -12,34 +12,63 @@ body {
     font-family: var(--font);
 }
 
-/* header algemeen */
+/* SEARCH BAR TOP-LINE */
+.search-bar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 800px;
+    border-top: 2px solid #ddd;
+}
+
+#search-close {
+    width: 52px;
+    background: rgb(36, 112, 101);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: -5px;
+    transition: opacity .35s ease, transform .35s ease;
+}
+
+/* HEADER */
 .site-header {
     background: #fff;
-    border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 5000;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
 }
 
 .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    /* matching spacing van de echte site */
-    padding: 0.8rem 3rem;
-
+    padding: 0.8rem 3rem 0rem 3rem;
     max-width: 1200px;
-    /* zelfde breedte container als echte site */
     margin: 0 auto;
-    /* centreert alles perfect */
-    width: 100%;
-    gap: 2rem;
+    overflow: visible;
+    height: 60px;
 }
 
+.site-logo {
+    height: 60px;
+}
 
-/* zoekknop */
+.site-logo img {
+    height: 20px;
+}
+
+/* SEARCH BUTTON */
 .search-toggle {
-    width: 52px;
-    height: 52px;
-    background: var(--green);
+    width: 60px;
+    height: 60px;
+    background: #247065;
     border: none;
     color: #fff;
     font-size: 1.3rem;
@@ -47,10 +76,6 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-}
-
-.search_icon {
-    font-size: 1.3rem;
 }
 
 .search_icon img,
@@ -65,7 +90,7 @@ body {
     display: none;
 }
 
-/* nav lijst */
+/* NAVIGATION */
 .main-nav__list {
     display: flex;
     align-items: center;
@@ -75,14 +100,154 @@ body {
     margin: 0;
 }
 
-/* hotspot style */
-/* hotspot basis */
+.main-nav__list span:hover,
+.contact_nav a:hover,
+.english_nav a:hover {
+    text-decoration: underline;
+}
+
+.main-nav__link {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.8rem 0.5rem;
+    font-size: 1rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--black);
+    font-weight: bold;
+}
+
+.contact_nav a {
+    font-size: 1.1rem;
+}
+
+.english_nav a {
+    font-weight: normal;
+    font-size: 1.1rem;
+}
+
+.main-nav__link--plain,
+.main-nav__link--italic {
+    color: var(--black);
+    text-decoration: none;
+}
+
+.main-nav__link--italic {
+    font-style: italic;
+}
+
+.main-nav__list > li {
+    position: relative;
+}
+
+.dropdown_arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+    font-size: 1rem;
+}
+
+.dropdown_open > .main-nav__link {
+    background: rgb(215, 47, 25);
+    color: #fff;
+}
+
+.dropdown_open > .main-nav__link span {
+    color: inherit;
+}
+
+/* DROPDOWN MENU */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 0.75rem 0;
+    list-style: none;
+    margin: 0;
+    z-index: 6000;
+    font-weight: bold;
+}
+
+.dropdown_open .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 0.45rem 1rem;
+    color: var(--black);
+    text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+    text-decoration: underline;
+}
+
+.dropdown_open .dropdown_arrow {
+    transform: rotate(90deg);
+}
+
+/* SEARCH BAR */
+.search-bar {
+    display: flex;
+    top: 0;
+    gap: 1rem;
+    padding: 0rem 2rem 0rem 2rem;
+    background: #fff;
+    max-width: 800px;
+    margin-left: 225px;
+    width: 100%;
+    height: 71px;
+    opacity: 1;
+    transition: all ease 1s;
+}
+
+.search-bar[hidden] {
+    opacity: 0;
+    height: 0;
+}
+
+.search-bar__form {
+    flex: 1;
+    display: flex;
+    gap: 0.5rem;
+    height: 60px;
+    border-top: 3px solid #ddd;
+}
+
+.search-bar__form input[type="search"] {
+    flex: 1;
+    border: none;
+    padding: 0.6rem;
+    font-size: 1rem;
+    width: 750px;
+    font-style: italic;
+    font-weight: 520;
+    font-family: akzidenz-grotesk-next, sans-serif;
+    outline: none;
+}
+
+.search-bar__form button {
+    background: rgb(36, 112, 101);
+    border: none;
+    padding: 0.5rem 1.3rem 0.5rem 1.3rem;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 550;
+    margin-top: -2px;
+}
+
+/* HOTSPOT STYLE */
 .point-wrapper {
     position: absolute;
     top: 100px;
-    /* hier verplaats je de hotspot omhoog/omlaag */
     left: 300px;
-    /* hier verplaats je de hotspot naar links/rechts */
     width: 30px;
     height: 30px;
     background: var(--red);
@@ -91,7 +256,6 @@ body {
     z-index: 1000;
 }
 
-/* binnenpunt */
 .point-wrapper i {
     width: 30px;
     height: 30px;
@@ -100,7 +264,7 @@ body {
     position: absolute;
     left: 0;
     top: 0;
-    z-index: 1001; 
+    z-index: 1001;
 }
 
 /* glow animatie */
@@ -110,11 +274,9 @@ body {
         -webkit-transform: scale(0);
         transform: scale(0);
     }
-
     5% {
         opacity: 1;
     }
-
     100% {
         -webkit-transform: scale(1);
         transform: scale(1);
@@ -122,19 +284,7 @@ body {
     }
 }
 
-.point-wrapper:before {
-    content: "";
-    background-color: var(--red);
-    width: 70px;
-    height: 70px;
-    border-radius: 100%;
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    opacity: 0;
-    -webkit-animation: glowAnimation 1.8s 0.33333s ease-out infinite;
-}
-
+.point-wrapper:before,
 .point-wrapper:after {
     content: "";
     background-color: var(--red);
@@ -145,6 +295,13 @@ body {
     top: -20px;
     left: -20px;
     opacity: 0;
+}
+
+.point-wrapper:before {
+    -webkit-animation: glowAnimation 1.8s 0.33333s ease-out infinite;
+}
+
+.point-wrapper:after {
     -webkit-animation: glowAnimation 1.8s 0.66666s ease-out infinite;
 }
 
@@ -167,7 +324,6 @@ body {
     z-index: 200;
 }
 
-/* klein driehoekje onder popup */
 .hotspot-popup::after {
     content: "";
     position: absolute;
@@ -179,263 +335,51 @@ body {
     border-color: #fff transparent transparent transparent;
 }
 
-/* popup zichtbaar bij open state */
 .point-wrapper.point-wrapper-open .hotspot-popup {
     opacity: 1;
     pointer-events: auto;
 }
 
-/* hotspot locatie */
-
+/* HOTSPOT LOCATIES */
 /* image 4 – 1 hotspot */
-.hotspot-4-1 {
-    top: 150px;
-    left: 120px;
-}
+.hotspot-4-1 { top: 150px; left: 120px; }
 
 /* image 10 – 4 hotspots */
-.hotspot-10-1 {
-    top: 160px;
-    left: 100px;
-}
-
-.hotspot-10-2 {
-    top: 180px;
-    left: 200px;
-}
-
-.hotspot-10-3 {
-    top: 130px;
-    left: 260px;
-}
-
-.hotspot-10-4 {
-    top: 210px;
-    left: 150px;
-}
+.hotspot-10-1 { top: 160px; left: 100px; }
+.hotspot-10-2 { top: 180px; left: 200px; }
+.hotspot-10-3 { top: 130px; left: 260px; }
+.hotspot-10-4 { top: 210px; left: 150px; }
 
 /* image 11 – 1 hotspot */
-.hotspot-11-1 {
-    top: 170px;
-    left: 140px;
-}
+.hotspot-11-1 { top: 170px; left: 140px; }
 
 /* image 12 – 2 hotspots */
-.hotspot-12-1 {
-    top: 160px;
-    left: 120px;
-}
-
-.hotspot-12-2 {
-    top: 190px;
-    left: 220px;
-}
+.hotspot-12-1 { top: 160px; left: 120px; }
+.hotspot-12-2 { top: 190px; left: 220px; }
 
 /* image 13 – 1 hotspot */
-.hotspot-13-1 {
-    top: 160px;
-    left: 130px;
-}
+.hotspot-13-1 { top: 160px; left: 130px; }
 
 /* image 14 – 1 hotspot */
-.hotspot-14-1 {
-    top: 170px;
-    left: 110px;
-}
+.hotspot-14-1 { top: 170px; left: 110px; }
 
 /* image 23 – 2 hotspots */
-.hotspot-23-1 {
-    top: 140px;
-    left: 120px;
-}
-
-.hotspot-23-2 {
-    top: 200px;
-    left: 180px;
-}
+.hotspot-23-1 { top: 140px; left: 120px; }
+.hotspot-23-2 { top: 200px; left: 180px; }
 
 /* image 24 – 1 hotspot */
-.hotspot-24-1 {
-    top: 150px;
-    left: 140px;
-}
+.hotspot-24-1 { top: 150px; left: 140px; }
 
 /* image 26 – 1 hotspot */
-.hotspot-26-1 {
-    top: 160px;
-    left: 120px;
-}
+.hotspot-26-1 { top: 160px; left: 120px; }
 
 /* image 31 – 1 hotspot */
-.hotspot-31-1 {
-    top: 170px;
-    left: 160px;
-}
+.hotspot-31-1 { top: 170px; left: 160px; }
 
 /* image 32 – 1 hotspot */
-.hotspot-32-1 {
-    top: 170px;
-    left: 150px;
-}
+.hotspot-32-1 { top: 170px; left: 150px; }
 
-/* elk item wordt relatief zodat dropdown eronder kan hangen */
-.main-nav__list>li {
-    position: relative;
-}
-
-/* nav knop */
-.main-nav__link {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    padding: 0.8rem 0.5rem;
-    font-size: 1rem;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    color: var(--black);
-}
-
-/* open state zoals voorbeeld-site (rood blok, witte tekst) */
-.dropdown_open>.main-nav__link {
-    background: var(--red);
-    color: #fff;
-}
-
-.dropdown_open>.main-nav__link span {
-    color: inherit;
-}
-
-/* pijlen tussen items (als je die nog gebruikt) */
-.main-nav__separator {
-    color: #555;
-    user-select: none;
-}
-
-/* contact */
-.main-nav__link--plain {
-    color: var(--black);
-    text-decoration: none;
-}
-
-/* english */
-.main-nav__link--italic {
-    color: var(--black);
-    text-decoration: none;
-    font-style: italic;
-}
-
-/* klein pijltje heb je nu niet meer nodig, maar laten staan kan */
-.main-nav__caret {
-    font-size: 0.7rem;
-}
-
-/* dropdown menu */
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 220px;
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 0.75rem 0;
-    list-style: none;
-    margin: 0;
-    z-index: 10;
-}
-
-/* dropdown zichtbaar als open */
-.dropdown_open .dropdown-menu {
-    display: block;
-}
-
-/* items in dropdown */
-.dropdown-menu li a {
-    display: block;
-    padding: 0.45rem 1rem;
-    color: var(--black);
-    text-decoration: none;
-}
-
-.dropdown-menu li a:hover {
-    background: #f0f0f0;
-}
-
-/* pijltje > dat draait */
-.dropdown_arrow {
-    display: inline-block;
-    transition: transform 0.2s ease;
-    font-size: 1rem;
-}
-
-.dropdown_open .dropdown_arrow {
-    transform: rotate(90deg);
-}
-
-/* logo */
-.site-logo img {
-    height: 60px;
-}
-
-/* zoekbalk */
-.search-bar {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 2rem;
-    border-top: 1px solid #ddd;
-    background: #fff;
-}
-
-/* dezelfde horizontale marge als de header */
-.search-bar {
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-}
-
-
-.search-bar[hidden] {
-    display: none;
-}
-
-.search-close {
-    width: 52px;
-    height: 52px;
-    background: var(--green);
-    border: none;
-    color: white;
-    font-size: 1.3rem;
-    cursor: pointer;
-}
-
-.search-bar__form {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.search-bar__form input[type="search"] {
-    flex: 1;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    padding: 0.6rem;
-    font-size: 1rem;
-}
-
-.search-bar__form button {
-    background: var(--green);
-    border: none;
-    padding: 0.7rem 1.2rem;
-    color: white;
-    cursor: pointer;
-}
-
-
-
-/* panorama container */
+/* PANORAMA */
 .panorama {
     background: var(--gray);
     padding: 1rem 0;
@@ -443,7 +387,7 @@ body {
     width: 100%;
     max-width: 100%;
     position: relative;
-    overflow: visible; /* NIET wegknippen wat erin zit */
+    overflow: visible;
 }
 
 /* panorama inhoud */
@@ -451,8 +395,8 @@ body {
     width: 70%;
     left: 255px;
     max-width: none;
-    position: relative; 
-    overflow-x: hidden; /* alleen horizontaal eventueel knippen */
+    position: relative;
+    overflow-x: hidden;
     overflow-y: visible;
 }
 
@@ -471,9 +415,15 @@ body {
 .panorama-img-wrapper {
     position: relative;
     flex-shrink: 0;
+    margin-top: 100px;
+    height: 100px;
 }
 
-/* pijltjes blijven zoals je had */
+.panorama img{
+    height: 665px;
+}
+
+/* pijltjes */
 .panorama-arrow {
     position: absolute;
     top: 50%;
@@ -492,13 +442,8 @@ body {
     z-index: 1500;
 }
 
-.panorama-arrow-left {
-    left: 8px;
-}
-
-.panorama-arrow-right {
-    right: 8px;
-}
+.panorama-arrow-left { left: 8px; }
+.panorama-arrow-right { right: 8px; }
 
 .panorama-arrow:hover {
     background: rgba(0,0,0,0.6);
@@ -508,18 +453,17 @@ body {
 .panorama-minimap {
     position: absolute;
     right: 10px;
-    bottom: 75px;                 /* in de panorama, niet eronder */
+    bottom: 75px;
     width: 220px;
     height: 30px;
     background: rgba(255, 255, 255, 0.85);
-    border: 2px solid red;        /* tijdelijk rood om duidelijk te zien */
+    border: 2px solid red; /* tijdelijk rood */
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0,0,0,0.15);
     z-index: 2000;
 }
 
-/* wat je “zichtbare gebied” aangeeft */
 .panorama-minimap-viewport {
     position: absolute;
     top: 0;
@@ -537,42 +481,34 @@ body {
     position: relative;
 }
 
-/* dit laat ons zoomen */
 .panorama-fotos.zoomed {
     transform-origin: var(--zoom-x) var(--zoom-y);
     transition: transform 0.25s ease;
 }
 
 /* INFO-PANEEL BIJ PANORAMA */
-.panorama {
-    position: relative;
-}
-
-/* basis van het panel */
 .panorama-info-panel {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
-    max-height: 780px; /* ongeveer hoogte panorama-fotos */
+    max-height: 780px;
     width: 360px;
     background: #fff;
     box-shadow: 4px 0 12px rgba(0,0,0,0.25);
-    transform: translateX(-100%);   /* verstopt links */
+    transform: translateX(-100%);
     transition: transform 0.3s ease;
     z-index: 3000;
     display: flex;
     flex-direction: column;
 }
 
-/* open state */
 .panorama-info-panel.info-open {
     transform: translateX(0);
 }
 
-/* inhoud */
 .info-content {
-    padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+    padding: 1.5rem;
     overflow-y: auto;
     font-size: 0.95rem;
 }
@@ -597,7 +533,6 @@ body {
     margin: 0;
 }
 
-/* sluitknop */
 .info-close {
     position: absolute;
     top: 0.75rem;
@@ -608,9 +543,7 @@ body {
     cursor: pointer;
 }
 
-
-/* footer */
-
+/* FOOTER */
 .site-footer {
     border-top: 1px solid #eee;
     background: #fff;
@@ -618,9 +551,9 @@ body {
 }
 
 .footer-inner {
-    max-width: 1400px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 3rem 3rem 2rem;
+    padding: 3rem 2rem 2rem;
     font-size: 0.95rem;
     color: var(--black);
 }
@@ -785,15 +718,5 @@ body {
 
 .footer-kvk p {
     margin: 0;
-}
-
-.footer-inner {
-    max-width: 1000px;
-    /* hier bepaal je de breedte */
-    margin: 0 auto;
-    /* centreert content */
-    padding: 3rem 2rem 2rem;
-    font-size: 0.95rem;
-    color: var(--black);
 }
 

@@ -490,7 +490,7 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="panorama-fotos" id="panoramaFotos">
                     <?php foreach ($artikelen as $artikel): ?>
                         <?php
-                        $artikel['height'] = $artikel['height'] * 1.5;
+                        $artikel['height'] = $artikel['height'] * 1.36;
                         $artikel['margin_left'] = $artikel['margin_left'] * 1.5;
                         $artikel['margin_top'] = $artikel['margin_top'] * 1.5;
                         $styleAttr = sprintf(
@@ -538,7 +538,6 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         </div>
                                     </div>
                                 <?php endif; ?>
-ß
                             </div>
                         </div>
                     <?php endforeach; ?>
