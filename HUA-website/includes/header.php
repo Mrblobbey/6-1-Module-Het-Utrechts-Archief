@@ -3,7 +3,7 @@
 
         <button id="search-toggle" class="search-toggle" aria-expanded="false" aria-controls="site-search">
             <span class="search_icon" aria-hidden="true">
-                <img src="/HUA/6-1-Module-Het-Utrechts-Archief/HUA-website/img/search_icon.png" alt="Zoek icoon" id="search_icon_img">
+                <img src="/6.2/6-1-Module-Het-Utrechts-Archief/HUA-website/img/search_icon.png" alt="Zoek icoon" id="search_icon_img">
             </span>
 
             <span id="search-close" style="display: none;">
@@ -113,7 +113,7 @@
 
         <a href="#" class="site-logo">
             <a href="https://hetutrechtsarchief.nl/">
-            <img src="/HUA/6-1-Module-Het-Utrechts-Archief/HUA-website/img/Logo_ingeklapt.png" alt="Het Utrechts Archief Logo" style="width: 62px">
+            <img src="/6.2/6-1-Module-Het-Utrechts-Archief/HUA-website/img/Logo_ingeklapt.png" alt="Het Utrechts Archief Logo" style="width: 62px">
             </a>    
         </a>
     </div>
