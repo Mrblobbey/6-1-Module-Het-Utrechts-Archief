@@ -1,7 +1,7 @@
 <?php
-$servername = "localhost";
+$servername = "mysql_db";
 $username = "root"; 
-$password = "";         
+$password = "root";         
 $dbname = "artikel";
 
 try {
