@@ -494,51 +494,48 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         $artikel['margin_left'] = $artikel['margin_left'] * 1.5;
                         $artikel['margin_top'] = $artikel['margin_top'] * 1.5;
                         $styleAttr = sprintf(
-                            'height: %spx; z-index: %s; margin-left: %spx; margin-top: %spx;',
+                            'height: %spx; margin-left: %spx; margin-top: %spx;',
                             $artikel['height'],
-                            $artikel['z_index'],
                             $artikel['margin_left'],
                             $artikel['margin_top']
                         );
                         ?>
-                        <div class="panorama-img-wrapper">
-                            <div>
-                                <!-- <div id="Hotspot_<?php echo ($artikel["id"]) ?>"></div> -->
-                                <img
-                                    src="img/<?= htmlspecialchars($artikel['afbeelding'], ENT_QUOTES) ?>"
-                                    alt="<?= htmlspecialchars($artikel['alt'], ENT_QUOTES) ?>"
-                                    style="<?= $styleAttr ?>">
+                        <div class="panorama-img-wrapper" style="z-index: <?= $artikel['z_index']; ?>">
+                            <!-- <div id="Hotspot_<?php echo ($artikel["id"]) ?>"></div> -->
+                            <img
+                                src="img/<?= htmlspecialchars($artikel['afbeelding'], ENT_QUOTES) ?>"
+                                alt="<?= htmlspecialchars($artikel['alt'], ENT_QUOTES) ?>"
+                                style="<?= $styleAttr ?>">
 
-                                <?php if (isset($artikel['x']) && isset($artikel['y'])): ?>
-                                    <?php
-                                    $scaledX = $artikel['x'] * 4.5;
-                                    $scaledY = $artikel['y'] * 4.5;
-                                    ?>
-                                    <div class="point-wrapper"
-                                        style="top: <?= $scaledY ?>px; left: <?= $scaledX ?>px; position:absolute;"
-                                        data-id="<?= htmlspecialchars($artikel['id'], ENT_QUOTES) ?>"
-                                        data-beschrijving="<?= htmlspecialchars($artikel['beschrijving'], ENT_QUOTES) ?>"
-                                        data-link="<?= htmlspecialchars($artikel['link_bron'], ENT_QUOTES) ?>">
-                                        <i></i>
+                            <?php if (isset($artikel['x']) && isset($artikel['y'])): ?>
+                                <?php
+                                $scaledX = $artikel['x'] * 4.5;
+                                $scaledY = $artikel['y'] * 4.5;
+                                ?>
+                                <div class="point-wrapper"
+                                    style="top: <?= $scaledY ?>px; left: <?= $scaledX ?>px; position:absolute;"
+                                    data-id="<?= htmlspecialchars($artikel['id'], ENT_QUOTES) ?>"
+                                    data-beschrijving="<?= htmlspecialchars($artikel['beschrijving'], ENT_QUOTES) ?>"
+                                    data-link="<?= htmlspecialchars($artikel['link_bron'], ENT_QUOTES) ?>">
+                                    <i></i>
 
-                                        <div class="hotspot-popup">
-                                            <h4 class="hotspot-beschrijving">
-                                                <?= htmlspecialchars($artikel['beschrijving'], ENT_QUOTES) ?>
-                                            </h4>
+                                    <div class="hotspot-popup">
+                                        <h4 class="hotspot-beschrijving">
+                                            <?= htmlspecialchars($artikel['beschrijving'], ENT_QUOTES) ?>
+                                        </h4>
 
-                                            <?php if (!empty($artikel['link_bron'])): ?>
-                                                <p class="hotspot-link">
-                                                    <a href="<?= htmlspecialchars($artikel['link_bron'], ENT_QUOTES) ?>"
-                                                        target="_blank"
-                                                        rel="noopener noreferrer">
-                                                        Bekijken →
-                                                    </a>
-                                                </p>
-                                            <?php endif; ?>
-                                        </div>
+                                        <?php if (!empty($artikel['link_bron'])): ?>
+                                            <p class="hotspot-link">
+                                                <a href="<?= htmlspecialchars($artikel['link_bron'], ENT_QUOTES) ?>"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer">
+                                                    Bekijken →
+                                                </a>
+                                            </p>
+                                        <?php endif; ?>
                                     </div>
-                                <?php endif; ?>
-                            </div>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
                 </div>
