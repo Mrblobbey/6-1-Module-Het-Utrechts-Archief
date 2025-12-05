@@ -956,17 +956,13 @@ table th.actions {
 /*Einde van bewerk pagina*/
 
 /*Begin van product toevoeg/bewerk pagina*/
-/*Begin van product toevoeg/bewerk pagina*/
 .add-wrap {
     height: 900px;
-    height: 900px;
-    max-width: 1100px;
-    margin-top: 0px;
+    width: 700px;
     margin-top: 0px;
     padding: 20px;
     display: flex;
     justify-content: center;
-    margin-top: 90px;
     margin-top: 90px;
 }
 
@@ -1075,6 +1071,8 @@ table th.actions {
     display: flex;
     flex-direction: column;
     width: 380px;
+    justify-content: center;
+    align-items: center;
 }
 
 .add-form-panel label {

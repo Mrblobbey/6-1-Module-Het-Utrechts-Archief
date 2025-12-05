@@ -12,7 +12,7 @@ if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {
     $artikel = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$artikel) {
-        $_SESSION['error'] = "Artikel niet gevonden.";
+        $_SESSION['error'] = "artikel niet gevonden.";
         header("Location: artikel-beheer.php");
         exit;
     }
@@ -39,27 +39,29 @@ if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {
 
 
         $stmt = $conn->prepare("UPDATE artikel SET 
-        catalogusnummer = :catalogusnummer,
-        beschrijving = :beschrijving,
-        link_bron = :link_bron,
-        actief = :actief,
-        afbeelding = :afbeelding,
-        x = :x,
-        y = :y
-        WHERE id = :id
-    ");
-        $stmt->execute([
-            ':catalogusnummer' => $catalogusnummer,
-            ':beschrijving' => $beschrijving,
-            ':link_bron' => $link_bron,
-            ':actief' => $actief,
-            ':afbeelding' => $afbeelding,
-            ':x' => $_POST['x'] ?? 0,
-            ':y' => $_POST['y'] ?? 0,
-            ':id' => $id
-        ]);
+    catalogusnummer = :catalogusnummer,
+    beschrijving = :beschrijving,
+    link_bron = :link_bron,
+    actief = :actief,
+    afbeelding = :afbeelding,
+    x = :x,
+    y = :y
+    WHERE id = :id
+");
 
-        $_SESSION['success'] = "Artikel succesvol bijgewerkt.";
+$stmt->execute([
+    ':catalogusnummer' => $catalogusnummer,
+    ':beschrijving' => $beschrijving,
+    ':link_bron' => $link_bron,
+    ':actief' => $actief,
+    ':afbeelding' => $afbeelding,
+    ':x' => $_POST['x'] ?? 0,
+    ':y' => $_POST['y'] ?? 0,
+    ':id' => $id
+]);
+
+
+        $_SESSION['success'] = "artikel succesvol bijgewerkt.";
         header("Location: product-beheer.php");
         exit;
     }
@@ -76,7 +78,7 @@ if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {
 
 <head>
     <meta charset="UTF-8">
-    <title>Artikel bewerken</title>
+    <title>artikel bewerken</title>
     <link rel="stylesheet" href="cms.css">
 </head>
 
@@ -85,7 +87,7 @@ if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {
         <div class="add-form-panel">
             <div class="add-title">
                 <div class="add-top">
-                    <h1>Artikel bewerken</h1>
+                    <h1>artikel bewerken</h1>
                     <?php if (!empty($_SESSION['error'])): ?>
                         <div class="add-alert-error"><?= htmlspecialchars($_SESSION['error']) ?></div>
                         <?php unset($_SESSION['error']); ?>
@@ -98,26 +100,27 @@ if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {
 
                     <form class="add-form" method="post" enctype="multipart/form-data">
                         <div class="left-col">
-                            <div class="hotspot-container" style="position:relative; display:inline-block; max-width:100%;">
+                            <div class="hotspot-container" style="position:relative; display:inline-block; width: 500px;">
                                 <img id="img-hotspot" src="../img/<?= htmlspecialchars($artikel['afbeelding']) ?>" style="width:100%; display:block;">
                                 <div id="hotspot"
                                     style="
-            width:20px;
-            height:20px;
+            width:15px;
+            height:15px;
             background:red;
             border-radius:50%;
             position:absolute;
             cursor:pointer;
-            left: <?= (int)$artikel['x'] ?>px;
-            top: <?= (int)$artikel['y'] ?>px;
+            left: <?= (int)$artikel['x'] ?? 0 ?>px;
+            top: <?= (int)$artikel['y'] ?? 0 ?>px;
         ">
                                 </div>
                             </div>
 
-                            <input type="hidden" name="x" id="input-x" value="<?= htmlspecialchars($artikel['x'] ?? 0) ?>">
-                            <input type="hidden" name="y" id="input-y" value="<?= htmlspecialchars($artikel['y'] ?? 0) ?>">
+                            <input type="hidden" name="x" id="input-x" value="<?= (int)($artikel['x'] ?? 0) ?>">
+                            <input type="hidden" name="y" id="input-y" value="<?= (int)($artikel['y'] ?? 0) ?>">
 
-                            <label>Titel *</label>
+
+                            <label>catalogusnummer *</label>
                             <input type="text" name="titel" value="<?= htmlspecialchars($artikel['catalogusnummer']) ?>" required>
 
                             <label>Link bron</label>
@@ -183,8 +186,3 @@ if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {
 </body>
 
 </html>
-
-<?php
-include '../includes/header.php';
-include '../includes/login-true.php';
-?>
