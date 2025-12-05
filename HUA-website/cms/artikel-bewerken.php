@@ -105,8 +105,9 @@ if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {
             border-radius:50%;
             position:absolute;
             cursor:pointer;
-            left: <?= (int)$artikel['x'] ?>px;
-            top: <?= (int)$artikel['y'] ?>px;
+left: <?= (isset($hotspots) && is_array($hotspots) && isset($hotspots['x'])) ? (int)$hotspots['x'] : 0 ?>px;
+top:  <?= (isset($hotspots) && is_array($hotspots) && isset($hotspots['y'])) ? (int)$hotspots['y'] : 0 ?>px;
+
         ">
                                 </div>
                             </div>
