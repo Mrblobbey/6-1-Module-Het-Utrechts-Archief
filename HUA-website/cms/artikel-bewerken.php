@@ -28,8 +28,6 @@ if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {
             $uploadDir = '../img/';
             $fileName = time() . '_' . basename($_FILES['afbeelding']['name']);
             move_uploaded_file($_FILES['afbeelding']['tmp_name'], $uploadDir . $fileName);
-            $fileName = time() . '_' . basename($_FILES['afbeelding']['name']);
-            move_uploaded_file($_FILES['afbeelding']['tmp_name'], $uploadDir . $fileName);
             $afbeelding = $fileName;
         }
 
