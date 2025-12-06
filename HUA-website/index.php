@@ -84,8 +84,8 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                             <?php if (isset($artikel['x']) && isset($artikel['y'])): ?>
                                 <?php
-                                $scaledX = $artikel['x'] * 4.5;
-                                $scaledY = $artikel['y'] * 4.5;
+                                $scaledX = $artikel['x'] * 2.95;
+                                $scaledY = $artikel['y'] * 3;
                                 ?>
                                 <div class="point-wrapper"
                                     style="top: <?= $scaledY ?>px; left: <?= $scaledX ?>px; position:absolute;"
