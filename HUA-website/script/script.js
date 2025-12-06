@@ -154,3 +154,153 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// Introductie-popup panorama + colofon
+document.addEventListener('DOMContentLoaded', function () {
+    const overlay = document.getElementById('introOverlay');
+    if (!overlay) return;
+
+    const closeBtn = overlay.querySelector('.intro-close');
+    const okBtn    = overlay.querySelector('.intro-ok');
+
+    // check of gebruiker de uitleg al heeft gezien
+    const alreadySeen = localStorage.getItem('panoramaIntroSeen') === '1';
+
+    if (!alreadySeen) {
+        overlay.style.display = 'flex';
+        overlay.setAttribute('aria-hidden', 'false');
+    }
+
+    function hideIntro() {
+        overlay.style.display = 'none';
+        overlay.setAttribute('aria-hidden', 'true');
+        localStorage.setItem('panoramaIntroSeen', '1'); // toon maar één keer per browser
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', hideIntro);
+    }
+
+    if (okBtn) {
+        okBtn.addEventListener('click', hideIntro);
+    }
+
+    // klik naast de modal sluit ook
+    overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) {
+            hideIntro();
+        }
+    });
+});
+
+// ================== Instructie + colofon popup ==================
+document.addEventListener('DOMContentLoaded', function () {
+    const overlay = document.getElementById('introOverlay');
+    const closeBtn = overlay ? overlay.querySelector('.intro-close') : null;
+    const STORAGE_KEY = 'panoramaIntroSeen';
+
+    if (!overlay) return;
+
+    // Alleen de eerste keer tonen (per browser)
+    if (window.localStorage && localStorage.getItem(STORAGE_KEY) === '1') {
+        overlay.style.display = 'none';
+        return;
+    }
+
+    function hideOverlay() {
+        overlay.style.display = 'none';
+        try {
+            localStorage.setItem(STORAGE_KEY, '1');
+        } catch (e) {
+            // niks; localStorage kan geblokkeerd zijn
+        }
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', hideOverlay);
+    }
+
+    // Klik buiten de modal sluit ook
+    overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) {
+            hideOverlay();
+        }
+    });
+});
+
+
+// ================== Zoom in / uit + fullscreen ==================
+document.addEventListener('DOMContentLoaded', function () {
+    const pano = document.getElementById('panoramaFotos');
+    if (!pano) return;
+
+    const zoomInBtn = document.querySelector('.pano-zoom-in');
+    const zoomOutBtn = document.querySelector('.pano-zoom-out');
+    const fullscreenBtn = document.querySelector('.pano-fullscreen');
+
+    let currentZoom = 1;
+    const minZoom = 0.7;
+    const maxZoom = 3;
+    const zoomStep = 0.3;
+
+    function applyZoom() {
+        pano.style.transform = `scale(${currentZoom})`;
+        if (currentZoom === 1) {
+            pano.classList.remove('zoomed');
+        } else {
+            pano.classList.add('zoomed');
+        }
+    }
+
+    if (zoomInBtn) {
+        zoomInBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            currentZoom = Math.min(maxZoom, currentZoom + zoomStep);
+            applyZoom();
+        });
+    }
+
+    if (zoomOutBtn) {
+        zoomOutBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            currentZoom = Math.max(1, currentZoom - zoomStep);
+            applyZoom();
+        });
+    }
+
+    // Dubbelklik zoom: inzoomen op klikpunt / terug naar 1x
+    pano.addEventListener('dblclick', function (e) {
+        e.preventDefault();
+
+        const rect = pano.getBoundingClientRect();
+        const clickX = (e.clientX - rect.left) / rect.width;
+        const clickY = (e.clientY - rect.top) / rect.height;
+
+        pano.style.setProperty('--zoom-x', (clickX * 100) + '%');
+        pano.style.setProperty('--zoom-y', (clickY * 100) + '%');
+
+        if (currentZoom === 1) {
+            currentZoom = 2; // inzoomen
+        } else {
+            currentZoom = 1; // terug naar normaal
+        }
+        applyZoom();
+    });
+
+    // Fullscreen knop
+    if (fullscreenBtn) {
+        fullscreenBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const container = document.querySelector('.panorama') || pano;
+
+            if (!document.fullscreenElement) {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        });
+    }
+});

@@ -1,4 +1,3 @@
-
 <?php
 
 include 'includes/conn.php';
@@ -26,7 +25,40 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
     ?>
 
     <main>
+        <!-- Instructie + colofon popup -->
+        <div class="intro-overlay" id="introOverlay">
+            <div class="intro-modal">
+                <button class="intro-close" type="button" aria-label="Sluit uitleg">×</button>
 
+                <h2>Panorama van Utrecht – Uitleg</h2>
+                <ul>
+                    <li>Gebruik de pijltjes links en rechts om door het panorama te schuiven.</li>
+                    <li>Klik in de minimap rechtsonder om snel naar een andere plek te springen.</li>
+                    <li>Dubbelklik op het panorama om in of uit te zoomen op de plek waar je klikt.</li>
+                    <li>Gebruik de knoppen <strong>+</strong> en <strong>−</strong> om verder in of uit te zoomen.</li>
+                    <li>Klik op het scherm-icoon om het panorama op volledig scherm te bekijken.</li>
+                    <li>Klik op de rode hotspots voor extra informatie.</li>
+                </ul>
+
+                <hr>
+
+                <h3>Colofon</h3>
+                <p>
+                    <strong>Panorama van Utrecht</strong> – titelpagina van het panorama, getekend op lithostenen
+                    door <strong>J. Bos</strong>, gedrukt bij <strong>P.W. van de Weijer</strong> en in juli 1859
+                    uitgegeven door <strong>Wed. Herfkens en Zoon</strong>.
+                </p>
+                <p>
+                    <strong>Catalogusnummer:</strong> 135001<br>
+                    <strong>Datering:</strong> 1859 (01-01-1859 – 31-12-1859)
+                </p>
+                <p>
+                    <strong>Auteursrecht:</strong> Publiek Domein 1.0 – u mag dit beeld downloaden, delen,
+                    kopiëren en bewerken, ook voor commerciële doeleinden.
+                </p>
+                <button class="intro-ok" type="button" onclick="closeIntro()">Ik begrijp het</button>
+            </div>
+        </div>
         <div class="panorama">
             <div class="panorama-content">
 
@@ -85,6 +117,12 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <div class="panorama-minimap" id="panoramaMinimap">
                     <div class="panorama-minimap-viewport" id="panoramaMinimapViewport"></div>
+                </div>
+                <!-- HIER de knoppen -->
+                <div class="panorama-controls">
+                    <button type="button" class="pano-btn pano-zoom-in" aria-label="Zoom in">+</button>
+                    <button type="button" class="pano-btn pano-zoom-out" aria-label="Zoom uit">−</button>
+                    <button type="button" class="pano-btn pano-fullscreen" aria-label="Volledig scherm">⤢</button>
                 </div>
                 <!-- pijltjes -->
                 <button class="panorama-arrow panorama-arrow-left" type="button" aria-label="Scroll naar links">

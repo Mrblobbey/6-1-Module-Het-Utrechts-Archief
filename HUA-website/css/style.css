@@ -339,6 +339,125 @@ body {
     opacity: 1;
     pointer-events: auto;
 }
+.intro-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9000;
+}
+
+.intro-modal {
+    position: relative;
+    max-width: 640px;
+    width: 90%;
+    max-height: 80vh;
+    background: #fff;
+    padding: 1.75rem 2rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.intro-modal h2 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+}
+
+.intro-modal h3 {
+    margin: 1rem 0 0.5rem;
+    font-size: 1rem;
+}
+
+.intro-modal ul {
+    padding-left: 1.2rem;
+    margin: 0 0 1rem;
+}
+
+.intro-modal li {
+    margin-bottom: 0.35rem;
+}
+
+.intro-close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.8rem;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.intro-ok {
+    margin-top: 1.5rem;
+    background: #166a5a;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.4rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.25s ease, transform 0.15s ease;
+}
+
+.intro-ok:hover {
+    background: #1c7d6d;
+    transform: translateY(-1px);
+}
+
+.intro-ok:active {
+    transform: translateY(0);
+}
+
+/*  Zoom / fullscreen knoppen  */
+
+.panorama {
+    position: relative; /* nodig voor absolute controls */
+}
+
+.panorama-controls {
+    position: absolute;
+    top: 150px; 
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 1600;
+}
+
+.pano-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    border: none;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.pano-btn:hover {
+    background: rgba(0, 0, 0, 0.75);
+}
+
+/* standaard transform-origin; bij zoom via dubbelklik wordt dit overschreven */
+.panorama-fotos {
+    transform-origin: center center;
+}
+
+/* bij inzoomen gebruiken we --zoom-x en --zoom-y (zie JS) */
+.panorama-fotos.zoomed {
+    transform-origin: var(--zoom-x) var(--zoom-y);
+    transition: transform 0.25s ease;
+}
 
 /* HOTSPOT LOCATIES */
 /* image 4 – 1 hotspot */
