@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $catalogusnummer = trim($_POST['catalogusnummer'] ?? '');
         $beschrijving = trim($_POST['beschrijving'] ?? '');
         $link_bron = trim($_POST['link_bron'] ?? '');
-        $actief = isset($_POST['actief']) ? 1 : 0;
 
         if ($catalogusnummer === '') {
             $_SESSION['error'] = 'Titel is verplicht.';
@@ -26,14 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
-        $sql = "INSERT INTO artikel (catalogusnummer, beschrijving, link_bron, actief, afbeelding)
-                VALUES (:catalogusnummer, :beschrijving, :link_bron, :actief, :afbeelding)";
+        $sql = "INSERT INTO artikel (catalogusnummer, beschrijving, link_bron, afbeelding)
+                VALUES (:catalogusnummer, :beschrijving, :link_bron, :afbeelding)";
         $stmt = $conn->prepare($sql);
         $stmt->execute([
             ':catalogusnummer' => $catalogusnummer,
             ':beschrijving' => $beschrijving,
             ':link_bron' => $link_bron,
-            ':actief' => $actief,
             ':afbeelding' => $afbeelding
         ]);
         $_SESSION['success'] = 'Artikel toegevoegd.';
@@ -46,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $catalogusnummer = trim($_POST['catalogusnummer'] ?? '');
         $beschrijving = trim($_POST['beschrijving'] ?? '');
         $link_bron = trim($_POST['link_bron'] ?? '');
-        $actief = isset($_POST['actief']) ? 1 : 0;
 
         if ($catalogusnummer === '') {
             $_SESSION['error'] = 'Titel is verplicht.';
@@ -54,14 +51,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
-        $sql = "UPDATE artikel SET catalogusnummer=:catalogusnummer, beschrijving=:beschrijving, link_bron=:linkbron, actief=:actief
+        $sql = "UPDATE artikel SET catalogusnummer=:catalogusnummer, beschrijving=:beschrijving, link_bron=:linkbron,
                 WHERE id = :id LIMIT 1";
         $stmt = $conn->prepare($sql);
         $stmt->execute([
             ':catalogusnummer' => $catalogusnummer,
             ':beschrijving' => $beschrijving,
-            ':actief' => $actief,
-            ':actief' => $actief,
             ':link_bron' => $link_bron,
             ':id' => $id
         ]);
@@ -118,8 +113,8 @@ if ($action === 'edit' && $editId) {
 $where = '1=1';
 $params = [];
 if ($search !== '') {
-    $where = "(catalogusnummer = :q OR beschrijving = :q)";
-    $params[':q'] = $search;
+    $where = "(catalogusnummer LIKE :q OR beschrijving LIKE :q)";
+    $params[':q'] = '%' . $search . '%';
 }
 $countStmt = $conn->prepare("SELECT COUNT(*) FROM artikel WHERE $where");
 $countStmt->execute($params);
@@ -213,8 +208,6 @@ unset($_SESSION['success'], $_SESSION['error']);
                 <label>Link Bron</label>
                 <input type="text" name="link_bron" value="<?php echo e($vals['link_bron']); ?>">
 
-                <label><input type="checkbox" name="actief" <?php echo (isset($vals['actief']) && $vals['actief']) ? 'checked' : ''; ?>> Actief</label>
-
                 <input type="hidden" name="x" id="input-x" value="<?php echo e($vals['x'] ?? 0); ?>">
                 <input type="hidden" name="y" id="input-y" value="<?php echo e($vals['y'] ?? 0); ?>">
 
@@ -233,7 +226,6 @@ unset($_SESSION['success'], $_SESSION['error']);
                 <th>catalogusnummer</th>
                 <th>Beschrijving</th>
                 <th>Link Bron</th>
-                <th>Actief</th>
                 <th class="actions">Acties</th>
             </tr>
         </thead>

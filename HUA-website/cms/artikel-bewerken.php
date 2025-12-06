@@ -42,7 +42,6 @@ if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'edit') {
     catalogusnummer = :catalogusnummer,
     beschrijving = :beschrijving,
     link_bron = :link_bron,
-    actief = :actief,
     afbeelding = :afbeelding,
     x = :x,
     y = :y
@@ -53,7 +52,6 @@ $stmt->execute([
     ':catalogusnummer' => $catalogusnummer,
     ':beschrijving' => $beschrijving,
     ':link_bron' => $link_bron,
-    ':actief' => $actief,
     ':afbeelding' => $afbeelding,
     ':x' => $_POST['x'] ?? 0,
     ':y' => $_POST['y'] ?? 0,
@@ -126,13 +124,8 @@ $stmt->execute([
                             <label>Link bron</label>
                             <input type="text" name="link_bron" value="<?= htmlspecialchars($artikel['link_bron']) ?>">
 
-                            <label>Titel *</label>
-                            <input type="text" name="catalogusnummer" value="<?= htmlspecialchars($artikel['catalogusnummer']) ?>" required>
-
                             <label>Beschrijving</label>
                             <textarea name="beschrijving"><?= htmlspecialchars($artikel['beschrijving']) ?></textarea>
-
-                            <label><input type="checkbox" name="actief" <?= $artikel['actief'] ? 'checked' : '' ?>> Actief</label>
 
                             <div class="add-cancel-btn-container">
                                 <button type="submit" class="add-btn-save">Opslaan</button>

@@ -11,47 +11,53 @@ function e($v)
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $naam = trim($_POST['naam'] ?? '');
-    $beschrijving = trim($_POST['beschrijving'] ?? '');
-    $link_bron = trim($_POST['link_bron'] ?? '');
-    $actief = isset($_POST['actief']) ? 1 : 0;
+    $naam = trim($_POST['naam']);
+    $beschrijving = trim($_POST['beschrijving']);
+    $link_bron = trim($_POST['link_bron']);
+    $afbeelding_id = intval($_POST['afbeelding_id']);
+    $x = intval($_POST['x']);
+    $y = intval($_POST['y']);
 
     if ($naam === '') {
-        $_SESSION['error'] = 'Productnaam is verplicht.';
-        header('Location: product-toevoegen.php');
+        $_SESSION['error'] = 'Titel is verplicht.';
+        header('Location: artikel-toevoegen.php');
         exit;
     }
 
-    if (isset($_FILES['afbeelding']) && $_FILES['afbeelding']['error'] == 0) {
-        $uploadDir = '../img/';
-        $fileName = time() . "_" . basename($_FILES['afbeelding']['name']);
-        $uploadFile = $uploadDir . $fileName;
-        move_uploaded_file($_FILES['afbeelding']['tmp_name'], $uploadFile);
-        $afbeelding = $fileName;
-    } else {
-        $afbeelding = null;
-    }
+    // Ophalen afbeelding-bestandsnaam
+    $stmt = $conn->prepare("SELECT afbeelding FROM artikel WHERE id = :id");
+    $stmt->execute([':id' => $afbeelding_id]);
+    $row = $stmt->fetch();
 
-    $sql = "INSERT INTO product (naam, beschrijving, link_bron, actief, afbeelding)
-            VALUES (:naam, :beschrijving, :link_bron, :actief, :afbeelding)";
+    $sql = "INSERT INTO artikel (catalogusnummer, beschrijving, link_bron, afbeelding, x, y)
+            VALUES (:naam, :beschrijving, :link_bron, :afbeelding, :x, :y)";
+
     $stmt = $conn->prepare($sql);
     $stmt->execute([
         ':naam' => $naam,
         ':beschrijving' => $beschrijving,
         ':link_bron' => $link_bron,
-        ':actief' => $actief,
-        ':afbeelding' => $afbeelding
+        ':afbeelding' => $row['afbeelding'],
+        ':x' => $x,
+        ':y' => $y,
     ]);
 
-    $_SESSION['success'] = 'Product succesvol toegevoegd.';
-    header('Location: product-beheer.php');
+    $_SESSION['success'] = 'Artikel + hotspot succesvol toegevoegd.';
+    header('Location: product-toevoegen.php');
     exit;
 }
 
+// Alle beschikbare images ophalen
+$images = $conn->query("SELECT id, afbeelding FROM artikel ORDER BY id ASC")->fetchAll(PDO::FETCH_ASSOC);
+
+
 $success = $_SESSION['success'] ?? '';
 $error = $_SESSION['error'] ?? '';
+
 unset($_SESSION['success'], $_SESSION['error']);
+
 ?>
+
 <!doctype html>
 <html lang="nl">
 
@@ -71,48 +77,109 @@ unset($_SESSION['success'], $_SESSION['error']);
                 </div>
 
                 <?php if ($success): ?>
-                    <div class="add-alert-success"><?= e($success) ?></div>
+                    <div id="alert-success" class="add-alert-success"><?= e($success) ?></div>
                 <?php endif; ?>
 
                 <?php if ($error): ?>
-                    <div class="add-alert-error"><?= e($error) ?></div>
+                    <div id="alert-error" class="add-alert-error"><?= e($error) ?></div>
                 <?php endif; ?>
             </div>
 
-            <form class="add-form" method="post" enctype="multipart/form-data">
-                <div class="left-col">
-                    <label>Afbeelding</label>
-                    <img id="preview" src="" alt="Preview"style="max-width:100%; margin-bottom:10px; max-height:200px;">
+            <form method="post" enctype="multipart/form-data">
 
-                    <input type="file" name="afbeelding" id="fileInput" accept="image/*">
+                <label>Catalogus nummer *</label>
+                <input type="text" name="naam" placeholder="123456" required>
+
+                <label>Link bron</label>
+                <input type="text" name="link_bron" placeholder="https://..." required>
+
+                <label>Beschrijving</label>
+                <textarea name="beschrijving" placeholder="text..." required></textarea>
+
+                <label>Kies afbeelding *</label><br>
+                <select name="afbeelding_id" id="afbeeldingSelect">
+                    <option value="" required>-- Kies een afbeelding --</option>
+                    <?php foreach ($images as $img): ?>
+                        <option value="<?= $img['id'] ?>"><?= $img['afbeelding'] ?></option>
+                    <?php endforeach; ?>
+                </select>
 
 
-                    <label>Titel *</label>
-                    <input type="text" name="naam" placeholder="bla bla bla" required>
+                <div id="hotspot-wrapper" style="position:relative; display:none; margin-top:20px;">
+                    <img id="hotspot-image" src="" style="max-width:500px; display:block;">
 
-                    <label>Beschrijving</label>
-                    <textarea name="beschrijving" placeholder="bla bla bla"></textarea>
+                    <div id="hotspot"
+                        style="
+                width:25px; height:25px;
+                background:red; border-radius:50%;
+                position:absolute; top:0; left:0;
+                cursor:grab;
+             ">
+                    </div>
                 </div>
 
-                <div class="left-col">
-                    <label>Link bron</label>
-                    <input type="text" name="link_bron" placeholder="https://...">
-
-                    <label><input type="checkbox" name="actief"> Actief</label>
-                </div>
-
-                <div class="add-btn-container">
-                    <div class="hotspot-drop"></div>
-                    <button type="button" class="hotspot-btn">Hotspot</button>
-                </div>
+                <input type="hidden" name="x" id="input-x">
+                <input type="hidden" name="y" id="input-y">
+                <div class="add-cancel-btn-container" style="margin-top:20px;"> <button type="submit" class="add-btn-save">Toevoegen</button> <a href="product-beheer.php" class="add-btn-cancel">Annuleren</a> </div>
             </form>
-
-            <div class="add-cancel-btn-container">
-                <button type="submit" form="productForm" class="add-btn-save">Toevoegen</button>
-                <a href="product-beheer.php" class="add-btn-cancel">Annuleren</a>
-            </div>
         </div>
     </div>
+    <script>
+        const hotspot = document.getElementById("hotspot");
+        const hotspotWrapper = document.getElementById("hotspot-wrapper");
+        const hotspotImage = document.getElementById("hotspot-image");
+        const afbeeldingSelect = document.getElementById("afbeeldingSelect");
+
+        const inputX = document.getElementById("input-x");
+        const inputY = document.getElementById("input-y");
+
+        let dragging = false;
+        let offsetX, offsetY;
+
+        afbeeldingSelect.addEventListener("change", function() {
+            if (!this.value) return;
+
+            hotspotImage.src = "../img/" + this.options[this.selectedIndex].text;
+            hotspotWrapper.style.display = "block";
+        });
+
+        hotspot.addEventListener("mousedown", (e) => {
+            dragging = true;
+            offsetX = e.offsetX;
+            offsetY = e.offsetY;
+        });
+
+        document.addEventListener("mouseup", () => dragging = false);
+
+        document.addEventListener("mousemove", (e) => {
+            if (!dragging) return;
+
+            const rect = hotspotImage.getBoundingClientRect();
+            let x = e.clientX - rect.left - offsetX;
+            let y = e.clientY - rect.top - offsetY;
+
+            // Grenzen
+            x = Math.max(0, Math.min(x, rect.width - hotspot.offsetWidth));
+            y = Math.max(0, Math.min(y, rect.height - hotspot.offsetHeight));
+
+            // Posities zetten
+            hotspot.style.left = x + "px";
+            hotspot.style.top = y + "px";
+
+            // Opslaan
+            inputX.value = Math.round(x);
+            inputY.value = Math.round(y);
+        });
+
+        setTimeout(() => {
+    const successAlert = document.getElementById("alert-success");
+    const errorAlert = document.getElementById("alert-error");
+
+    if (successAlert) successAlert.style.display = 'none';
+    if (errorAlert) errorAlert.style.display = 'none';
+}, 2000);
+
+    </script>
 
     <script src="../script/header.js"></script>
     <script src="../script/script.js"></script>
