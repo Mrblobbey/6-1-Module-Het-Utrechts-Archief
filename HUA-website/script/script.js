@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// ================== Instructie + colofon popup ==================
+//  Instructie + colofon popup 
 document.addEventListener('DOMContentLoaded', function () {
     const overlay = document.getElementById('introOverlay');
     const closeBtn = overlay ? overlay.querySelector('.intro-close') : null;
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// ================== Zoom in / uit + fullscreen ==================
+//  Zoom in / uit + fullscreen 
 document.addEventListener('DOMContentLoaded', function () {
     const pano = document.getElementById('panoramaFotos');
     if (!pano) return;
