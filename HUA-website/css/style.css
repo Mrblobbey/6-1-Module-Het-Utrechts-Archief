@@ -436,6 +436,77 @@ body {
     transform-origin: var(--zoom-x) var(--zoom-y);
     transition: transform 0.25s ease;
 }
+/* ? Help knop onder fullscreen */
+.panorama-help-btn {
+    /* zelfde basis als .pano-btn */
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    border: none;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 1600;   /* zelfde laag als de andere knoppen */
+}
+
+.panorama-help-btn:hover {
+    background: rgba(0, 0, 0, 0.75);
+}
+/* Overlay */
+.intro-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* Popup box */
+.intro-modal {
+    background: white;
+    max-width: 520px;
+    width: 90%;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    font-size: 0.95rem;
+}
+
+.intro-modal h2 {
+    margin-top: 0;
+    color: #166a5a;
+}
+
+.intro-modal ul {
+    padding-left: 1rem;
+}
+
+.intro-modal hr {
+    margin: 1.5rem 0;
+}
+
+/* ik begrijp het knop */
+.intro-ok {
+    margin-top: 1.5rem;
+    background: #e44421;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.intro-ok:hover {
+    opacity: 0.9;
+}
 
 /* HOTSPOT LOCATIES */
 /* image 4 – 1 hotspot */

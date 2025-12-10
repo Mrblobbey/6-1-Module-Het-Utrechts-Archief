@@ -304,3 +304,25 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+const introOverlay = document.getElementById("introOverlay");
+const openIntro = document.getElementById("openIntro");
+const closeIntro = document.getElementById("closeIntro");
+
+// Automatisch openen bij eerste bezoek
+window.addEventListener("load", () => {
+  if (!localStorage.getItem("panoramaIntroSeen")) {
+    introOverlay.style.display = "flex";
+    localStorage.setItem("panoramaIntroSeen", "true");
+  }
+});
+
+// Openen via ?
+openIntro.addEventListener("click", () => {
+  introOverlay.style.display = "flex";
+});
+
+// Sluiten via knop
+closeIntro.addEventListener("click", () => {
+  introOverlay.style.display = "none";
+});

@@ -36,7 +36,8 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <li>Klik in de minimap rechtsonder om snel naar een andere plek te springen.</li>
                     <li>Dubbelklik op het panorama om in of uit te zoomen op de plek waar je klikt.</li>
                     <li>Gebruik de knoppen <strong>+</strong> en <strong>−</strong> om verder in of uit te zoomen.</li>
-                    <li>Klik op het scherm-icoon om het panorama op volledig scherm te bekijken.</li>
+                    <li>Klik op het scherm-icoon om het panorama op leperello focus scherm te bekijken.</li>
+                    <li>Klik op het op het vraag icon om de instructie weer te zien.</li>
                     <li>Klik op de rode hotspots voor extra informatie.</li>
                 </ul>
 
@@ -123,6 +124,7 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <button type="button" class="pano-btn pano-zoom-in" aria-label="Zoom in">+</button>
                     <button type="button" class="pano-btn pano-zoom-out" aria-label="Zoom uit">−</button>
                     <button type="button" class="pano-btn pano-fullscreen" aria-label="Volledig scherm">⤢</button>
+                    <button class="panorama-help-btn" id="openIntro">?</button>
                 </div>
                 <!-- pijltjes -->
                 <button class="panorama-arrow panorama-arrow-left" type="button" aria-label="Scroll naar links">
