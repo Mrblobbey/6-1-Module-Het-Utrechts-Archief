@@ -478,3 +478,138 @@ document.addEventListener("DOMContentLoaded", function () {
     const viewer = document.getElementById("panoramaFotos");
     if (viewer) setupMinimap(viewer);
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const pano    = document.getElementById("panoramaFotos");
+    const playBtn = document.querySelector(".pano-play");
+
+    if (!pano || !playBtn) return;
+
+    let isPlaying     = false;
+    let lastTimestamp = null;
+    const speed       = 150; // pixels per seconds
+
+    function step(timestamp) {
+        if (!isPlaying) return;
+
+        if (!lastTimestamp) {
+            lastTimestamp = timestamp;
+        }
+
+        let deltaSec = (timestamp - lastTimestamp) / 1000;
+
+        //  Fix: delta time limiteren zodat autoplay NIET stopt bij haperingen
+        deltaSec = Math.min(deltaSec, 0.05); // max 50ms per frame
+        lastTimestamp = timestamp;
+
+        const maxScroll = pano.scrollWidth - pano.clientWidth;
+
+        pano.scrollLeft += speed * deltaSec;
+
+        if (pano.scrollLeft >= maxScroll) {
+            pano.scrollLeft = maxScroll;
+            isPlaying = false;
+            playBtn.classList.remove("is-playing");
+            return;
+        }
+
+        requestAnimationFrame(step);
+    }
+
+    playBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+
+        if (!isPlaying) {
+            isPlaying     = true;
+            lastTimestamp = null;
+            playBtn.classList.add("is-playing");
+            requestAnimationFrame(step);
+        } else {
+            isPlaying = false;
+            playBtn.classList.remove("is-playing");
+        }
+    });
+
+    //  Stop autoplay als gebruiker zelf door panorama scrollt
+    pano.addEventListener("mousedown", () => {
+        isPlaying = false;
+        playBtn.classList.remove("is-playing");
+    });
+
+    pano.addEventListener("wheel", () => {
+        isPlaying = false;
+        playBtn.classList.remove("is-playing");
+    });
+
+    //  Stop autoplay bij pijltjes
+    const leftArrow  = document.querySelector(".panorama-arrow-left");
+    const rightArrow = document.querySelector(".panorama-arrow-right");
+
+    [leftArrow, rightArrow].forEach(btn => {
+        if (btn) {
+            btn.addEventListener("click", () => {
+                isPlaying = false;
+                playBtn.classList.remove("is-playing");
+            });
+        }
+    });
+});
+
+// werkende polly 
+
+document.addEventListener("DOMContentLoaded", function () {
+    const hotspots = document.querySelectorAll(".point-wrapper, .hotspot-area");
+    const panel    = document.getElementById("panoInfo");
+
+    if (!panel || !hotspots.length) return;
+
+    const titleEl       = document.getElementById("infoTitle");
+    const catalogusEl   = document.getElementById("infoCatalogus");
+    const descriptionEl = document.getElementById("infoDescription");
+    const linkSectionEl = document.getElementById("infoLinkSection");
+    const linkEl        = document.getElementById("infoLink");
+    const closeBtn      = panel.querySelector(".info-close");
+
+    function openPanelForHotspot(hotspot) {
+        const catalogus    = hotspot.dataset.catalogus || "";
+        const beschrijving = hotspot.dataset.beschrijving || "";
+        const link         = hotspot.dataset.link || "";
+
+        if (titleEl)     titleEl.textContent     = catalogus ? `Catalogusnummer ${catalogus}` : "Catalogusnummer onbekend";
+        if (catalogusEl) catalogusEl.textContent = catalogus;
+        if (descriptionEl) descriptionEl.textContent = beschrijving;
+
+        if (linkEl && linkSectionEl) {
+            if (link) {
+                linkEl.href = link;
+                linkSectionEl.style.display = "";
+            } else {
+                linkSectionEl.style.display = "none";
+            }
+        }
+
+        panel.classList.add("info-open");
+    }
+
+    hotspots.forEach((hotspot) => {
+        hotspot.addEventListener("click", (e) => {
+            e.preventDefault();  // belangrijk voor <area href="#">
+            e.stopPropagation();
+            openPanelForHotspot(hotspot);
+        });
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            panel.classList.remove("info-open");
+        });
+    }
+
+    document.addEventListener("click", (e) => {
+        if (!panel.contains(e.target)) {
+            panel.classList.remove("info-open");
+        }
+    });
+});

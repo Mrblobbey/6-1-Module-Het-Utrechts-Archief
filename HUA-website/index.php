@@ -101,6 +101,21 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
                             <?php endif; ?>
                         </div>
+                        <?php if ($artikel['id'] == 3): ?>
+                            <map name="image-map-3">
+                                <area
+                                    class="hotspot-area"
+                                    shape="poly"
+                                    href="#"
+                                    coords="249,205,246,229,214,194,199,214,188,192,162,203,155,192,152,202,116,204,105,221,103,363,1012,362,1006,221,975,220,956,184,947,195,907,194,882,162,856,161,835,129,829,151,785,153,772,125,769,152,692,150,692,129,676,112,661,126,666,150,600,151,499,77,494,61,479,60,474,74,384,152,394,175,324,200,338,204,335,221,250,221"
+
+                                    data-id="3"
+                                    data-catalogus="<?= htmlspecialchars($artikel['catalogusnummer'] ?? '', ENT_QUOTES) ?>"
+                                    data-beschrijving="<?= htmlspecialchars($artikel['beschrijving'] ?? '', ENT_QUOTES) ?>"
+                                    data-link="<?= htmlspecialchars($artikel['link_bron'] ?? '', ENT_QUOTES) ?>">
+                            </map>
+                        <?php endif; ?>
+
                     <?php endforeach; ?>
                 </div>
 

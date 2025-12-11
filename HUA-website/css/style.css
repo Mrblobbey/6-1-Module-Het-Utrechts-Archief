@@ -422,6 +422,37 @@ body {
 .pano-btn:hover {
     background: rgba(0, 0, 0, 0.75);
 }
+/* play button */
+.pano-btn.pano-play {
+    width: 36px;                      /* zelfde formaat */
+    height: 36px;
+    background: rgba(0, 0, 0, 0.55);  /* zelfde achtergrond */
+    border: none;
+    border-radius: 4px;               /* zelfde afgeronde hoeken */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-image: url("../img/play_icoon.png");
+    background-size: 90%;             /* icoon iets kleiner */
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.pano-btn.pano-play:hover {
+    background-color: rgba(0, 0, 0, 0.75); /* zelfde hover */
+}
+
+.pano-btn.pano-play.is-playing {
+    animation: playPulse 1.2s infinite ease-in-out;
+}
+
+@keyframes playPulse {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}
 
 /* standaard transform-origin; bij zoom via dubbelklik wordt dit overschreven */
 .panorama-fotos {
