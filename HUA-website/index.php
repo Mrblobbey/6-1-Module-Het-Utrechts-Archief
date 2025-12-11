@@ -38,6 +38,7 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <li>Gebruik de knoppen <strong>+</strong> en <strong>−</strong> om verder in of uit te zoomen.</li>
                     <li>Klik op het scherm-icoon om het panorama op leperello focus scherm te bekijken.</li>
                     <li>Klik op het op het vraag icon om de instructie weer te zien.</li>
+                    <li>Klik op het Richtpunt icon om de hotspots aan/uit te zetten </li>
                     <li>Klik op de rode hotspots voor extra informatie.</li>
                 </ul>
 
@@ -81,7 +82,8 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <img
                                 src="img/<?= htmlspecialchars($artikel['afbeelding'], ENT_QUOTES) ?>"
                                 alt="<?= htmlspecialchars($artikel['alt'], ENT_QUOTES) ?>"
-                                style="<?= $styleAttr ?>">
+                                style="<?= $styleAttr ?>"
+                                usemap="#image-map-<?= $artikel['id'] ?>">
 
                             <?php if (isset($artikel['x']) && isset($artikel['y'])): ?>
                                 <?php
@@ -90,41 +92,27 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 ?>
                                 <div class="point-wrapper"
                                     style="top: <?= $scaledY ?>px; left: <?= $scaledX ?>px; position:absolute;"
-                                    data-id="<?= htmlspecialchars($artikel['id'], ENT_QUOTES) ?>"
+                                    data-catalogus="<?= htmlspecialchars($artikel['catalogusnummer'] ?? '', ENT_QUOTES) ?>"
                                     data-beschrijving="<?= htmlspecialchars($artikel['beschrijving'], ENT_QUOTES) ?>"
-                                    data-link="<?= htmlspecialchars($artikel['link_bron'], ENT_QUOTES) ?>">
+                                    data-link="<?= htmlspecialchars($artikel['link_bron'], ENT_QUOTES) ?>"
+                                    data-foto1="img/<?= htmlspecialchars($artikel['afbeelding'], ENT_QUOTES) ?>">
                                     <i></i>
 
-                                    <div class="hotspot-popup">
-                                        <h4 class="hotspot-beschrijving">
-                                            <?= htmlspecialchars($artikel['beschrijving'], ENT_QUOTES) ?>
-                                        </h4>
-
-                                        <?php if (!empty($artikel['link_bron'])): ?>
-                                            <p class="hotspot-link">
-                                                <a href="<?= htmlspecialchars($artikel['link_bron'], ENT_QUOTES) ?>"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer">
-                                                    Bekijken →
-                                                </a>
-                                            </p>
-                                        <?php endif; ?>
-                                    </div>
                                 </div>
                             <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
                 </div>
 
-                <div class="panorama-minimap" id="panoramaMinimap">
-                    <div class="panorama-minimap-viewport" id="panoramaMinimapViewport"></div>
-                </div>
+
                 <!-- HIER de knoppen -->
                 <div class="panorama-controls">
                     <button type="button" class="pano-btn pano-zoom-in" aria-label="Zoom in">+</button>
                     <button type="button" class="pano-btn pano-zoom-out" aria-label="Zoom uit">−</button>
                     <button type="button" class="pano-btn pano-fullscreen" aria-label="Volledig scherm">⤢</button>
                     <button class="panorama-help-btn" id="openIntro">?</button>
+                    <button type="button" class="pano-btn pano-waypoints"></button>
+                    <button type="button" class="pano-btn pano-play"></button>
                 </div>
                 <!-- pijltjes -->
                 <button class="panorama-arrow panorama-arrow-left" type="button" aria-label="Scroll naar links">
@@ -134,8 +122,49 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     ›
                 </button>
 
+                <!-- panorama mini map -->
+                <div class="minimap-bottom" id="minimap-bottom">
+                    <div class="minimap-thumbnails" id="minimap-thumbnails">
+                        <?php for ($i = 1; $i <= 33; $i++): ?>
+                            <img
+                                src="img-afgesneden/<?php echo $i; ?>.jpg"
+                                alt="Deel <?php echo $i; ?>"
+                                class="minimap-thumb"
+                                data-index="<?php echo $i; ?>">
+                        <?php endfor; ?>
+
+                        <div class="minimap-viewport-indicator" id="minimap-viewport-indicator"></div>
+                    </div>
+                </div>
+                <!-- hotspot info paneel -->
+                <div class="panorama-info-panel" id="panoInfo">
+                    <button class="info-close" type="button" aria-label="Sluit informatie"></button>
+                    <div class="info-content">
+                        <div class="info-section">
+                            <h2>Catalogus nummer</h2>
+                            <p id="infoCatalogus"></p>
+                        </div>
+
+                        <div class="info-section">
+                            <h3>Beschrijving</h3>
+                            <p id="infoDescription"></p>
+                        </div>
+
+                        <div class="info-section" id="infoLinkSection">
+                            <h3>Meer informatie</h3>
+                            <p>
+                                <a id="infoLink" href="#" target="_blank" rel="noopener noreferrer">
+                                    Bekijken →
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
+
+
     </main>
 
     <footer class="site-footer">
@@ -147,16 +176,16 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="footer-column">
                     <h3 class="footer-title">Plan een bezoek</h3>
                     <ul class="footer-linklist">
-                        <li><a href="#">Expo - Hamburgerstraat 28</a></li>
-                        <li><a href="#">Studiezaal - Alexander Numankade 199 - 201</a></li>
+                        <li><a href="https://hetutrechtsarchief.nl/expo">Expo - Hamburgerstraat 28</a></li>
+                        <li><a href="https://hetutrechtsarchief.nl/studiezaal-en-depot">Studiezaal - Alexander Numankade 199 - 201</a></li>
                     </ul>
 
                     <h4 class="footer-subtitle">Onderzoek</h4>
                     <ul class="footer-linklist">
-                        <li><a href="#">Archieven doorzoeken</a></li>
-                        <li><a href="#">Beeldmateriaal bekijken</a></li>
-                        <li><a href="#">Bouwtekeningen</a></li>
-                        <li><a href="#">Personen zoeken</a></li>
+                        <li><a href="https://hetutrechtsarchief.nl/onderzoek/collecties">Archieven doorzoeken</a></li>
+                        <li><a href="https://hetutrechtsarchief.nl/beeldmateriaal-bekijken/?mode=gallery&view=horizontal&sort=random%7B1765441716711%7D%20asc">Beeldmateriaal bekijken</a></li>
+                        <li><a href="https://hetutrechtsarchief.nl/bouwtekeningen-en-woonomgeving">Bouwtekeningen</a></li>
+                        <li><a href="https://hetutrechtsarchief.nl/onderzoek/resultaten/personen-mais?mivast=39&mizig=100&miadt=39&miview=tbl&milang=nl">Personen zoeken</a></li>
                     </ul>
                 </div>
 
@@ -164,15 +193,15 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="footer-column">
                     <h3 class="footer-title">Over ons</h3>
                     <ul class="footer-linklist">
-                        <li><a href="#">Nieuws</a></li>
-                        <li><a href="#">Agenda</a></li>
-                        <li><a href="#">Uw materiaal in ons archief</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Toegankelijkheid</a></li>
-                        <li><a href="#">Auteursrecht en disclaimer</a></li>
-                        <li><a href="#">Privacyverklaring</a></li>
-                        <li><a href="#">ANBI</a></li>
-                        <li><a href="#" class="footer-link-italic">English</a></li>
+                        <li><a href="https://hetutrechtsarchief.nl/over-ons/nieuws">Nieuws</a></li>
+                        <li><a href="https://hetutrechtsarchief.nl/ontdekken/agenda">Agenda</a></li>
+                        <li><a href="https://hetutrechtsarchief.nl/uw-materiaal-in-ons-archief">Uw materiaal in ons archief</a></li>
+                        <li><a href="https://hetutrechtsarchief.nl/contact">Contact</a></li>
+                        <li><a href="https://hetutrechtsarchief.nl/toegankelijkheid">Toegankelijkheid</a></li>
+                        <li><a href="https://hetutrechtsarchief.nl/disclaimer-colofon">Auteursrecht en disclaimer</a></li>
+                        <li><a href="https://hetutrechtsarchief.nl/privacyverklaring">Privacyverklaring</a></li>
+                        <li><a href="https://hetutrechtsarchief.nl/anbi">ANBI</a></li>
+                        <li><a href="https://hetutrechtsarchief.nl/english" class="footer-link-italic">English</a></li>
                     </ul>
                 </div>
 
@@ -182,7 +211,7 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <ul class="footer-contact-list">
                         <li>
                             <span class="footer-contact-icon">📞</span>
-                            <span>(030) 286 66 11</span>
+                            <span>(030) 286 66 11 </span>
                         </li>
                         <li>
                             <span class="footer-contact-icon">@</span>
@@ -203,10 +232,10 @@ $artikelen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <div class="footer-social">
                         <p class="footer-subtitle">Volg ons op</p>
                         <div class="footer-social-links">
-                            <a href="#" aria-label="Facebook">F</a>
-                            <a href="#" aria-label="Instagram">I</a>
-                            <a href="#" aria-label="YouTube">Y</a>
-                            <a href="#" aria-label="RSS">RSS</a>
+                            <a href="https://www.facebook.com/HetUtrechtsArchief" aria-label="Facebook">F</a>
+                            <a href="https://www.instagram.com/hetutrechtsarchief/" aria-label="Instagram">I</a>
+                            <a href="https://www.youtube.com/user/hetutrechtsarchief" aria-label="YouTube">Y</a>
+                            <a href="https://hetutrechtsarchief.nl/over-ons/nieuws?format=feed" aria-label="RSS">RSS</a>
                         </div>
                     </div>
                 </div>

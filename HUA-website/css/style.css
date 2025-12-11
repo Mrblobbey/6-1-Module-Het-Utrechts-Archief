@@ -394,13 +394,9 @@ body {
 
 /* Zoom / fullscreen knoppen  */
 
-.panorama {
-    position: relative; /* nodig voor absolute controls */
-}
-
 .panorama-controls {
     position: absolute;
-    top: 150px; 
+    top: 133px; 
     right: 12px;
     display: flex;
     flex-direction: column;
@@ -420,6 +416,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 1.3rem;
+    position: relative;
 }
 
 .pano-btn:hover {
@@ -551,17 +548,18 @@ body {
 .panorama {
     background: var(--gray);
     padding: 1rem 0;
-    height: 800px;
+    height: 875px;
     width: 100%;
     max-width: 100%;
+    display: flex;
+    justify-content: center;
     position: relative;
     overflow: visible;
 }
 
 /* panorama inhoud */
 .panorama-content {
-    width: 70%;
-    left: 255px;
+    width: 80%;
     max-width: none;
     position: relative;
     overflow-x: hidden;
@@ -587,7 +585,7 @@ body {
     height: 100px;
 }
 
-.panorama img{
+#panoramaFotos img{
     height: 665px;
 }
 
@@ -617,50 +615,80 @@ body {
     background: rgba(0,0,0,0.6);
 }
 
-/* MINI MAP */
-.panorama-minimap {
+.minimap-bottom {
     position: absolute;
-    right: 10px;
-    bottom: 75px;
-    width: 220px;
-    height: 30px;
-    background: rgba(255, 255, 255, 0.85);
-    border: 2px solid red; /* tijdelijk rood */
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-    z-index: 2000;
-}
-
-.panorama-minimap-viewport {
-    position: absolute;
-    top: 0;
-    bottom: 0;
+    bottom: 15px;
     left: 0;
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: 3px;
+    right: 0;
+    height: 80px;
+    background: rgba(139, 111, 71, 0.95);
+    z-index: 38;
+    overflow: hidden;
     pointer-events: none;
+    margin-top: -10px;
 }
 
-.panorama-zoom-container {
-    overflow: hidden;
-    width: 100%;
+.minimap-thumbnails {
+    display: flex;
     height: 100%;
+    position: relative;
+    gap: 1px;
+    padding: 5px;
+    width: 99.3%;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.minimap-thumb {
+    height: 70px;
+    flex: 1 1 auto;
+    width: calc(100% / 33);
+    min-width: 0;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    pointer-events: auto;
+}
+
+.minimap-thumb:hover {
+    border-color: #F5F1E8;
+    transform: scale(1.05);
+    z-index: 10;
     position: relative;
 }
 
-.panorama-fotos.zoomed {
-    transform-origin: var(--zoom-x) var(--zoom-y);
-    transition: transform 0.25s ease;
+.minimap-viewport-indicator {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    height: 70px;
+    background: rgba(245, 241, 232, 0.3);
+    border: 3px solid #F5F1E8;
+    pointer-events: auto;
+    transition: left 0.1s ease, width 0.1s ease;
+    box-shadow: 0 0 20px rgba(245, 241, 232, 0.5);
+    cursor: grab;
+    z-index: 9999;
+}
+
+
+.minimap-viewport-indicator:active {
+    cursor: grabbing;
+    transition: none;
+}
+
+.minimap-viewport-indicator.dragging {
+    transition: none;
 }
 
 /* INFO-PANEEL BIJ PANORAMA */
 .panorama-info-panel {
     position: absolute;
-    top: 0;
+    top: 93px;
     left: 0;
     height: 100%;
-    max-height: 780px;
+    max-height: 686px;
     width: 360px;
     background: #fff;
     box-shadow: 4px 0 12px rgba(0,0,0,0.25);
@@ -705,12 +733,80 @@ body {
     position: absolute;
     top: 0.75rem;
     right: 0.75rem;
-    background: transparent;
-    border: none;
-    font-size: 1.4rem;
+    width: 32px;        /* grootte van de knop */
+    height: 32px;
     cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
 }
 
+/* de groene X lijnen */
+.info-close::before,
+.info-close::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 26px;        /* lengte van de lijnen */
+    height: 3px;        /* dikte van de lijnen */
+    background-color: #2F6D62;  /* donkergroen */
+    transform-origin: center;
+}
+
+.info-close::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.info-close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.info-close:hover::before,
+.info-close:hover::after {
+    background-color: #1f4b43;  /* iets donkerder bij hover */
+}
+
+/* Waypoint knop – zelfde stijl als andere knoppen */
+.pano-btn.pano-waypoints {
+    /* zelfde achtergrondkleur als de andere knoppen */
+    background-color: rgba(0, 0, 0, 0.55);
+
+    /* gebruik je waypoint afbeelding */
+    background-image: url("../img/waypoint_icon.png"); /* pad eventueel aanpassen */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%; /* iets kleiner dan de knop zelf */
+}
+
+/* hover-effect gelijk houden */
+.pano-btn.pano-waypoints:hover {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+/* Waypoint knop basis */
+.pano-waypoints {
+    position: relative !important; /* streep kan nu verschijnen */
+}
+
+/* Zorg dat het icoon niet boven de streep staat */
+.pano-waypoints img {
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Streep door het waypoint icoon */
+.pano-waypoints.is-off::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 32px;           /* breedte van de streep */
+    height: 3px;
+    background: white;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    border-radius: 2px;
+    z-index: 5;            /* boven icon */
+}
 /* FOOTER */
 .site-footer {
     border-top: 1px solid #eee;

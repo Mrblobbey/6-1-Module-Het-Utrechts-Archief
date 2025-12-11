@@ -1,31 +1,92 @@
 // hotspot klik
+// document.addEventListener("DOMContentLoaded", function () {
+//     const hotspots = document.querySelectorAll(".point-wrapper");
+
+//     hotspots.forEach((hotspot) => {
+//         hotspot.addEventListener("click", (e) => {
+//             e.stopPropagation();
+//             const isOpen = hotspot.classList.contains("point-wrapper-open");
+
+//             hotspots.forEach((h) => h.classList.remove("point-wrapper-open"));
+
+//             if (!isOpen) {
+//                 hotspot.classList.add("point-wrapper-open");
+//             }
+//         });
+//     });
+
+//     document.addEventListener("click", () => {
+//         hotspots.forEach((h) => h.classList.remove("point-wrapper-open"));
+//     });
+// });
+
+
+// hotspot klikken & info
+
+// HOTSPOT → INFOPANEEL
 document.addEventListener("DOMContentLoaded", function () {
     const hotspots = document.querySelectorAll(".point-wrapper");
+    const panel    = document.getElementById("panoInfo");
+
+    if (!panel || !hotspots.length) return;
+
+    const titleEl       = document.getElementById("infoTitle");
+    const descriptionEl = document.getElementById("infoDescription");
+    const catalogusEl   = document.getElementById("infoCatalogus");
+    const linkSectionEl = document.getElementById("infoLinkSection");
+    const linkEl        = document.getElementById("infoLink");
+    const closeBtn      = panel.querySelector(".info-close");
+
+    function openPanelForHotspot(hotspot) {
+        const catalogus    = hotspot.dataset.catalogus || "";
+        const beschrijving = hotspot.dataset.beschrijving || "";
+        const link         = hotspot.dataset.link || "";
+
+        if (titleEl)       titleEl.textContent       = catalogus || "Gegevens";
+        if (catalogusEl)   catalogusEl.textContent   = catalogus ? `${catalogus}` : "Onbekend";
+        if (descriptionEl) descriptionEl.textContent = beschrijving;
+
+        if (linkEl && linkSectionEl) {
+            if (link) {
+                linkEl.href = link;
+                linkSectionEl.style.display = "";
+            } else {
+                linkSectionEl.style.display = "none";
+            }
+        }
+
+        panel.classList.add("info-open");
+    }
 
     hotspots.forEach((hotspot) => {
         hotspot.addEventListener("click", (e) => {
             e.stopPropagation();
-            const isOpen = hotspot.classList.contains("point-wrapper-open");
-
-            hotspots.forEach((h) => h.classList.remove("point-wrapper-open"));
-
-            if (!isOpen) {
-                hotspot.classList.add("point-wrapper-open");
-            }
+            openPanelForHotspot(hotspot);
         });
     });
 
-    document.addEventListener("click", () => {
-        hotspots.forEach((h) => h.classList.remove("point-wrapper-open"));
+    if (closeBtn) {
+        closeBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            panel.classList.remove("info-open");
+        });
+    }
+
+    document.addEventListener("click", (e) => {
+        if (!panel.contains(e.target)) {
+            panel.classList.remove("info-open");
+        }
     });
 });
+
+
 // pijltjes werkend krijgen 
 const panoramaFotos = document.querySelector(".panorama-fotos");
 const arrowLeft = document.querySelector(".panorama-arrow-left");
 const arrowRight = document.querySelector(".panorama-arrow-right");
 
 if (panoramaFotos && arrowLeft && arrowRight) {
-  const scrollAmount = 300; // hoeveel px per klik
+    const scrollAmount = 300; // hoeveel px per klik
 
     arrowLeft.addEventListener("click", function (e) {
         e.stopPropagation();
@@ -43,62 +104,10 @@ if (panoramaFotos && arrowLeft && arrowRight) {
         });
     });
 }
-// mini map
-document.addEventListener('DOMContentLoaded', function () {
-    const pano = document.getElementById('panoramaFotos');
-    const minimap = document.getElementById('panoramaMinimap');
-    const viewport = document.getElementById('panoramaMinimapViewport');
-
-    if (!pano || !minimap || !viewport) {
-        console.warn('Panorama of minimap elementen niet gevonden.');
-        return;
-    }
-
-    function updateMinimap() {
-        const scrollWidth = pano.scrollWidth;
-        const clientWidth = pano.clientWidth;
-        const scrollLeft = pano.scrollLeft;
-
-        if (scrollWidth <= 0) return;
-
-        const minimapWidth = minimap.clientWidth;
-
-        const ratioVisible = clientWidth / scrollWidth;
-        const viewportWidth = minimapWidth * ratioVisible;
-
-        const ratioLeft = scrollLeft / scrollWidth;
-        const viewportLeft = minimapWidth * ratioLeft;
-
-        viewport.style.width = viewportWidth + 'px';
-        viewport.style.left = viewportLeft + 'px';
-    }
-
-    pano.addEventListener('scroll', updateMinimap);
-    window.addEventListener('resize', updateMinimap);
-
-    minimap.addEventListener('click', function (e) {
-        const rect = minimap.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const percentage = x / minimap.clientWidth;
-
-        const targetScroll = percentage * pano.scrollWidth - (pano.clientWidth / 2);
-
-        const maxScroll = pano.scrollWidth - pano.clientWidth;
-        const newScrollLeft = Math.max(0, Math.min(targetScroll, maxScroll));
-
-        pano.scrollTo({
-            left: newScrollLeft,
-            behavior: 'smooth'
-        });
-    });
-
-    updateMinimap();
-});
-
 
 // img toevoegen
 const fileInput = document.getElementById("fileInput");
-const preview   = document.getElementById("preview");
+const preview = document.getElementById("preview");
 
 if (fileInput && preview) {
     fileInput.addEventListener("change", function () {
@@ -160,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!overlay) return;
 
     const closeBtn = overlay.querySelector('.intro-close');
-    const okBtn    = overlay.querySelector('.intro-ok');
+    const okBtn = overlay.querySelector('.intro-ok');
 
     // check of gebruiker de uitleg al heeft gezien
     const alreadySeen = localStorage.getItem('panoramaIntroSeen') === '1';
@@ -191,43 +200,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
-//  Instructie + colofon popup 
-document.addEventListener('DOMContentLoaded', function () {
-    const overlay = document.getElementById('introOverlay');
-    const closeBtn = overlay ? overlay.querySelector('.intro-close') : null;
-    const STORAGE_KEY = 'panoramaIntroSeen';
-
-    if (!overlay) return;
-
-    // Alleen de eerste keer tonen (per browser)
-    if (window.localStorage && localStorage.getItem(STORAGE_KEY) === '1') {
-        overlay.style.display = 'none';
-        return;
-    }
-
-    function hideOverlay() {
-        overlay.style.display = 'none';
-        try {
-            localStorage.setItem(STORAGE_KEY, '1');
-        } catch (e) {
-            // niks; localStorage kan geblokkeerd zijn
-        }
-    }
-
-    if (closeBtn) {
-        closeBtn.addEventListener('click', hideOverlay);
-    }
-
-    // Klik buiten de modal sluit ook
-    overlay.addEventListener('click', function (e) {
-        if (e.target === overlay) {
-            hideOverlay();
-        }
-    });
-});
-
-
 //  Zoom in / uit + fullscreen 
 document.addEventListener('DOMContentLoaded', function () {
     const pano = document.getElementById('panoramaFotos');
@@ -305,24 +277,204 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-const introOverlay = document.getElementById("introOverlay");
-const openIntro = document.getElementById("openIntro");
-const closeIntro = document.getElementById("closeIntro");
+// Intro + colofon popup + ?-knop
+document.addEventListener("DOMContentLoaded", function () {
+    const overlay = document.getElementById("introOverlay");
+    const closeBtns = overlay ? overlay.querySelectorAll(".intro-close, .intro-ok") : [];
+    const helpBtn = document.getElementById("openIntro");
+    const STORAGE_KEY = "panoramaIntroSeen";
 
-// Automatisch openen bij eerste bezoek
-window.addEventListener("load", () => {
-  if (!localStorage.getItem("panoramaIntroSeen")) {
-    introOverlay.style.display = "flex";
-    localStorage.setItem("panoramaIntroSeen", "true");
-  }
+    if (!overlay) return;
+
+    // Eerste bezoek: automatisch tonen
+    if (!localStorage.getItem(STORAGE_KEY)) {
+        overlay.style.display = "flex";
+    }
+
+    function hideOverlay() {
+        overlay.style.display = "none";
+        try {
+            localStorage.setItem(STORAGE_KEY, "1");
+        } catch (e) {
+            // localStorage kan geblokkeerd zijn, negeren
+        }
+    }
+
+    // X-knop en 'Ik begrijp het' sluiten de overlay
+    closeBtns.forEach(btn => {
+        btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            hideOverlay();
+        });
+    });
+
+    // Klik buiten de modal sluit ook
+    overlay.addEventListener("click", function (e) {
+        if (e.target === overlay) {
+            hideOverlay();
+        }
+    });
+
+    // ? knop opent altijd weer de overlay
+    if (helpBtn) {
+        helpBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            overlay.style.display = "flex";
+        });
+    }
 });
 
-// Openen via ?
-openIntro.addEventListener("click", () => {
-  introOverlay.style.display = "flex";
+// waypoint knop – streep toggelen
+document.addEventListener("DOMContentLoaded", function () {
+    const wpBtn = document.querySelector(".pano-waypoints");
+
+    if (!wpBtn) {
+        console.warn("Geen .pano-waypoints knop gevonden");
+        return;
+    }
+
+    wpBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        wpBtn.classList.toggle("is-off");
+        console.log("waypoints toggled, heeft is-off:", wpBtn.classList.contains("is-off"));
+    });
 });
 
-// Sluiten via knop
-closeIntro.addEventListener("click", () => {
-  introOverlay.style.display = "none";
+// Minimap with thumbnails
+function setupMinimap(viewer) {
+    const minimapBottom = document.getElementById("minimap-bottom");
+    const minimapThumbnails = document.getElementById("minimap-thumbnails");
+    const viewportIndicator = document.getElementById("minimap-viewport-indicator");
+
+    if (!viewer || !minimapBottom || !minimapThumbnails || !viewportIndicator) return;
+
+    const thumbnails = minimapThumbnails.querySelectorAll(".minimap-thumb");
+    let isUpdatingFromScroll = false;
+    let dragging = false;
+
+    function clamp(v, min, max) {
+        return Math.max(min, Math.min(max, v));
+    }
+
+    function updateViewportIndicator() {
+        const totalWidth = viewer.scrollWidth;
+        const viewerWidth = viewer.clientWidth;
+        const scrollLeft = viewer.scrollLeft;
+        if (totalWidth <= 0) return;
+
+        const minimapWidth = minimapThumbnails.clientWidth;
+
+        // Hoeveel deel van de panorama is zichtbaar?
+        const ratioVisible = viewerWidth / totalWidth;
+        const visibleWidth = minimapWidth * ratioVisible;
+
+        // Maximaal scrollbare afstand in de hoofd-panorama
+        const maxScroll = Math.max(1, totalWidth - viewerWidth);
+        const ratioScroll = scrollLeft / maxScroll;
+
+        // De indicator kan niet over de hele minimap, maar alleen tot maxLeft
+        const maxLeft = Math.max(0, minimapWidth - visibleWidth);
+
+        // 👉 Belangrijk: gebruik maxLeft i.p.v. minimapWidth
+        const left = ratioScroll * maxLeft;
+
+        viewportIndicator.style.width = visibleWidth + "px";
+        viewportIndicator.style.left = left + "px";
+    }
+
+
+    viewer.addEventListener("scroll", () => {
+        if (!isUpdatingFromScroll) updateViewportIndicator();
+    });
+
+    thumbnails.forEach((thumb, i) => {
+        thumb.addEventListener("click", () => {
+            const wrappers = viewer.querySelectorAll(".panorama-img-wrapper");
+            const targetWrapper = wrappers[i];
+            if (!targetWrapper) return;
+
+            const img = targetWrapper.querySelector("img");
+            const marginLeft = img ? parseFloat(getComputedStyle(img).marginLeft) || 0 : 0;
+
+            const totalWidth = viewer.scrollWidth;
+            const viewerWidth = viewer.clientWidth;
+            const maxScroll = Math.max(0, totalWidth - viewerWidth);
+
+            let targetScroll = targetWrapper.offsetLeft + marginLeft;
+            targetScroll = clamp(targetScroll, 0, maxScroll);
+
+            viewer.scrollTo({
+                left: targetScroll,
+                behavior: "smooth"
+            });
+        });
+    });
+
+    viewportIndicator.addEventListener("mousedown", (e) => {
+        dragging = true;
+        viewportIndicator.classList.add("dragging");
+        e.preventDefault();
+    });
+
+    document.addEventListener("mousemove", (e) => {
+        if (!dragging) return;
+
+        const rect = minimapThumbnails.getBoundingClientRect();
+        const minimapWidth = rect.width;
+        const totalWidth = viewer.scrollWidth;
+        const viewerWidth = viewer.clientWidth;
+        const maxScroll = Math.max(0, totalWidth - viewerWidth);
+
+        let x = e.clientX - rect.left;
+        x = clamp(x, 0, minimapWidth);
+
+        const percent = x / minimapWidth;
+
+        isUpdatingFromScroll = true;
+        let targetScroll = percent * totalWidth - viewerWidth / 2;
+        targetScroll = clamp(targetScroll, 0, maxScroll);
+        viewer.scrollLeft = targetScroll;
+
+        updateViewportIndicator();
+
+        requestAnimationFrame(() => {
+            isUpdatingFromScroll = false;
+        });
+    });
+
+    document.addEventListener("mouseup", () => {
+        if (!dragging) return;
+        dragging = false;
+        viewportIndicator.classList.remove("dragging");
+    });
+
+    minimapThumbnails.addEventListener("click", (e) => {
+        if (e.target === viewportIndicator || viewportIndicator.contains(e.target)) return;
+
+        const rect = minimapThumbnails.getBoundingClientRect();
+        const minimapWidth = rect.width;
+        const totalWidth = viewer.scrollWidth;
+        const viewerWidth = viewer.clientWidth;
+        const maxScroll = Math.max(0, totalWidth - viewerWidth);
+
+        let x = e.clientX - rect.left;
+        x = clamp(x, 0, minimapWidth);
+        const percent = x / minimapWidth;
+
+        let targetScroll = percent * totalWidth - viewerWidth / 2;
+        targetScroll = clamp(targetScroll, 0, maxScroll);
+
+        viewer.scrollTo({
+            left: targetScroll,
+            behavior: "smooth"
+        });
+    });
+
+    setTimeout(updateViewportIndicator, 200);
+    window.addEventListener("resize", updateViewportIndicator);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const viewer = document.getElementById("panoramaFotos");
+    if (viewer) setupMinimap(viewer);
 });
