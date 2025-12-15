@@ -535,6 +535,29 @@ body {
 .intro-ok:hover {
     opacity: 0.9;
 }
+/* hotspots */
+.poly-visual-3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1188px; /* zelfde als afbeelding */
+    height: 426px;
+    pointer-events: none; /* klik blijft op de image-map */
+    z-index: 5000;
+}
+
+.poly-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.poly-highlight {
+    fill: rgba(255, 0, 0, 0.25); /* rode transparante overlay */
+    stroke: red;
+    stroke-width: 2px;
+}
+
+
 
 /* HOTSPOT LOCATIES */
 /* image 4 – 1 hotspot */
