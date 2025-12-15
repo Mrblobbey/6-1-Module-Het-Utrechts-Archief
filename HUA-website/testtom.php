@@ -18,31 +18,29 @@
                 transform: scale(0.55);
             }
 
-            < !-- g:hover .image-mapper-shape {
+            <!-- g:hover .image-mapper-shape {
                 stroke: white;
                 stroke-width: 2px;
                 opacity: 20%;
-            }
-
-            -->
+            } -->
         </style>
         <image xlink:href="img/3.jpg" style="width: 1188px;"></image>
-        <a>
+        <a xlink:href="#" target="---" xlink:title="">
             <g>
                 <polygon class="image-mapper-shape selected" data-index="22" points="249.333 205.333 245.949 229.026 214.359 194.051 198.564 214.359 188.41 191.795 162.462 203.077 154.564 191.795 152.308 201.949 116.205 204.205 104.923 221.128 102.667 363.282 1012 362.154 1006.36 221.128 974.769 220 955.59 183.897 946.564 195.179 907.077 194.051 882.256 162.462 856.308 161.333 834.872 128.615 829.231 151.179 785.231 153.436 771.692 125.231 769.436 152.308 691.59 150.051 691.59 128.615 675.795 111.692 661.128 126.359 665.641 150.051 600.205 151.179 498.667 76.7179 494.154 60.9231 479.487 59.7949 473.846 74.4615 383.59 152.308 393.744 174.872 323.795 199.692 338.462 204.205 335.077 221.128 250.462 221.128"></polygon>
             </g>
         </a>
-        <a>
+        <a xlink:href="#" target="---" xlink:title="">
             <g>
                 <polygon class="image-mapper-shape" data-index="23" points="326.051 146.667"></polygon>
             </g>
         </a>
-        <a>
+        <a xlink:href="#" target="---" xlink:title="">
             <g>
                 <polygon class="image-mapper-shape" data-index="25" points="405.026 121.846"></polygon>
             </g>
         </a>
-        <a>
+        <a xlink:href="#" target="---" xlink:title="">
             <g>
                 <polygon class="image-mapper-shape" data-index="26" points="169.231 196.308"></polygon>
             </g>
@@ -52,14 +50,13 @@
 <script>
     const gElements = document.querySelectorAll('g');
 
-    for (let i = 0; i < gElements.length; i++) {
+    for(let i = 0; i < gElements.length; i++){
         const gElement = gElements[i];
 
-        gElement.addEventListener('click', function() {
+        gElement.addEventListener('click', function(){
             console.log(`nigger-${i}`);
             console.log(gElement);
         });
     }
 </script>
-
 </html>
